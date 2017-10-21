@@ -1,0 +1,208 @@
+.navbar {
+    font-size: 20px !important;
+    background: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+.navbar-inverse .nav .active a {
+    background: 0 !important;
+    color: #333 !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+.navbar-inverse .nav li a {
+    color: #333 !important;
+    text-shadow: none !important;
+}
+
+    .navbar-inverse .nav li a:hover {
+        color: #333 !important;
+    }
+
+.parallax1 {
+    /* The image used */
+    background-image: url("../Images/slide1.jpg");
+    /* Set a specific height */
+    height: 650px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax2 {
+    /* The image used */
+    background-image: url("../Images/hyatt.jpg");
+    position: relative;
+    /* Set a specific height */
+    height: 500px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax3 {
+    /* The image used */
+    background-image: url("../Images/contact.jpg");
+    position: relative;
+    /* Set a specific height */
+    height: 500px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.w3-wide {
+    letter-spacing: 10px;
+}
+
+.w3-hover-opacity {
+    cursor: pointer;
+}
+
+@media only screen and (max-device-width: 1024px) {
+    .parallax1,
+    .parallax2,
+    .parallax3 {
+        background-attachment: scroll;
+    }
+}
+
+#myNavbar {
+    color: white;
+}
+
+#hotel1 {
+    font-family: "Brush Script MT", cursive;
+    font-size: 200px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    color: lightgray;
+}
+
+#book1 {
+    font-size: 20px;
+    line-height: 45px;
+    font-family: 'Old Standard TT';
+}
+
+#show1 {
+    display: none;
+}
+
+#book1:hover #show1 {
+    display: inline;
+}
+
+#book1:hover {
+    border: 2px solid lightgray;
+    padding: 10px 35px;
+}
+
+.btn {
+    background: #0d875c;
+    color: white;
+}
+
+/* .btn:hover{
+            background: #bfa145;
+        } */
+
+.datphong {
+    color: #0d875c;
+    font-weight: bold;
+    line-height: 1em;
+}
+
+.top {
+    background: #0d875c;
+    color: white;
+}
+
+    .top:hover {
+        background: #bfa145;
+    }
+
+#container1 {
+    margin-top: 15px;
+    color: black;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 0.7;
+    text-align: center;
+}
+
+.centered2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 0.7;
+    text-align: center;
+    font-size: 17px;
+    width: 550px;
+    height: 350px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.overlay {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+}
+
+.showimg:hover .overlay {
+    opacity: 1;
+}
+
+.text {
+    color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+h2 {
+    font-family: 'Old Standard TT';
+    line-height: 2em;
+}
+
+.btn, a, a:hover {
+    text-decoration: none;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    outline: 0;
+}
+
+#loadbtn {
+    margin-top: 90px;
+    margin-bottom: 70px;
+    color: #0d875c;
+    font-family: 'Old Standard TT';
+    font-size: 17px;
+}
