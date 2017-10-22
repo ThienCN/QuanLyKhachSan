@@ -31,7 +31,7 @@
 
     <!-- CONTENT -->
     <section class="phan-noi-dung">
-        <div class="noi-dung">
+        <div>
             Trang thông tin cá nhân của nhân viên 
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         </div>    

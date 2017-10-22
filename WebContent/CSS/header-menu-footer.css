@@ -99,17 +99,11 @@ ul.none-style > li {
 
 /*CONTENT*/
 .phan-noi-dung {
-    min-height: 600px;
-    padding-left: 20px;
-}
-
-.noi-dung {
     width: 100%;
-    margin-left: 0px;
-    background-color: #fff !important;
     padding: 10px;
     min-height: 1050px;
 }
+
 
 
 
@@ -120,7 +114,7 @@ ul.none-style > li {
         width: 220px;
     }
     .phan-noi-dung {
-        margin: 0 0 0 200px;
+        margin: 0 0 0 220px;
         min-height: 1050px;
     }
 }
