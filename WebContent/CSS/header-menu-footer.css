@@ -1,4 +1,4 @@
-body{
+﻿body{
     font: 15px/1.5 Arial, Helvetica,sans-serif;
     padding:0;
     margin:0;  
@@ -38,7 +38,8 @@ header{
     font-size: 16px;
     color: #04583b !important;
 }
-.nav-menu .navbar-collapse .nav > li:hover > a, .nav-menu .navbar-collapse .nav > li:hover {
+.nav-menu .navbar-collapse .nav > li:hover > a, .nav-menu .navbar-collapse .nav > li:hover,
+.nav-menu .navbar-collapse .nav > li:focus > a, .nav-menu .navbar-collapse .nav > li:focus {
     background-color: #0d875c !important;
     color: white !important;
 }
@@ -66,6 +67,7 @@ header{
 .image-nhanvien img { /*image nhan vien*/
     border-radius: 50%; 
     width:11%;
+    padding-right: 3px;
 }
 
 /*SUB MENU*/
@@ -99,17 +101,11 @@ ul.none-style > li {
 
 /*CONTENT*/
 .phan-noi-dung {
-    min-height: 600px;
-    padding-left: 20px;
-}
-
-.noi-dung {
-    width: 100%;
-    margin-left: 0px;
-    background-color: #fff !important;
+    max-width: 1300px;
     padding: 10px;
     min-height: 1050px;
 }
+
 
 
 
@@ -120,41 +116,55 @@ ul.none-style > li {
         width: 220px;
     }
     .phan-noi-dung {
-        margin: 0 0 0 200px;
+        margin: 0 0 0 220px;
         min-height: 1050px;
     }
+    
 }
 
-
-
-@media only screen and (max-width: 769px){
-    header{
-        width:100%;
-    }
-    .logo {
-        width: 100%;
-        margin-left: 0%;
-    }
-    #page-trich-dan{
-        display:none;
-    } 
-    .navbar-right {
+@media (max-width: 1000px) {
+    #page-trich-dan {
         display: none;
     }
-    .nav-menu {
-        width: 100%;
-    }
-    .navbar-left{
-        margin-top: 0px;
-    }
-    .navbar-nav{
-        margin:0px;
-    }
-    .nav-menu .navbar-collapse .nav > li > a, .nav-menu .navbar-collapse .nav > li > span {
-        font-size: 10px;
-    }
-    .phan-noi-dung {
-        padding-left: 0px;
-    }
 }
+
+
+    @media only screen and (max-width: 767px) {
+        header {
+            width: 100%;
+        }
+
+        .logo {
+            width: 100%;
+            margin-left: 0%;
+        }
+
+        #page-trich-dan {
+            display: none;
+        }
+
+        .navbar-right {
+            display: none;
+        }
+
+        .nav-menu {
+            width: 100%;
+        }
+
+        .navbar-left {
+            margin-top: 0px;
+        }
+
+        .navbar-nav {
+            margin: 0px;
+        }
+
+        .nav-menu .navbar-collapse .nav > li > a, .nav-menu .navbar-collapse .nav > li > span {
+            font-size: 10px;
+        }
+
+        .phan-noi-dung {
+            padding: 5px;
+        }
+    }
 

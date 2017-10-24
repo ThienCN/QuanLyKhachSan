@@ -4,7 +4,6 @@
 <html>
 <head>
  	<title>Quản lý khách sạn</title>
-    <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
@@ -31,10 +30,44 @@
 
     <!-- CONTENT -->
     <section class="phan-noi-dung">
-        <div class="noi-dung">
-            Trang thông tin cá nhân của nhân viên 
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        </div>    
+        <h4> TRANG CỦA BẠN </h4>
+        <div class="trang-cua-ban">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>Mã nhân viên </td>
+                                    <td>: NV15110283</td>
+                                </tr>
+                                <tr>
+                                    <td>Họ tên </td>
+                                    <td>: Hoàng Thị Kim Phụng</td>
+                                </tr>
+                                <tr>
+                                    <td>CMND </td>
+                                    <td>: 241386440</td>
+                                </tr>
+                                <tr>
+                                    <td>Địa chỉ </td>
+                                    <td>: 01 Kha Vạn Cân, Phường Linh Đông, Quận Thủ Đức, Tp.HCM</td>
+                                </tr>
+                                <tr>
+                                    <td>SĐT </td>
+                                    <td>: 01668174561</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <div class="col-xs-4 col-sm-4 col-md-4 ">
+                                <img src="./Images/doremon.png" class="img-rounded" alt="Cinque Terre" width="120" height="150">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </div>
     </section>
 
     <!-- FOOTER -->
