@@ -13,7 +13,7 @@
 <script src="JS/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="CSS/w3.css">
-<link rel="stylesheet" href="Font/css/font-awesome.min.css">
+<link rel="stylesheet" href="CSS/font-awesome.min.css">
 
 <script src="JS/index.js"></script>
 <link rel="stylesheet" href="CSS/trangchu.css">
