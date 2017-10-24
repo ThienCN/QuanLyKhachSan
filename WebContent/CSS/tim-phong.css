@@ -1,0 +1,37 @@
+﻿body {
+    color: black;
+}
+
+h4 {
+    font-weight: bold;
+    color: #0d875c;
+    text-align: center;
+    display: none;
+}
+
+
+.ket-qua-tim-kiem #co-ket-qua, .ket-qua-tim-kiem #khong-co-ket-qua {
+    display: none;
+    /*display: block;*/
+}
+
+.input-group-btn {
+    text-align: right
+}
+.input-group-btn a {
+    background-color: #0d875c;
+    color: white;
+    width: 150px;
+    margin-right: 10px;
+}
+.input-group-btn a:hover {
+    color: red;
+    background-color: #0d875c;
+}
+
+
+@media only screen and (max-width:768px) {
+    h4 {
+        display: block;
+    }
+}

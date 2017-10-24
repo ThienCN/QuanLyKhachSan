@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>Tra cứu khách đặt</title>
+	<title>Tra cứu khách hàng</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
@@ -30,17 +30,16 @@
     <section id="menu"> </section>
 
     <!-- CONTENT -->
-   
     <section class="phan-noi-dung">
-        <h4>TRA CỨU KHÁCH ĐẶT</h4>
-        <label> Mã khách đặt: </label>
+        <h4>TRA CỨU KHÁCH THUÊ</h4>
+        <label> Mã khách hàng: </label>
         <div class="row">
             <div class="col-xs-12 col-md-6">
                 <form>
                     <div class="input-group search">
-                        <input type="text" class="form-control" size="50" placeholder="Nhập mã khách đặt vào đây" id="maKhachDat">
+                        <input type="text" class="form-control" size="50" placeholder="Nhập mã khách hàng vào đây" id="maKhachHang">
                         <div class="input-group-btn">
-                            <button id="btn-tra-cuu-khach-dat" class="btn btn-default" type="submit" style="background-color: #0d875c; color:white">
+                            <button id="btn-tra-cuu-khach-thue" class="btn btn-default" type="submit" style="background-color: #0d875c; color:white">
                                 Tìm <i class="glyphicon glyphicon-search"></i>
                             </button>
                         </div>
@@ -53,7 +52,7 @@
             <label> KẾT QUẢ TÌM KIẾM: </label>
             <div id="co-ket-qua">
                 <fieldset>
-                    <p style="color: #0d875c; font-weight: bold; text-decoration: underline">Thông tin khách đặt: </p>
+                    <p style="color: #0d875c; font-weight: bold; text-decoration: underline">Thông tin khách hàng: </p>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -79,7 +78,7 @@
                 </fieldset>
                 <br />
                 <fieldset>
-                    <p style="color: #0d875c; font-weight: bold; text-decoration: underline">Thông tin đặt phòng: </p>
+                    <p style="color: #0d875c; font-weight: bold; text-decoration: underline">Thông tin thuê phòng: </p>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -87,9 +86,6 @@
                                     <th>Mã phòng </th>
                                     <th>Ngày nhận phòng</th>
                                     <th>Ngày trả phòng</th>
-                                    <th>Tiền cọc</th>
-                                    <th>Tình trạng</th>
-                                    <th>Người hủy</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -97,32 +93,24 @@
                                     <td id="maPhong">A1</td>
                                     <td id="ngayNhanPhong">02/02/2017</td>
                                     <td id="ngayTraPhong">05/02/2017</td>
-                                    <td id="tienCoc">150</td>
-                                    <td id="tinhTrang">Đã đặt</td>
-                                    <td id="nguoiHuy"></td>
                                 </tr>
                                 <tr>
                                     <td id="maPhong">A2</td>
                                     <td id="ngayNhanPhong">02/02/2017</td>
                                     <td id="ngayTraPhong">05/02/2017</td>
-                                    <td id="tienCoc">150</td>
-                                    <td id="tinhTrang">Đã đặt</td>
-                                    <td id="nguoiHuy"></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <label style="font-style:italic">Tổng số phòng đặt: <span>2</span> </label><br /><br />
-                    <label style="font-style:italic">Tổng số tiền cọc đã thanh toán: <span>300 USD</span> </label>
+                    <label style="font-style:italic">Tổng số phòng thuê: <span>2</span> </label><br /><br />
                 </fieldset>
             </div>
-           
+
 
             <div id="khong-co-ket-qua" style="text-align: center">
                 <label>Không tìm thấy kết quả</label>
             </div>
         </div>
-        
     </section>
 </body>
 </html>
