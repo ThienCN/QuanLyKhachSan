@@ -7,26 +7,26 @@ $(document).ready(function () {
         $('#menu').html(res); 
         
         //Sự kiện khi click vào các sub-menu
-        $("li#submenu2").click(function () {
-            $("ul#sub-menu1").toggle();
-        });
         $("li#submenu3").click(function () {
-            $("ul#sub-menu2").toggle();
-        });
-        $("li#submenu4").click(function () {
             $("ul#sub-menu3").toggle();
         });
-        $("li#submenu5").click(function () {
+        $("li#submenu4").click(function () {
             $("ul#sub-menu4").toggle();
         });
-        $("li#submenu6").click(function () {
+        $("li#submenu5").click(function () {
             $("ul#sub-menu5").toggle();
         });
-        $("li#submenu7").click(function () {
+        $("li#submenu6").click(function () {
             $("ul#sub-menu6").toggle();
         });
-        $("li#submenu8").click(function () {
+        $("li#submenu7").click(function () {
             $("ul#sub-menu7").toggle();
+        });
+        $("li#submenu8").click(function () {
+            $("ul#sub-menu8").toggle();
+        });
+        $("li#submenu9").click(function () {
+            $("ul#sub-menu9").toggle();
 
         });
 
@@ -40,11 +40,41 @@ $(document).ready(function () {
             $("li#submenu1").css("background-color", "#0d875c");
             $("li#submenu1 a:first").attr("style", "color: white !important");
         }
+        if (path.lastIndexOf('tim-phong.jsp') >= 0) {
+            namepage = 'TÌM PHÒNG';
+            namefile = 'tim-phong.jsp';
+            $("li#submenu2").css("background-color", "#0d875c");
+            $("li#submenu2 a:first").attr("style", "color: white !important");
+        }
         else if (path.lastIndexOf('tra-cuu-khach-dat.jsp') >= 0) {
             namepage = 'TRA CỨU > TRA CỨU KHÁCH ĐẶT';
             namefile = 'tra-cuu-khach-dat.jsp';
-            $("li#submenu2").css("background-color", "#0d875c");
-            $("li#submenu2 a:first").attr("style", "color: white !important");
+            $("li#submenu3").css("background-color", "#0d875c");
+            $("li#submenu3 a:first").attr("style", "color: white !important");
+        }
+        else if (path.lastIndexOf('tra-cuu-khach-hang.jsp') >= 0) {
+            namepage = 'TRA CỨU > TRA CỨU KHÁCH HÀNG';
+            namefile = 'tra-cuu-khach-hang.jsp';
+            $("li#submenu3").css("background-color", "#0d875c");
+            $("li#submenu3 a:first").attr("style", "color: white !important");
+        }
+        else if (path.lastIndexOf('tra-cuu-phong.jsp') >= 0) {
+            namepage = 'TRA CỨU > TRA CỨU PHÒNG';
+            namefile = 'tra-cuu-phong.jsp';
+            $("li#submenu3").css("background-color", "#0d875c");
+            $("li#submenu3 a:first").attr("style", "color: white !important");
+        }
+        else if (path.lastIndexOf('tra-cuu-dich-vu.jsp') >= 0) {
+            namepage = 'TRA CỨU > TRA CỨU DỊCH VỤ';
+            namefile = 'tra-cuu-dich-vu.jsp';
+            $("li#submenu3").css("background-color", "#0d875c");
+            $("li#submenu3 a:first").attr("style", "color: white !important");
+        }
+        else if (path.lastIndexOf('them-don-thue-phong.jsp') >= 0) {
+            namepage = 'QUẢN LÝ THUÊ PHÒNG > THÊM ĐƠN THUÊ PHÒNG';
+            namefile = 'them-don-thue-phong.jsp';
+            $("li#submenu5").css("background-color", "#0d875c");
+            $("li#submenu5 a:first").attr("style", "color: white !important");
         }
 
         $('#page-trich-dan').attr("href", namefile);
