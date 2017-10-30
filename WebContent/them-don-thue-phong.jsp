@@ -3,8 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>Tra cứu khách hàng</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	
+	<title>Thêm đơn thuê phòng</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
     <!-- Boostrap-->
@@ -23,7 +24,7 @@
     <script src="./JS/them-don-thue-phong.js"></script>
 </head>
 <body>
-	<!-- HEADER -->
+    <!-- HEADER -->
     <header id="header"></header>
 
     <!-- MENU-LEFT -->
@@ -41,7 +42,7 @@
                     <div class="form-group">
                         <label class="control-label col-xs-12 col-sm-4 col-md-2">Mã KH:</label>
                         <div class="col-xs-12 col-sm-8 col-md-4">
-                            <input type="text" class="form-control" size="20" placeholder="Ví dụ: KH1, KH2, ..">
+                            <input type="text" class="form-control" size="20" value="KH1" readonly >
                         </div>
                         <label class="control-label col-xs-12 col-sm-4 col-md-2">Họ tên:</label>
                         <div class="col-xs-12 col-sm-8 col-md-4">
@@ -90,48 +91,76 @@
                     </tbody>
                 </table>
             </div>
+            <div class="input-group-btn">
+                <button  class="btn btn-default">
+                    Xác nhận thuê <i class="glyphicon glyphicon-ok"></i>
+                </button>
+            </div>
         </fieldset>
 
         <hr />
         <!--Chọn phòng -->
-        <div class="chon-phong">
-            <label style="text-decoration:underline; color:#0d875c;">CHỌN PHÒNG:</label>
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label class="control-label col-xs-12 col-sm-4 col-md-2">Loại phòng:</label>
-                    <div class="col-xs-12 col-sm-8 col-md-4">
-                        <select class="form-control" id="loaiPhong">
-                            <option>Phòng đơn</option>
-                            <option>Phòng đôi</option>
-                            <option>Phòng tập thể</option>
-                        </select>
+        <div>   
+            <div class="w3-half">
+                <fieldset>
+                    <form class="form-horizontal">
+                        <label style="text-decoration:underline; color:#0d875c;">TÌM PHÒNG MỚI:</label> <br />
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-4 col-md-4">Ngày nhận phòng:</label>
+                            <div class="col-xs-12 col-sm-8 col-md-8">
+                                <input type="date" id="ngayNhanPhong" class="form-control" size="30" placeholder="Mã phòng cần tra cứu">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-4 col-md-4">Ngày trả phòng:</label>
+                            <div class="col-xs-12 col-sm-8 col-md-8">
+                                <input type="date" id="ngayTraPhong" class="form-control" size="30" placeholder="Mã phòng cần tra cứu">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="input-group-btn">
+                        <button class="btn btn-default">
+                            Thay đổi ngày tìm <i class="glyphicon glyphicon-edit"></i>
+                        </button>
+                        <button class="btn btn-default">
+                            Tìm phòng <i class="glyphicon glyphicon-search"></i>
+                        </button>
                     </div>
-                    <label class="control-label col-xs-12 col-sm-4 col-md-2">Mã phòng:</label>
-                    <div class="col-xs-12 col-sm-8 col-md-4">
-                        <select class="form-control" id="maPhong">
-                            <option>A1</option>
-                            <option>A2</option>
-                            <option>A3</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-xs-12 col-sm-4 col-md-2">Ngày nhận phòng:</label>
-                    <div class="col-xs-12 col-sm-8 col-md-4">
-                        <input type="date" id="ngayNhanPhong" class="form-control" size="30" placeholder="Mã phòng cần tra cứu">
-                    </div>
-                    <label class="control-label col-xs-12 col-sm-4 col-md-2">Ngày trả phòng:</label>
-                    <div class="col-xs-12 col-sm-8 col-md-4">
-                        <input type="date" id="ngayTraPhong" class="form-control" size="30" placeholder="Mã phòng cần tra cứu">
-                    </div>
-                </div>
-            </form>
-            <div class="input-group-btn" style="text-align: right">
-                <button id="btn-chon-phong" class="btn btn-default" type="submit" style="background-color: #0d875c; color:white; width:150px; ">
-                    Chọn <i class="glyphicon glyphicon-ok"></i>
-                </button>
-
+                </fieldset>                
             </div>
+            <div class="w3-half">
+                <fieldset>
+                    <form class="form-horizontal">
+                        <label style="text-decoration:underline; color:#0d875c;">CHỌN PHÒNG:</label> <br />
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-4 col-md-4">Loại phòng:</label>
+                            <div class="col-xs-12 col-sm-8 col-md-8">
+                                <select class="form-control" id="loaiPhong">
+                                    <option>Phòng đơn</option>
+                                    <option>Phòng đôi</option>
+                                    <option>Phòng tập thể</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-4 col-md-4">Mã phòng:</label>
+                            <div class="col-xs-12 col-sm-8 col-md-8">
+                                <select class="form-control" id="maPhong">
+                                    <option>A1</option>
+                                    <option>A2</option>
+                                    <option>A3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="input-group-btn">
+                        <button id="btn-chon-phong" class="btn btn-default">
+                            Chọn <i class="glyphicon glyphicon-ok"></i>
+                        </button>
+                    </div>
+                </fieldset>
+            </div>
+            
         </div>
     </section>
 </body>

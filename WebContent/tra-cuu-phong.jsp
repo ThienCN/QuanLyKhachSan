@@ -3,8 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>Tra cứu phòng</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Tra cứu phòng</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
     <!-- Boostrap-->
@@ -23,7 +23,7 @@
     <script src="./JS/tracuu.js"></script>
 </head>
 <body>
-	<!-- HEADER -->
+    <!-- HEADER -->
     <header id="header"></header>
 
     <!-- MENU-LEFT -->
@@ -68,7 +68,6 @@
                 <button id="btn-tra-cuu-phong" class="btn btn-default" type="submit" style="background-color: #0d875c; color:white; width:150px; ">
                     Tìm <i class="glyphicon glyphicon-search"></i>
                 </button>
-
             </div>
         </div>
 

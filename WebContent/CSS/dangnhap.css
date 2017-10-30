@@ -1,0 +1,58 @@
+﻿.modal-content {
+    border: 5px solid #197485;
+    border-radius: 25px;
+}
+
+.modal-header {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+}
+
+.checkbox-login {
+    height: 50px;
+    width: 100.2%;
+    background-color: #197485 !important;
+    margin-top: 25px;
+    margin-bottom: 0px;
+    border-bottom: 2px solid #7C7A7A;
+    border-top: 2px solid #7C7A7A;
+}
+
+.checkbox-login label {
+    margin-top: 10px;
+    color: white;
+    text-align: left;
+}
+
+button.close {
+    color: red !important;
+    text-align: center;
+    font-size: 30px;
+}
+
+button#btnLogin {
+    width: 200px;
+    height: 50px;
+    border-radius: 30px;
+    background-color: #197485 !important;
+    border: 1px solid #56A1B0 !important;
+}
+
+button#btnLogin:hover {
+    background-color: #56A1B0 !important;
+}
+
+.form-control {
+    height: 40px;
+    border: 1px solid #7C7A7A;
+}
+
+span.error {
+    color: red;
+}
+
+.div-btnLogin {
+    text-align: center !important;
+    font-weight: bold;
+}

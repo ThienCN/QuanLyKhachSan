@@ -3,8 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Tìm phòng</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
     <!-- Boostrap-->
@@ -23,7 +23,7 @@
     <script src="./JS/tracuu.js"></script>
 </head>
 <body>
-	<!-- HEADER -->
+    <!-- HEADER -->
     <header id="header"></header>
 
     <!-- MENU-LEFT -->
@@ -65,33 +65,38 @@
                                 <tr>
                                     <th>Loại phòng</th>
                                     <th>Mã phòng </th>
-                                    <th>Ngày </th>
+                                    <th>Phí thuê phòng (USD)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td id="loaiPhong">Đơn</td>
                                     <td id="maPhong">A1</td>
-                                    <td id="ngay">02/02/2017</td>
+                                    <td id="phiThuePhong">500</td>
                                 </tr>
                                 <tr>
                                     <td id="loaiPhong">Đơn</td>
                                     <td id="maPhong">A1</td>
-                                    <td id="ngay">03/02/2017</td>
+                                    <td id="phiThuePhong">500</td>
                                 </tr>
                                 <tr>
                                     <td id="loaiPhong">Đôi</td>
                                     <td id="maPhong">B1</td>
-                                    <td id="ngay">02/02/2017</td>
+                                    <td id="phiThuePhong">500</td>
                                 </tr>
                                 <tr>
                                     <td id="loaiPhong">Tập thể</td>
                                     <td id="maPhong">B1</td>
-                                    <td id="ngay">03/02/2017</td>
+                                    <td id="phiThuePhong">500</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                    <div>
+                        <label>Số loại phòng đơn trống là : 2 phòng</label> <br />
+                        <label>Số loại phòng đôi trống là : 1 phòng</label> <br />
+                        <label>Số loại phòng tập thể trống là : 1 phòng</label>
+                    </div>                
                 </fieldset>
 
                 <br />
@@ -102,7 +107,7 @@
                     <a href="them-don-thue-phong.jsp" class="btn btn-default">
                         Thuê phòng <i class="glyphicon glyphicon-check"></i>
                     </a>
-                </div>s
+                </div>
             </div>
 
             <div id="khong-co-ket-qua" style="text-align: center">
@@ -112,7 +117,5 @@
         </div>
         
     </section>
-
-    
 </body>
 </html>
