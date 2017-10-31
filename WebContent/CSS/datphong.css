@@ -1,0 +1,70 @@
+﻿label {
+    color: white;
+}
+
+#inputcheckin{
+    padding:5px 0 5px 10px;
+    margin-left:4px;
+    border-radius:4px;
+    width:120px;
+}
+
+#iconcheckin {
+    color: white;
+    font-size: 23px;
+    border: none;
+    margin-left: 5px;
+    padding: 0;
+    background: #0d875c;
+    margin-top:4px;
+}
+
+#findroom {
+    color: white;
+    background: #bfa145;
+    border-radius: 5px;
+}
+
+#findroom:hover{
+    background-color:saddlebrown;
+}
+
+#accordion {
+    padding: 7px 20px;
+    border: 2px solid beige;
+    border-radius: 5px;
+}
+
+.bottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 15px;
+}
+
+.pdon1{
+    display:none;
+}
+
+.pdoi1 {
+    display: none;
+}
+
+.ptt2{
+    display:none;
+}
+
+#tablephong{
+    padding:7px 20px;
+    border: 2px solid beige;
+    border-radius: 5px;
+}
+
+#btnxacnhan {
+    margin-bottom: 45px;
+    background: #0d875c;
+    color: white
+}
+
+#btnxacnhan:hover {
+    background: #bfa145;
+}

@@ -748,6 +748,7 @@ a {
     display:none;
 }
 
+<<<<<<< HEAD
 #image1:hover img {
     opacity: 0.5;
     margin-bottom: -100px;
@@ -863,3 +864,8 @@ a {
 #btntop:hover {
     background: #bfa145;
 }
+=======
+.modal-backdrop.in{
+    opacity:0;
+}
+>>>>>>> 35bf5f070fc3994142934b28446174fe5e4e990e

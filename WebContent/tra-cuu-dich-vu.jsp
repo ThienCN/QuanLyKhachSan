@@ -3,8 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Tra cứu dịch vụ</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
     <!-- Boostrap-->
@@ -23,7 +23,7 @@
     <script src="./JS/tracuu.js"></script>
 </head>
 <body>
-	<!-- HEADER -->
+    <!-- HEADER -->
     <header id="header"></header>
 
     <!-- MENU-LEFT -->
@@ -31,6 +31,7 @@
 
     <!-- CONTENT -->
     <section class="phan-noi-dung">
+        <!-- NHỚ CHỈNH SỬA LẠI MỤC NÀY: KHI VÀO TRANG LÀ LOAD TẤT CẢ THÔNG TIN VỀ DỊCH VỤ LÊN MÀN HÌNH -->
         <h4>TRA CỨU DỊCH VỤ</h4>
         <label> Nhập thông tin tra cứu: </label>
         <div class="row">
@@ -82,6 +83,7 @@
                 <label>Không tìm thấy kết quả</label>
             </div>
         </div>
+
     </section>
 </body>
 </html>

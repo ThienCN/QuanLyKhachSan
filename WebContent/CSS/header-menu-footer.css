@@ -1,4 +1,4 @@
-﻿body{
+body{
     font: 15px/1.5 Arial, Helvetica,sans-serif;
     padding:0;
     margin:0;  
@@ -36,11 +36,17 @@ header{
 .nav-menu .navbar-collapse .nav > li > a, .nav-menu .navbar-collapse .nav > li > span {
     font-weight: bold;
     font-size: 16px;
-    color: #04583b !important;
+    color: #04583b;
 }
 .nav-menu .navbar-collapse .nav > li:hover > a, .nav-menu .navbar-collapse .nav > li:hover,
 .nav-menu .navbar-collapse .nav > li:focus > a, .nav-menu .navbar-collapse .nav > li:focus {
     background-color: #0d875c !important;
+    color: white !important;
+}
+.active {
+    background-color: #0d875c !important;
+}
+.active > a {
     color: white !important;
 }
 
@@ -126,45 +132,47 @@ ul.none-style > li {
     #page-trich-dan {
         display: none;
     }
+
 }
 
 
-    @media only screen and (max-width: 767px) {
-        header {
-            width: 100%;
-        }
-
-        .logo {
-            width: 100%;
-            margin-left: 0%;
-        }
-
-        #page-trich-dan {
-            display: none;
-        }
-
-        .navbar-right {
-            display: none;
-        }
-
-        .nav-menu {
-            width: 100%;
-        }
-
-        .navbar-left {
-            margin-top: 0px;
-        }
-
-        .navbar-nav {
-            margin: 0px;
-        }
-
-        .nav-menu .navbar-collapse .nav > li > a, .nav-menu .navbar-collapse .nav > li > span {
-            font-size: 10px;
-        }
-
-        .phan-noi-dung {
-            padding: 5px;
-        }
+@media only screen and (max-width: 767px) {
+    header {
+        width: 100%;
     }
+
+    .logo {
+        width: 100%;
+        margin-left: 0%;
+    }
+
+    #page-trich-dan {
+        display: none;
+    }
+
+    .navbar-right {
+        display: none;
+    }
+
+    .nav-menu {
+        width: 100%;
+    }
+
+    .navbar-left {
+        margin-top: 0px;
+    }
+
+    .navbar-nav {
+        margin: 0px;
+    }
+
+    .nav-menu .navbar-collapse .nav > li > a, .nav-menu .navbar-collapse .nav > li > span {
+        font-size: 10px;
+    }
+
+    .phan-noi-dung {
+        padding: 5px;
+    }
+}
+
 

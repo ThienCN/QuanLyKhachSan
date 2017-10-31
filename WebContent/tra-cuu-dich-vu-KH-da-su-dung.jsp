@@ -3,8 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Tra cứu khách đặt</title>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Tra cứu dịch vụ khách hàng đã sử dụng</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
     <!-- Boostrap-->
@@ -29,17 +29,18 @@
     <!-- MENU-LEFT -->
     <section id="menu"> </section>
 
+
     <!-- CONTENT -->
     <section class="phan-noi-dung">
-        <h4>TRA CỨU KHÁCH ĐẶT</h4>
-        <label> Mã khách đặt: </label>
+        <h4>TRA CỨU DỊCH VỤ <br /> KHÁCH HÀNG ĐÃ SỬ DỤNG</h4>
+        <label> Mã khách hàng: </label>
         <div class="row">
             <div class="col-xs-12 col-md-6">
                 <form>
                     <div class="input-group search">
-                        <input type="text" class="form-control" size="50" placeholder="Nhập mã khách đặt vào đây" id="maKhachDat">
+                        <input type="text" class="form-control" size="50" placeholder="Nhập mã khách hàng vào đây" id="maKhachHang">
                         <div class="input-group-btn">
-                            <button id="btn-tra-cuu-khach-dat" class="btn btn-default" type="submit" style="background-color: #0d875c; color:white">
+                            <button id="btn-tra-cuu-dich-vu-KH-da-su-dung" class="btn btn-default" type="submit" style="background-color: #0d875c; color:white">
                                 Tìm <i class="glyphicon glyphicon-search"></i>
                             </button>
                         </div>
@@ -48,11 +49,12 @@
             </div>
         </div>
         <br />
+        <!-- KẾT QUẢ TÌM KIẾM -->
         <div class="ket-qua-tim-kiem">
             <label> KẾT QUẢ TÌM KIẾM: </label>
             <div id="co-ket-qua">
                 <fieldset>
-                    <p style="color: #0d875c; font-weight: bold; text-decoration: underline">Thông tin khách đặt: </p>
+                    <p style="color: #0d875c; font-weight: bold; text-decoration: underline">Thông tin khách hàng: </p>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -78,50 +80,39 @@
                 </fieldset>
                 <br />
                 <fieldset>
-                    <p style="color: #0d875c; font-weight: bold; text-decoration: underline">Thông tin đặt phòng: </p>
+                    <p style="color: #0d875c; font-weight: bold; text-decoration: underline">Thông tin dịch vụ khách hàng đã sử dụng: </p>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Mã phòng </th>
-                                    <th>Ngày nhận phòng</th>
-                                    <th>Ngày trả phòng</th>
-                                    <th>Tiền cọc</th>
-                                    <th>Tình trạng</th>
-                                    <th>Người hủy</th>
+                                    <th>Mã dịch vụ </th>
+                                    <th>Tên dịch vụ</th>
+                                    <th>Phí dịch vụ (USD)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td id="maPhong">A1</td>
-                                    <td id="ngayNhanPhong">02/02/2017</td>
-                                    <td id="ngayTraPhong">05/02/2017</td>
-                                    <td id="tienCoc">150</td>
-                                    <td id="tinhTrang">Đã đặt</td>
-                                    <td id="nguoiHuy"></td>
+                                    <td id="maDV">DV1</td>
+                                    <td id="tenDV">Ăn trưa</td>
+                                    <td id="phiDV">50</td>
                                 </tr>
                                 <tr>
-                                    <td id="maPhong">A2</td>
-                                    <td id="ngayNhanPhong">02/02/2017</td>
-                                    <td id="ngayTraPhong">05/02/2017</td>
-                                    <td id="tienCoc">150</td>
-                                    <td id="tinhTrang">Đã đặt</td>
-                                    <td id="nguoiHuy"></td>
+                                    <td id="maDV">DV2</td>
+                                    <td id="tenDV">Spa</td>
+                                    <td id="phiDV">150</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <label style="font-style:italic">Tổng số phòng đặt: <span>2</span> </label><br /><br />
-                    <label style="font-style:italic">Tổng số tiền cọc đã thanh toán: <span>300 USD</span> </label>
+                    <label style="font-style:italic">Tổng số tiền dịch vụ đã sử dụng: <span>200 </span> USD </label><br /><br />
                 </fieldset>
             </div>
-           
+
 
             <div id="khong-co-ket-qua" style="text-align: center">
                 <label>Không tìm thấy kết quả</label>
             </div>
         </div>
-        
     </section>
 </body>
 </html>
