@@ -9,7 +9,7 @@ public class ConnectDB {
 	public static String url = "jdbc:sqlserver://localhost:1433;databaseName=QUANLYKHACHSAN;";
 	public static String user, password;
 	
-	public static boolean CheckConnectDB(String username, String pass) {
+	public static boolean ConnectDB_Role(String username, String pass) {
 		try {
 			//Đăng ký Driver của SQL Server
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -17,23 +17,19 @@ public class ConnectDB {
             connect=DriverManager.getConnection(url+"user="+username+";password="+pass); 
             
         } catch (ClassNotFoundException | SQLException e) {
+        	System.out.println("Database Connect Failed.");
             return false;
         }
-		
-		user=username;
-		password=pass;
 		return true;
 	}
  
-	public static Connection getConnect() {		
-		//String user = "sa";
-		//String password = "12345678";		
+	public static Connection getConnect_sa() {	
 				
 		try {
 			//Đăng ký Driver của SQL Server
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             //Lấy ra connection đến CSDL với 3 tham số truyền vào: url, user, pass
-            connect=DriverManager.getConnection(url+"user="+user+";password="+password);
+            connect=DriverManager.getConnection(url+"user=sa;password=12345678");            
             
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Database Connect Failed.");
