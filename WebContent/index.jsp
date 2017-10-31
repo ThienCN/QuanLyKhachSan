@@ -17,7 +17,6 @@
     <!--My CSS-->
     <link rel="stylesheet" href="./CSS/dangnhap.css">
     <link rel="stylesheet" href="./CSS/trangchu.css">
-    <link rel="shortcut icon" href="">
 
     <!--My JS-->
     <script src="./JS/index.js"></script>
