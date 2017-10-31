@@ -41,7 +41,7 @@
                                 <ul class="nav navbar-nav navbar-right ">
                                     <li><a href="#contact" style="font-family:'avant_garde', sans-serif">LIÊN HỆ</a> </li>
                                     <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                                    <li><a data-toggle="modal" data-target="#modallogin">ĐĂNG NHẬP</a></li>
+                                    <li><a href="login.jsp">ĐĂNG NHẬP</a></li>
                                     <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                                 </ul>
                             </div>
@@ -52,46 +52,6 @@
             </div>
         </div>
     </center>
-
-    <!-- Modal -->
-    <div class="modal fade" id="modallogin" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header" style="text-align:center">
-                    <img src="./Images/logoks.png" alt="Avatar" style="width:30%" class="">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <div class="checkbox-login">
-                        <label class="col-xs-6 col-md-6 col-sm-6"><input type="radio" value="NhanVien" name="gender" checked> Nhân viên</label>
-                        <label class="col-xs-6 col-md-6 col-sm-6"><input type="radio" value="QuanTriVien" name="gender"> Quản trị viên</label>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label>Tên đăng nhập:</label>
-                            <input type="text" class="form-control" id="txt-user" placeholder="Từ 5 đến 20 ký tự" name="username" required>
-                            <span class="error" id="error-user"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Mật khẩu:</label>
-                            <input type="password" class="form-control" id="txt-pass" placeholder="Không ít hơn 5 ký tự" name="password" required>
-                            <span class="error" id="error-pass"></span>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" value="" checked>Lưu mật khẩu</label>
-                        </div>
-                        <span class="error" id="error-login"></span>
-                        <div class="div-btnLogin">
-                            <button id="btnLogin" type="button" style="color:white"><span class="fa fa-sign-in"></span> ĐĂNG NHẬP</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <p><a href="#" style="color:blue">Quên mật khẩu</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!--Banner-->
     <div id="home">

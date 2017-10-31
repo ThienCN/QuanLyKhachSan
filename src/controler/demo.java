@@ -12,10 +12,15 @@ public class demo {
 	}
 
 	public static void main(String[] args) {
-		ConnectDB connectDB = new ConnectDB();
-		Connection connection = connectDB.getConnect();
-		System.out.println(connection);
-
+		
+		Connection connection = ConnectDB.getConnect_sa();
+		if(connection != null)
+			System.out.println(connection + ": thanh cong");
+		else
+			System.out.println("Login khong thanh cong");
+		
+		
+		
 	}
 
 }
