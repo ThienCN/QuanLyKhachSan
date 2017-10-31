@@ -1,9 +1,9 @@
 $(document).ready(function () {    
     //Sự kiện add header, menu-left và footer vào page
-    $.get('header.html', function (res) {
+    $.get('header-NV.html', function (res) {
         $('#header').html(res);
     });
-    $.get('menu.html', function (res) {
+    $.get('menu-NV.html', function (res) {
         $('#menu').html(res); 
         
         //Sự kiện khi click vào các sub-menu
@@ -70,9 +70,39 @@ $(document).ready(function () {
             $("li#submenu3").css("background-color", "#0d875c");
             $("li#submenu3 a:first").attr("style", "color: white !important");
         }
+        else if (path.lastIndexOf('tra-cuu-dich-vu-KH-da-su-dung.jsp') >= 0) {
+            namepage = 'TRA CỨU > TRA CỨU DỊCH VỤ KHÁCH HÀNG ĐÃ SỬ DỤNG';
+            namefile = 'tra-cuu-dich-vu-KH-da-su-dung.jsp';
+            $("li#submenu3").css("background-color", "#0d875c");
+            $("li#submenu3 a:first").attr("style", "color: white !important");
+        }
         else if (path.lastIndexOf('them-don-thue-phong.jsp') >= 0) {
             namepage = 'QUẢN LÝ THUÊ PHÒNG > THÊM ĐƠN THUÊ PHÒNG';
             namefile = 'them-don-thue-phong.jsp';
+            $("li#submenu5").css("background-color", "#0d875c");
+            $("li#submenu5 a:first").attr("style", "color: white !important");
+        }
+        else if (path.lastIndexOf('chinh-sua-don-thue-phong.jsp') >= 0) {
+            namepage = 'QUẢN LÝ THUÊ PHÒNG > CHỈNH SỬA ĐƠN THUÊ PHÒNG';
+            namefile = 'chinh-sua-don-thue-phong.jsp';
+            $("li#submenu5").css("background-color", "#0d875c");
+            $("li#submenu5 a:first").attr("style", "color: white !important");
+        }
+        else if (path.lastIndexOf('thong-ke-don-thue-phong.jsp') >= 0) {
+            namepage = 'QUẢN LÝ THUÊ PHÒNG > THỐNG KÊ ĐƠN THUÊ PHÒNG';
+            namefile = 'thong-ke-don-thue-phong.jsp';
+            $("li#submenu5").css("background-color", "#0d875c");
+            $("li#submenu5 a:first").attr("style", "color: white !important");
+        }
+        else if (path.lastIndexOf('huy-don-thue-phong.jsp') >= 0) {
+            namepage = 'QUẢN LÝ THUÊ PHÒNG > HỦY ĐƠN THUÊ PHÒNG';
+            namefile = 'huy-don-thue-phong.jsp';
+            $("li#submenu5").css("background-color", "#0d875c");
+            $("li#submenu5 a:first").attr("style", "color: white !important");
+        }
+        else if (path.lastIndexOf('chi-tiet-thong-ke-thue-phong.jsp') >= 0) {
+            namepage = 'QUẢN LÝ THUÊ PHÒNG > THỐNG KÊ ĐƠN THUÊ PHÒNG > CHI TIẾT';
+            namefile = 'chi-tiet-thong-ke-thue-phong.jsp';
             $("li#submenu5").css("background-color", "#0d875c");
             $("li#submenu5 a:first").attr("style", "color: white !important");
         }

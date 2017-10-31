@@ -3,279 +3,256 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Angel Hotel</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8" />
+    <title>Angel Hotel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-<link rel="stylesheet" href="CSS/bootstrap.min.css">
-<script src="JS/jquery-3.2.1.min.js"></script>
-<script src="JS/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="./CSS/font-awesome.min.css">
 
-<link rel="stylesheet" href="CSS/w3.css">
-<link rel="stylesheet" href="CSS/font-awesome.min.css">
+    <script src="./JS/jquery-3.2.1.min.js"></script>
+    <script src="./JS/bootstrap.min1.js"></script>
 
-<script src="JS/index.js"></script>
-<link rel="stylesheet" href="CSS/trangchu.css">
+    <!--My CSS-->
+    <link rel="stylesheet" href="./CSS/dangnhap.css">
+    <link rel="stylesheet" href="./CSS/trangchu.css">
+    <link rel="shortcut icon" href="">
 
+    <!--My JS-->
+    <script src="./JS/index.js"></script>
 </head>
 <body>
+    <center>
+        <div id="wrap">
+            <div class="subMenu" style="position: absolute;top: 0px;">
+                <div class="container">
+                    <nav class="navbar navbar-default" role="navigation">
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <a><img class="logo " src="./Images/logoks.png" alt="Angel Hotel"></a>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <div class="navigation">
+                                <ul class="nav navbar-nav navbar-left">
+                                    <li><a href="#home" style="font-family:'avant_garde', sans-serif">TRANG CHỦ</a> </li>
+                                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                                    <li><a href="#room">PHÒNG</a></li>
+                                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                                    <li><a href="#portfolio">DỊCH VỤ</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right ">
+                                    <li><a href="#contact" style="font-family:'avant_garde', sans-serif">LIÊN HỆ</a> </li>
+                                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                                    <li><a data-toggle="modal" data-target="#modallogin">ĐĂNG NHẬP</a></li>
+                                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </center>
 
-	<!-- Navbar (sit on top) -->
-	<div class="w3-top">
-		<div class="w3-bar" id="myNavbar"
-			style="font-size: 17px; line-height: 20px;">
-			<a
-				class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right"
-				href="javascript:void(0);" onclick="toggleFunction()"
-				title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a> <a
-				href="#home" class="w3-bar-item w3-button w3-hide-small">Trang
-				chủ</a> <a href="#room" class="w3-bar-item w3-button w3-hide-small">Phòng</a>
-			<a href="#food" class="w3-bar-item w3-button w3-hide-small"> Dịch
-				vụ</a> <a href="#event" class="w3-bar-item w3-button w3-hide-small">Sự
-				kiện</a> <a href="#info" class="w3-bar-item w3-button w3-hide-small">Thông
-				tin</a> <a href="#contact" class="w3-bar-item w3-button w3-hide-small">Liên
-				hệ</a> <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right"
-				id="login" style="margin-right: 20px"><i class="fa fa-user"></i>
-				Đăng nhập</a>
-		</div>
+    <!-- Modal -->
+    <div class="modal fade" id="modallogin" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="text-align:center">
+                    <img src="./Images/logoks.png" alt="Avatar" style="width:30%" class="">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <div class="checkbox-login">
+                        <label class="col-xs-6 col-md-6 col-sm-6"><input type="radio" value="NhanVien" name="gender" checked> Nhân viên</label>
+                        <label class="col-xs-6 col-md-6 col-sm-6"><input type="radio" value="QuanTriVien" name="gender"> Quản trị viên</label>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label>Tên đăng nhập:</label>
+                            <input type="text" class="form-control" id="txt-user" placeholder="Từ 5 đến 20 ký tự" name="username" required>
+                            <span class="error" id="error-user"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Mật khẩu:</label>
+                            <input type="password" class="form-control" id="txt-pass" placeholder="Không ít hơn 5 ký tự" name="password" required>
+                            <span class="error" id="error-pass"></span>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" value="" checked>Lưu mật khẩu</label>
+                        </div>
+                        <span class="error" id="error-login"></span>
+                        <div class="div-btnLogin">
+                            <button id="btnLogin" type="button" style="color:white"><span class="fa fa-sign-in"></span> ĐĂNG NHẬP</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <p><a href="#" style="color:blue">Quên mật khẩu</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-		<!-- Navbar on small screens-->
-		<div id="navDemo"
-			class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
-			<a href="#room" class="w3-bar-item w3-button"
-				onclick="toggleFunction()">Phòng</a> <a href="#food"
-				class="w3-bar-item w3-button" onclick="toggleFunction()">Dịch vụ</a>
-			<a href="#event" class="w3-bar-item w3-button"
-				onclick="toggleFunction()">Sự kiện</a> <a href="#info"
-				class="w3-bar-item w3-button" onclick="toggleFunction()">Thông
-				tin</a> <a href="#contact" class="w3-bar-item w3-button"
-				onclick="toggleFunction()">Liên hệ</a> <a href="#"
-				class="w3-bar-item w3-button"><i class="fa fa-user"></i> Đăng
-				nhập</a>
-		</div>
-	</div>
+    <!--Banner-->
+    <div id="home">
+        <img src="./Images/banner.jpg" alt="Angel Hotel" style="height:700px" />
+        <div class="hero-image">
+            <div class="hero-text" style="margin:0">
+                <h1 style="font-size:120px;color:white;">A N G E L</h1>
+                <h3 style="font-family:'Brush Script MT';font-size:110px;">Hotel</h3>
+                <a href="#container1" id="book1">Đặt phòng </a><span style="display:none;color:lightgray" id="hide1"> >></span>
+            </div>
+        </div>
+    </div>
 
-	<!--Banner-->
-	<div class="parallax1" id="home">
-		<div class="centered">
-			<span style="font-size: 120px; color: lightgray">A n g e l</span> <span
-				id="hotel1">Hotel</span>
-			<p class="w3-animate-fading" style="margin-top: 35px">
-				<a id="book1" href="#container1"
-					style="color: lightgray; font-size: 20px">Đặt phòng <span
-					id="show1"> >></span></a>
-			</p>
-		</div>
-	</div>
+    <!--Reservation-->
+    <div class="container" id="container1">
+        <div class="row" style="margin:20px 50px">
+            <div class="col-xs-12 col-sm-5 col-md-5">
+                <div class="embed-responsive embed-responsive-16by9 wowload fadeInLeft">
+                    <video style="width:100%" autoplay muted loop>
+                        <source src="./Images/VideoHotel.mp4" type="video/mp4"> Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div><br>
 
-	<!--Reservation-->
-	<div class="container" id="container1">
-		<div class="row">
-			<div class="col-xs-12 col-sm-5 col-md-5">
-				<div
-					class="embed-responsive embed-responsive-16by9 wowload fadeInLeft">
-					<video style="width: 100%" autoplay muted loop> <source
-						src="Images/VideoHotel.mp4" type="video/mp4"> Your
-					browser does not support the video tag. </video>
-				</div>
-			</div>
-			<br>
+            <div class="col-xs-12 col-sm-5 col-md-5">
+                <h2 class="datphong" style="color:#0d875c">Đặt phòng</h2>
+                <form role="form" class="wowload fadeInRight">
+                    <div class="form-group">
+                        <div class="col-sm-6" style="line-height: 35px">
+                            Ngày nhận phòng: <input type="date" class="form-control" placeholder="Ngày nhận phòng"><br>
+                        </div>
+                        <div class="col-sm-6" style="line-height: 35px">
+                            Ngày trả phòng: <input type="date" class="form-control" placeholder="Ngày trả phòng"><br>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" style="float:right">
+                        <button class="btn w3-button" id="btntimphong">Tìm phòng</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><br>
+    <div class="container"><hr style="font-size:15px" /></div>
 
-			<div class="col-xs-12 col-sm-5 col-md-5">
-				<h2 class="datphong">Đặt phòng</h2>
-				<form role="form" class="wowload fadeInRight">
-					<div class="form-group">
-						<div class="col-sm-6" style="line-height: 35px">
-							Ngày nhận phòng: <input type="date" class="form-control"><br>
-						</div>
-						<div class="col-sm-6" style="line-height: 35px">
-							Ngày trả phòng: <input type="date" class="form-control"><br>
-						</div>
-					</div>
-					<div class="col-sm-4" style="float: right">
-						<button class="btn w3-button">Tìm phòng</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<br>
+    <!--Rooms-->
+    <div class="container" style="padding: 0px 50px;" id="room">
+        <h2 style="text-align: center;color: #0d875c">P H Ò N G</h2>
+        <h4 style="text-align: center; font-size: 30px;color: #0d875c">__</h4><br>
+        <div class="col-sm-5" style="padding: 70px 25px 25px 25px; text-align: center">
+            <p>
+                Những căn phòng đạt chất lượng 5 sao với đầy đủ tiện nghi, phòng rộng rãi, thoáng mát, chăn ấm, nệm êm, ánh đèn
+                lung linh huyền ảo, màu sắc bắt mắt cùng với hướng nhìn ra biển tuyệt đẹp
+            </p><br />
+            <a href="#" id="book2">Xem phòng</a>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class=" wowload fadeInLeft col-sm-6">
+            <video style="width:100%" autoplay muted loop>
+                <source src="./Images/Video.mp4" type="video/mp4"> Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
 
-	<!--About-->
-	<div class="parallax2" id="home">
-		<div class="centered2 w3-padding w3-white w3-opacity">
-			<b style="line-height: 90px; font-size: 20px">A&nbsp;&nbsp;&nbsp;N&nbsp;&nbsp;&nbsp;G&nbsp;&nbsp;&nbsp;E&nbsp;&nbsp;&nbsp;L</b><br>
-			<br>
-			<p style="line-height: 35px">
-				<b> Cách trung tâm thành phố 2km, cách sân bay 3km<br>Nằm
-					sát bờ biển trong xanh với bãi cát vàng thơ mộng<br>Những căn
-					phòng quyến rũ, rộng rãi, sang trọng và đầy đủ tiện nghi<br>Dịch
-					vụ ăn uống, thể thao, du lịch biển đầy hấp dẫn và phong phú<br>Một
-					nơi nghĩ dưỡng tuyệt vời bên cạnh những người bạn thương yêu ♥
-				</b>
-			</p>
-		</div>
-	</div>
+    <!--Services-->
+    <div class="container" id="portfolio" style="padding:0px 35px">
+        <h2 style="text-align: center;color: #0d875c;margin-top:90px">D Ị C H V Ụ</h2>
+        <h4 style="text-align: center; font-size: 30px;color: #0d875c">__</h4><br>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="image1">
+                <img src="./Images/pic1.jpg" style="width:100%;" alt="Free-Wifi">
+                <div class="overlay">
+                    <div class="text">
+                        <h2>Free Wi-fi</h2>
+                        <p>Check-in, lướt web, nộp báo cáo</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="image2">
+                <img src="./Images/pic2a.jpg" style="width:100%;" alt="Dining">
+                <div class="overlay">
+                    <div class="text">
+                        <h2>Ăn tối</h2>
+                        <p>Một bữa tối thịnh soạn cùng ly rượu vang thơm nồng bên ánh đèn lung linh </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="image3">
+                <img src="./Images/pic3.jpg" style="width:100%;" alt="Drink">
+                <div class="overlay">
+                    <div class="text">
+                        <h2>Thức uống</h2>
+                        <p>Một ly cafe mỗi sáng thức dậy hay vài ly bia cùng bạn bè</p>
+                    </div>
+                </div>
+            </div>
+        </div><br />
 
-	<!--Rooms-->
-	<div class="container" style="padding: 50px;">
-		<h2 style="text-align: center; color: #0d875c">P H Ò N G</h2>
-		<h4 style="text-align: center; font-size: 30px; color: #0d875c">__</h4>
-		<br>
-		<div class="col-sm-5"
-			style="padding: 70px 25px 25px 25px; text-align: center">
-			<p>Những căn phòng đạt chất lượng 5 sao với đầy đủ tiện nghi,
-				phòng rộng rãi, thoáng mát, chăn ấm, nệm êm, ánh đèn lung linh huyền
-				ảo, màu sắc bắt mắt cùng với hướng nhìn ra biển tuyệt đẹp</p>
-			<a href="#" id="book1">Xem phòng</a>
-		</div>
-		<div class="col-sm-1"></div>
-		<div class=" wowload fadeInLeft col-sm-6">
-			<video width="100%" autoplay muted loop> <source
-				src="Images/Video.mp4" type="video/mp4"> Your browser does
-			not support the video tag. </video>
-		</div>
-	</div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="image4">
+                <img src="./Images/pic4.jpg" style="width:100%;" alt="Pool">
+                <div class="overlay">
+                    <div class="text">
+                        <h2>Thư giản</h2>
+                        <p>Đắm mình trong làn nước trong xanh của hồ bơi hoặc thỏa sức với những cơn sóng của biển</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="image5">
+                <img src="./Images/pic5.jpg" style="width:100%;" alt="Spa">
+                <div class="overlay">
+                    <div class="text">
+                        <h2>Spa</h2>
+                        <p>Thư giãn với những dịch vụ massage và đắm chìm trong hương thơm của thảo dược</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="image6">
+                <img src="./Images/pic6.jpg" style="width:100%;" alt="Housekeeping">
+                <div class="overlay">
+                    <div class="text">
+                        <h2>Giặt ủi</h2>
+                        <p>Trắng sáng, thơm tho và thẳng thớm</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-	<!--Services-->
-	<div class="w3-padding-64" id="portfolio">
-		<h2 style="text-align: center; color: #0d875c">D Ị C H V Ụ</h2>
-		<h4 style="text-align: center; font-size: 30px; color: #0d875c">__</h4>
-		<br>
+    </div>
+    <div class="container" style="text-align:center">
+        <button class="btn btn-lg" id="loadbtn">XEM THÊM</button>
+    </div>
+    <div class="container">
+        <hr />
+    </div>
+    <!--Contact-->
+    <div class="container" id="contact" style="padding-bottom: 64px">
+        <h2 style="text-align: center;color: #0d875c">ĐẾN VỚI CHÚNG TÔI</h2>
+        <h4 style="text-align: center; font-size: 30px;color: #0d875c">__</h4><br>
+        <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12"></div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div id="googleMap">
+                    <a href="https://www.google.com/maps/place/Hyatt+Regency+Danang+Resort+and+Spa/@16.0130941,108.2621455,17z/data=!4m5!3m4!1s0x314210cf6a42c159:0xaeb535cc2b736240!8m2!3d16.0131183!4d108.2637083"
+                       target="googlemap"><img src="./Images/hyatt.PNG" alt="Hyatt Resort"></a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="line-height:45px;font-size:20px">
+                <i class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Da Nang, Vietnam<br>
+                <i class="fa fa-phone fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Phone: +00 999999<br>
+                <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Email: gmail@gmail.com<br>
+                <a href="#home" class="btn btn-lg" id="btntop"><span class="glyphicon glyphicon-arrow-up"></span> To the top</a><br />
 
-
-		<!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
-		<div class="w3-row-padding w3-center" style="padding: 0 75px">
-			<div class="w3-col m4 showimg">
-				<img src="Images/pic1.jpg"
-					style="width: 100%; margin-bottom: -100px" class="w3-hover-opacity"
-					alt="Free-Wifi">
-				<div class="overlay">
-					<div class="text">
-						<h2>Free Wi-fi</h2>
-						<p>Check-in, lướt web, nộp báo cáo</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="w3-col m4 showimg">
-				<img src="Images/pic2a.jpg"
-					style="width: 100%; margin-bottom: -100px" class="w3-hover-opacity"
-					alt="Dining">
-				<div class="overlay">
-					<div class="text">
-						<h2>Ăn tối</h2>
-						<p>Một bữa tối thịnh soạn cùng ly rượu vang thơm nồng bên ánh
-							đèn lung linh</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="w3-col m4 showimg">
-				<img src="Images/pic3.jpg"
-					style="width: 100%; margin-bottom: -100px" class="w3-hover-opacity"
-					alt="Drink">
-				<div class="overlay">
-					<div class="text">
-						<h2>Thức uống</h2>
-						<p>Một ly cafe mỗi sáng thức dậy hay vài ly bia cùng bạn bè</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<br> <br> <br> <br> <br> <br>
-		<div class="w3-row-padding w3-center" style="padding: 0 75px">
-			<div class="w3-col m4 showimg">
-				<img src="Images/pic4.jpg"
-					style="width: 100%; margin-bottom: -100px" class="w3-hover-opacity"
-					alt="Pool">
-				<div class="overlay">
-					<div class="text">
-						<h2>Thư giản</h2>
-						<p>Đắm mình trong làn nước trong xanh của hồ bơi hoặc thỏa sức
-							với những cơn sóng của biển</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="w3-col m4 showimg">
-				<img src="Images/pic5.jpg"
-					style="width: 100%; margin-bottom: -100px" class="w3-hover-opacity"
-					alt="Spa">
-				<div class="overlay">
-					<div class="text">
-						<h2>Spa</h2>
-						<p>Thư giãn với những dịch vụ massage và đắm chìm trong hương
-							thơm của thảo dược</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="w3-col m4 showimg">
-				<img src="Images/pic6.jpg"
-					style="width: 100%; margin-bottom: -100px" class="w3-hover-opacity"
-					alt="Housekeeping">
-				<div class="overlay">
-					<div class="text">
-						<h2>Giặt ủi</h2>
-						<p>Trắng sáng, thơm tho và thẳng thớm</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="w3-center">
-		<button class="w3-button w3-padding-large"
-			style="margin-top: 90px; margin-bottom: 70px; color: #0d875c"
-			onclick="appendText()" id="loadbtn">XEM THÊM</button>
-	</div>
-
-	<!--Contact-->
-	<div class="parallax3 w3-opacity-min">
-		<div class="centered">
-			<span style="font-size: 35px; color: white">L I Ê
-				N&nbsp;&nbsp;H Ệ</span>
-		</div>
-	</div>
-	<div class="w3-content w3-container" style="padding-bottom: 64px">
-		<h2 style="text-align: center; color: #0d875c">ĐẾN VỚI CHÚNG TÔI</h2>
-		<div class="w3-row">
-			<div class="w3-col m4 w3-container">
-				<div id="googleMap" class="w3-round-large"
-					style="height: 400px; position: relative; overflow: hidden;">
-					<a
-						href="https://www.google.com/maps/place/Hyatt+Regency+Danang+Resort+and+Spa/@16.0130941,108.2621455,17z/data=!4m5!3m4!1s0x314210cf6a42c159:0xaeb535cc2b736240!8m2!3d16.0131183!4d108.2637083"
-						target="googlemap"><img src="Images/hyatt.PNG"
-						alt="Hyatt Resort"></a>
-				</div>
-			</div>
-			<div class="w3-col m8 w3-panel">
-				<div class="w3-large w3-margin-bottom" style="line-height: 35px">
-					<i
-						class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
-					Da Nang, Vietnam<br> <i
-						class="fa fa-phone fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
-					Phone: +00 999999<br> <i
-						class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
-					Email: gmail@gmail.com<br>
-				</div>
-				<a href="#home" class="w3-button top"><i
-					class="fa fa-arrow-up w3-margin-right" style="color: white"></i>To
-					the top</a>
-				<div class="w3-xlarge w3-section">
-					<i class="fa fa-facebook-official w3-hover-opacity"></i> <i
-						class="fa fa-instagram w3-hover-opacity"></i> <i
-						class="fa fa-snapchat w3-hover-opacity"></i> <i
-						class="fa fa-pinterest-p w3-hover-opacity"></i> <i
-						class="fa fa-twitter w3-hover-opacity"></i> <i
-						class="fa fa-linkedin w3-hover-opacity"></i>
-				</div>
-			</div>
-		</div>
-	</div>
+                <i class="fa fa-facebook-official w3-hover-opacity"></i>
+                <i class="fa fa-instagram w3-hover-opacity"></i>
+                <i class="fa fa-snapchat w3-hover-opacity"></i>
+                <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+                <i class="fa fa-twitter w3-hover-opacity"></i>
+                <i class="fa fa-linkedin w3-hover-opacity"></i>
+            </div>
+        </div>
+    </div>
 </body>
-
-
-
 </html>
