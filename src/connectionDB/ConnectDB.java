@@ -29,7 +29,7 @@ public class ConnectDB {
 			//Đăng ký Driver của SQL Server
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             //Lấy ra connection đến CSDL với 3 tham số truyền vào: url, user, pass
-            connect=DriverManager.getConnection(url+"user=sa;password=12345678");            
+            connect=DriverManager.getConnection(url+"user=sa;password=123");            
             
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Database Connect Failed.");
