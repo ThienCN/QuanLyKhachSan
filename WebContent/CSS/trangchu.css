@@ -206,3 +206,7 @@ h2 {
     font-family: 'Old Standard TT';
     font-size: 17px;
 }
+
+.modal-backdrop.in{
+    opacity:0;
+}

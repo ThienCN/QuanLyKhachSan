@@ -9,24 +9,13 @@ h4 {
     display: none;
 }
 
+td.icon-tinh-trang {
+    color: #0d875c;
+}
 
 .ket-qua-tim-kiem #co-ket-qua, .ket-qua-tim-kiem #khong-co-ket-qua {
     display: none;
     /*display: block;*/
-}
-
-.input-group-btn {
-    text-align: right
-}
-.input-group-btn a {
-    background-color: #0d875c;
-    color: white;
-    width: 150px;
-    margin-right: 10px;
-}
-.input-group-btn a:hover {
-    color: white;
-    background-color: #0d875c;
 }
 
 

@@ -3,8 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>Tra cứu khách hàng</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Tra cứu khách hàng</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
     <!-- Boostrap-->
@@ -23,7 +23,7 @@
     <script src="./JS/tracuu.js"></script>
 </head>
 <body>
-	<!-- HEADER -->
+    <!-- HEADER -->
     <header id="header"></header>
 
     <!-- MENU-LEFT -->
@@ -52,7 +52,6 @@
             <label> KẾT QUẢ TÌM KIẾM: </label>
             <div id="co-ket-qua">
                 <fieldset>
-                    <p style="color: #0d875c; font-weight: bold; text-decoration: underline">Thông tin khách hàng: </p>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -111,6 +110,7 @@
                 <label>Không tìm thấy kết quả</label>
             </div>
         </div>
+
     </section>
 </body>
 </html>
