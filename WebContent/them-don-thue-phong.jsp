@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="connectionDB.NVTimPhongDB"%>
+<%@page import="model.DanhSachPhongTrong"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -46,27 +53,27 @@
                         </div>
                         <label class="control-label col-xs-12 col-sm-4 col-md-2">Họ tên:</label>
                         <div class="col-xs-12 col-sm-8 col-md-4">
-                            <input type="text" class="form-control" size="30" placeholder="Nguyễn Văn A">
+                            <input type="text" class="form-control" size="30" placeholder="Nguyễn Văn A" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-xs-12 col-sm-4 col-md-2">CMND:</label>
                         <div class="col-xs-12 col-sm-8 col-md-4">
-                            <input type="text" class="form-control" size="30" placeholder="241386440">
+                            <input type="text" class="form-control" size="30" placeholder="241386440" required>
                         </div>
                         <label class="control-label col-xs-12 col-sm-4 col-md-2">SĐT:</label>
                         <div class="col-xs-12 col-sm-8 col-md-4">
-                            <input type="text" class="form-control" size="30" placeholder="0123456789">
+                            <input type="text" class="form-control" size="30" placeholder="0123456789" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-xs-12 col-sm-4 col-md-2">Quốc tịch:</label>
                         <div class="col-xs-12 col-sm-8 col-md-4">
-                            <input type="text" class="form-control" size="30" placeholder="Việt Nam">
+                            <input type="text" class="form-control" size="30" placeholder="Việt Nam" required>
                         </div>
                         <label class="control-label col-xs-12 col-sm-4 col-md-2">Địa chỉ:</label>
                         <div class="col-xs-12 col-sm-8 col-md-4">
-                            <input type="text" class="form-control" size="30" placeholder="Đường, Khu phố, Phường, Quận, Tỉnh">
+                            <input type="text" class="form-control" size="30" placeholder="Đường, Khu phố, Phường, Quận, Tỉnh" required>
                         </div>
                     </div>
                 </form>
@@ -108,22 +115,26 @@
                         <div class="form-group">
                             <label class="control-label col-xs-12 col-sm-4 col-md-4">Ngày nhận phòng:</label>
                             <div class="col-xs-12 col-sm-8 col-md-8">
-                                <input type="date" id="ngayNhanPhong" class="form-control" size="30" placeholder="Mã phòng cần tra cứu">
+                                <input type="date" id="ngayNhanPhong" class="form-control" readonly                                	
+                                	value= <%=getServletContext().getAttribute("ngayNhanPhong")%>                                
+                                >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-xs-12 col-sm-4 col-md-4">Ngày trả phòng:</label>
                             <div class="col-xs-12 col-sm-8 col-md-8">
-                                <input type="date" id="ngayTraPhong" class="form-control" size="30" placeholder="Mã phòng cần tra cứu">
+                                <input type="date" id="ngayTraPhong" class="form-control" readonly
+                                	value= <%=getServletContext().getAttribute("ngayTraPhong")%>  
+                                >
                             </div>
                         </div>
                     </form>
                     <div class="input-group-btn">
-                        <button class="btn btn-default">
-                            Thay đổi ngày tìm <i class="glyphicon glyphicon-edit"></i>
+                        <button class="btn btn-default" id="thay-doi-ngay-tim-phong">
+                            Thay đổi ngày <i class="glyphicon glyphicon-edit"></i>
                         </button>
-                        <button class="btn btn-default">
-                            Tìm phòng <i class="glyphicon glyphicon-search"></i>
+                        <button class="btn btn-default" id="tim-phong" disabled>
+                            Tìm phòng <i class="glyphicon glyphicon-search"></i> 
                         </button>
                     </div>
                 </fieldset>                
@@ -135,10 +146,19 @@
                         <div class="form-group">
                             <label class="control-label col-xs-12 col-sm-4 col-md-4">Loại phòng:</label>
                             <div class="col-xs-12 col-sm-8 col-md-8">
-                                <select class="form-control" id="loaiPhong">
-                                    <option>Phòng đơn</option>
-                                    <option>Phòng đôi</option>
-                                    <option>Phòng tập thể</option>
+                                <select class="form-control" id="loaiPhong">                                
+                                <%
+                                List<DanhSachPhongTrong> dsPhongTrong = (List)getServletContext().getAttribute("dsPhongTrong"); 
+								 	for(DanhSachPhongTrong sp : dsPhongTrong){
+									 //out.println(sp.getLoaiPhong()); 
+								 %>
+                                    <option><%=sp.getLoaiPhong() %></option>
+                                    <option><%=sp.getLoaiPhong() %></option>
+                                    <option><%=sp.getLoaiPhong() %></option>
+                                    
+                                 <%
+								 }
+                                 %>
                                 </select>
                             </div>
                         </div>

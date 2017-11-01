@@ -8,4 +8,5 @@ $(document).ready(function () {
 
         $("#portfolio").append(text);
         $("#loadbtn").hide();
+        
     });});

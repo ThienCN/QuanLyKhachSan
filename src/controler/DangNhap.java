@@ -2,11 +2,9 @@ package controler;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import connectionDB.ConnectDB;
-import connectionDB.NguoiDungDB;
+import connectionDB.NVTimPhongDB;
 
 
 
@@ -64,10 +62,13 @@ public class DangNhap extends HttpServlet {
 					response.sendRedirect("quan-tri-vien.jsp");										
 				if(role==2)
 					response.sendRedirect("nhan-vien.jsp");
-				//
+				//				
+				
 				getServletContext().setAttribute("user", user);
 				getServletContext().setAttribute("pass", pass);
 				getServletContext().setAttribute("role", role);
+				
+				NVTimPhongDB.NVTimPhong("2017-10-02","2017-10-04",user,pass);
 			}
 			else
 				response.sendRedirect("login.jsp?err=fail");
