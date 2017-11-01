@@ -10,8 +10,8 @@ h4 {
 }
 
 
-.ket-qua-tim-kiem #co-ket-qua, .ket-qua-tim-kiem #khong-co-ket-qua {
-    display: none;
+#co-ket-qua, #khong-co-ket-qua {
+    display: block;
     /*display: block;*/
 }
 
