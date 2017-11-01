@@ -78,17 +78,17 @@
 
             <div class="col-xs-12 col-sm-5 col-md-5">
                 <h2 class="datphong" style="color:#0d875c">Đặt phòng</h2>
-                <form role="form" class="wowload fadeInRight">
+                <form role="form" class="wowload fadeInRight" action="TimPhong" method="post">
                     <div class="form-group">
                         <div class="col-sm-6" style="line-height: 35px">
-                            Ngày nhận phòng: <input type="date" class="form-control" placeholder="Ngày nhận phòng"><br>
+                            Ngày nhận phòng: <input type="date" class="form-control" name="ngaynhanphong"><br>
                         </div>
                         <div class="col-sm-6" style="line-height: 35px">
-                            Ngày trả phòng: <input type="date" class="form-control" placeholder="Ngày trả phòng"><br>
+                            Ngày trả phòng: <input type="date" class="form-control" name="ngaytraphong"><br>
                         </div>
                     </div>
                     <div class="col-sm-4" style="float:right">
-                        <button class="btn w3-button" id="btntimphong">Tìm phòng</button>
+                        <button class="btn w3-button" type="submit" id="btntimphong">Tìm phòng</button>
                     </div>
                 </form>
             </div>
