@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="connectionDB.NVTimPhongDB"%>
+<%@page import="model.DanhSachPhongTrong"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>	
+	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,87 +44,70 @@
         <h4>TÌM PHÒNG</h4>
         <label style="font-weight: bold; text-decoration: underline"> Thông tin tìm phòng: </label><br />
         <div class="col-xs-12 col-sm-12 col-md-12">
-            <form class="form-horizontal">
-                <div class="form-group">
+            <form class="form-horizontal" action="NV_TimPhong" method="get">
+                <div class="form-group"> 
                     <label class="control-label col-xs-12 col-sm-4 col-md-2">Ngày nhận phòng:</label>
                     <div class="col-xs-12 col-sm-8 col-md-4">
-                        <input type="date" class="form-control" size="30" placeholder="Mã phòng cần tra cứu">
+                        <input type="date" name="ngayNhanPhong" id="ngayNhanPhong" class="form-control"  
+                        	<%
+                        		if(getServletContext().getAttribute("ngayNhanPhong") == null)
+                        		{
+                        			Date date = new Date();                        			  
+                        			String strDateFormat = "yyyy-MM-dd";                        			  
+                        			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(strDateFormat);
+                        	%>
+                        		value= <%=simpleDateFormat.format(date)%>
+                        	<%
+                        		}
+                        		else
+                        		{
+                        	%>	                        
+                        		value= <%=getServletContext().getAttribute("ngayNhanPhong")%>
+                        	<%
+                        		}
+                        	%>                        	
+                        >
                     </div>
                     <label class="control-label col-xs-12 col-sm-4 col-md-2">Ngày trả phòng:</label>
                     <div class="col-xs-12 col-sm-8 col-md-4">
-                        <input type="date" class="form-control" size="30" placeholder="Mã phòng cần tra cứu">
+                        <input type="date" name="ngayTraPhong" id="ngayTraPhong"  class="form-control"  
+                        	<%
+                        		if(getServletContext().getAttribute("ngayTraPhong") == null)
+                        		{
+                        			Date date = new Date();                        			  
+                        			String strDateFormat = "yyyy-MM-dd";                        			  
+                        			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(strDateFormat);
+                        	%>
+                        		value= <%=simpleDateFormat.format(date)%>
+                        	<%
+                        		}
+                        		else
+                        		{
+                        	%>	                        
+                        		value= <%=getServletContext().getAttribute("ngayTraPhong")%>
+                        	<%
+                        		}
+                        	%>                           
+                        >
                     </div>
                 </div>
-            </form>
-            <div class="input-group-btn" style="text-align: right">
-                <button id="btn-tim-phong" class="btn btn-default" type="submit" style="background-color: #0d875c; color:white; width:150px; ">
-                    Tìm <i class="glyphicon glyphicon-search"></i>
-                </button>
-            </div>
+                <div class="input-group-btn" style="text-align: right">
+	                <button id="btn-tim-phong" class="btn btn-default" type="submit" style="background-color: #0d875c; color:white; width:150px; ">
+	                    Tìm <i class="glyphicon glyphicon-search"></i>
+	                </button>
+            	</div>
+            </form>            
         </div>
-
-        <br />
-        <div class="ket-qua-tim-kiem">
-            <label> KẾT QUẢ TÌM KIẾM: </label>
-            <div id="co-ket-qua">
-                <fieldset>
-                    <p style="color: #0d875c; font-weight: bold; text-decoration: underline">Danh sách phòng trống: </p>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Loại phòng</th>
-                                    <th>Mã phòng </th>
-                                    <th>Phí thuê phòng (USD)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id="loaiPhong">Đơn</td>
-                                    <td id="maPhong">A1</td>
-                                    <td id="phiThuePhong">500</td>
-                                </tr>
-                                <tr>
-                                    <td id="loaiPhong">Đơn</td>
-                                    <td id="maPhong">A1</td>
-                                    <td id="phiThuePhong">500</td>
-                                </tr>
-                                <tr>
-                                    <td id="loaiPhong">Đôi</td>
-                                    <td id="maPhong">B1</td>
-                                    <td id="phiThuePhong">500</td>
-                                </tr>
-                                <tr>
-                                    <td id="loaiPhong">Tập thể</td>
-                                    <td id="maPhong">B1</td>
-                                    <td id="phiThuePhong">500</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                        <label>Số loại phòng đơn trống là : 2 phòng</label> <br />
-                        <label>Số loại phòng đôi trống là : 1 phòng</label> <br />
-                        <label>Số loại phòng tập thể trống là : 1 phòng</label>
-                    </div>                
-                </fieldset>
-
-                <br />
-                <div class="input-group-btn">                  
-                    <a href="#" class="btn btn-default">
-                        Đặt phòng <i class="glyphicon glyphicon-edit"></i>
-                    </a>
-                    <a href="them-don-thue-phong.jsp" class="btn btn-default">
-                        Thuê phòng <i class="glyphicon glyphicon-check"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div id="khong-co-ket-qua" style="text-align: center">
-                <label>Không tìm thấy kết quả</label>
-            </div>
-            
-        </div>
+		 
+		 
+		<%
+			if(getServletContext().getAttribute("dsPhongTrong") != null)
+			{		
+		%>
+				<jsp:include page="ket-qua-NV-tim-phong.jsp"></jsp:include>
+		<%	
+			}
+		%>
         
     </section>
 </body>
