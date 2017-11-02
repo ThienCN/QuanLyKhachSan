@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
-	
-	$("#thay-doi-ngay-tim-phong").click(function (e) {
+    /*VALIDATE nhập thông tin người dùng*/
+    $("#thay-doi-ngay-tim-phong").click(function (e) {
         $("#tim-phong").prop("disabled", false);
         $("#ngayNhanPhong").attr("readonly", false);
         $("#ngayTraPhong").attr("readonly", false);
@@ -8,6 +8,7 @@
     });
 
     $("#tim-phong").click(function (e) {
+        e.preventDefault();
         var ngayNhanPhong = new Date($("#ngayNhanPhong").val());
         var ngayTraPhong = new Date($("#ngayTraPhong").val());
 
@@ -23,18 +24,92 @@
         else
         {
             $("#thay-doi-ngay-tim-phong").prop("disabled", false);
+            $("#phongDon").prop("disabled", false);
             $("#ngayNhanPhong").attr("readonly", true);
             $("#ngayTraPhong").attr("readonly", true);
             $("#tim-phong").prop("disabled", true);
-        }
+            $("#btn-chon-phong").prop("disabled", false);
+        }    
+
+      
+
     });
-    
+
+
+    $("#ds-phong-don").click(function (e) {
+        $("#phongDon").prop("disabled", false);
+        $("#phongDoi").prop("disabled", true);
+        $("#phongTapThe").prop("disabled", true);
+    });
+    $("#ds-phong-doi").click(function (e) {
+        $("#phongDon").prop("disabled", true);
+        $("#phongDoi").prop("disabled", false);
+        $("#phongTapThe").prop("disabled", true);
+    });
+    $("#ds-phong-tap-the").click(function (e) {
+        $("#phongDon").prop("disabled", true);
+        $("#phongDoi").prop("disabled", true);
+        $("#phongTapThe").prop("disabled", false);
+    });
+
+
+
     $("#btn-chon-phong").click(function () {
-        var loaiPhong = "<td>"+ $("select#loaiPhong").val() + "</td>";
-        var maPhong = "<td>" + $("select#maPhong").val() + "</td>";
-        var ngayNhanPhong = "<td>" + $("input#ngayNhanPhong").val() + "</td>";
-        var ngayTraPhong = "<td>" + $("input#ngayTraPhong").val() + "</td>";
-        var xoaPhong = "<td> <a> Xóa </a> </td>";
-        $("table#table-thong-tin-thue-phong").append("<tr>" + loaiPhong + maPhong + ngayNhanPhong + ngayTraPhong + xoaPhong +"</tr>"); 
+        var loaiPhong, maPhong, phiThue;
+        if (document.getElementById("phongDon").disabled == false)
+        {
+            loaiPhong = "Phòng đơn";
+            maPhong = $("select#phongDon").val();
+            phiThue = $("#phiThuePhongDon").text();
+            $("#phongDon option:selected").remove();
+        }            
+        if (document.getElementById("phongDoi").disabled == false)
+        {
+            loaiPhong = "Phòng đôi";
+            maPhong = $("select#phongDoi").val();
+            phiThue = $("#phiThuePhongDoi").text();
+            $("#phongDoi option:selected").remove();
+        }            
+        if (document.getElementById("phongTapThe").disabled == false)
+        {
+            loaiPhong = "Phòng tập thể";
+            maPhong = $("select#phongTapThe").val();
+            phiThue = $("#phiThuePhongTapThe").text();
+            $("#phongTapThe option:selected").remove();
+        }
+        var ngayNhanPhong = $("#ngayNhanPhong").val();
+        var ngayTraPhong = $("#ngayTraPhong").val();
+
+        if (loaiPhong == null || maPhong == null || phiThue == null || ngayNhanPhong == null || ngayTraPhong == null) {
+            alert("Mời bàn tìm phòng trước khi chọn phòng!");
+        }
+        else
+        {
+            $("#table-thong-tin-thue-phong > tbody").append(
+                $('<tr>').append(
+                    $('<td>').text(loaiPhong)
+                ).append(
+                    $('<td>').text(maPhong)
+                    ).append(
+                    $('<td>').text(ngayNhanPhong)
+                    ).append(
+                    $('<td>').text(ngayTraPhong)
+                    ).append(
+                    $('<td>').text(phiThue)
+                    ).append(
+                    $('<td>').append(
+                        $('<a>').text('Hủy').css('cursor', 'pointer')
+                            .click(function (e) {
+                                e.preventDefault();
+                                if (confirm('Bạn có chắc chắn muốn hủy thuê phòng này không?')) {
+                                    $(this).closest('tr').remove();
+                                }
+                        })
+                    )
+               )
+            );
+        }
+
+       
     });
 });

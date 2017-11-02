@@ -27,14 +27,11 @@ public class NV_TimPhong extends HttpServlet {
 		String ngayTraPhong=request.getParameter("ngayTraPhong");
 		
 	
-		try {
-//			List<DanhSachPhongTrong> dsPhongTrong = 
-//					NVTimPhongDB.NVTimPhong(ngayNhanPhong, ngayTraPhong, 
-//					(String)getServletContext().getAttribute("user"), 
-//					(String)getServletContext().getAttribute("pass"));
+		try {			
 			List<DanhSachPhongTrong> dsPhongTrong = 
 					NVTimPhongDB.NVTimPhong(ngayNhanPhong, ngayTraPhong, 
-					"sa", "12345678"); 
+					(String)request.getSession().getAttribute("user"), 
+					(String)request.getSession().getAttribute("pass")); 
 			
 			getServletContext().setAttribute("ngayNhanPhong", ngayNhanPhong);
 			getServletContext().setAttribute("ngayTraPhong", ngayTraPhong); 

@@ -13,10 +13,21 @@ public class NVThuePhongDB {
 		
 		try {
 			conn=ConnectDB.ConnectDB_Role(user, pass);
-			String sql= "{call spNVTimPhong(?,?)}";
 			
+			cstmt=conn.prepareCall("{?=call fn_TaoMaKhachHang()}");
 			
-		}finally {
+			cstmt.registerOutParameter(1, java.sql.Types.CHAR);
+			
+			cstmt.execute();
+			
+			String maKH=cstmt.getString(1);
+			
+			return maKH;
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
             try {
                 if (conn != null) {
                     conn.close();
@@ -28,8 +39,6 @@ public class NVThuePhongDB {
                 ex.printStackTrace();
             }
         }
-		
-		
 		return null;
 	}
 

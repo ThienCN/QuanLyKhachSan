@@ -73,11 +73,6 @@
                     </a>
                 </div>
             </div>
-
-            <div id="khong-co-ket-qua" style="text-align: center">
-                <label>Không tìm thấy kết quả</label>
-            </div>
-            
         </div>
 </body>
 </html>
