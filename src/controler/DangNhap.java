@@ -58,16 +58,14 @@ public class DangNhap extends HttpServlet {
 			
 			
 			if(kq.next()) {
-				if(role==1)
-					response.sendRedirect("quan-tri-vien.jsp");										
-				if(role==2)
-					response.sendRedirect("nhan-vien.jsp");
-				//		
 				request.getSession().setAttribute("user", user);
 				request.getSession().setAttribute("pass", pass);
 				request.getSession().setAttribute("role", role);
 				
-				NVTimPhongDB.NVTimPhong("2017-10-02","2017-10-04",user,pass);
+				if(role==1)
+					response.sendRedirect("quan-tri-vien.jsp");										
+				if(role==2)
+					response.sendRedirect("nhan-vien.jsp");				
 			}
 			else
 				response.sendRedirect("login.jsp?err=fail");

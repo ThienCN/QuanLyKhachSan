@@ -5,6 +5,7 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.ArrayList"%>
+
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -74,7 +75,7 @@
                         	<%
                         		if(getServletContext().getAttribute("ngayTraPhong") == null)
                         		{
-                        			Date date = new Date();                        			  
+                        			Date date = new Date(new Date().getTime()+60*60*24*1000);                        			  
                         			String strDateFormat = "yyyy-MM-dd";                        			  
                         			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(strDateFormat);
                         	%>
@@ -93,7 +94,7 @@
                 </div>
                 <div class="input-group-btn" style="text-align: right">
 	                <button id="btn-tim-phong" class="btn btn-default" type="submit" style="background-color: #0d875c; color:white; width:150px; ">
-	                    Tìm <i class="glyphicon glyphicon-search"></i>
+	                    Tìm Kiếm <i class="glyphicon glyphicon-search"></i>
 	                </button>
             	</div>
             </form>            

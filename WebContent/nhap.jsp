@@ -9,29 +9,39 @@
         <title>Search Employee</title>
         <script src="./JS/jquery-1.10.2.min.js"></script>       
         <style>
-            th{ //Css cho thẻ <th> phần t head
+            th{ 
                 background: rgba(0, 135, 255, 0.46);
             }
-            .text-center{ //Css cho các class mới tạo bằng Jquery trong thẻ <td>
+            .text-center{ 
                 text-align: center;
             }
-            .trOnColor{ //Css cho class mới tạo bằng Jquery trong thẻ <tr>
+            .trOnColor{ 
                 background: rgba(0, 121, 128, 0.23);
             }
         </style>
         <script type="text/javascript">
         
         $(function () {
+        	
+        	$('.demo').click(function(){
+        		$.ajax({
+                    type: "GET",
+                    url: "nhap2",
+                    data: {
+                        name: "Phụng",
+                        age: "23",
+                        nguoiyeu: "Thiện"
+                    }
+                });
+        	});
 
             $('.search').click(function () {
                 var name = $("#name").val();
                 $.ajax({
                     type: "GET",
                     url: "nhap", //Tên servlet
-                    data: "name=" + name,  //Gán giá trị vào name mục đich để servlet nhận được Parameter
+                    data: {name: name},  //Gán giá trị vào name mục đich để servlet nhận được Parameter
                     dataType: "json",
-                    async: true,
-                    cache: false,
                     success: function (result) {
                         //Lấy size của list này
                         var listSize = Object.keys(result).length;
@@ -44,6 +54,7 @@
                         //Nếu list tồn tại thì reset thông điệp cảnh báo về rỗng và loop dữ liệu hiển thị ra table
                         if (listSize > 0) {
                             $('#message').text("");
+                            console.log(listSize);
                             //Khai báo table kiểu global để sử dụng ngoài fuction này
                             table = document.getElementById("row");
                             for (i = 0; i < listSize; i++) {
@@ -54,11 +65,14 @@
                                 var cell2 = row.insertCell(2);
                                 var cell3 = row.insertCell(3);
 
-                                cell.innerHTML = i;
-                                cell1.innerHTML = result[i].loaiPhong;
+                                cell.innerHTML = result[i].maLoaiPhong; 
+                                cell1.innerHTML = result[i].loaiPhong; 
                                 cell2.innerHTML = result[i].maPhong;
-                                cell3.innerHTML = result[i].phiThue;
-
+                                cell3.innerHTML = result[i].tienPhong;
+								//maLoaiPhong, loaiPhong, maPhong, tienPhong muốn lấy giá trị nào 
+								//thì lấy như cấu trúc của 1 struct
+                                
+                                
                                 // Thêm class vào tr
                                 row.className += 'trOnColor';// class có tên trOnColor
                                 // Thêm class vào td
@@ -90,9 +104,11 @@
         <p id="message" align="left"></p> <!--Hiển thị thông báo không tìm thấy bản ghi   -->
             Name<input type="text" id="name" name="name"/> 
             <input type="button" class="search" value="Search" />
+            <input type="button" class="demo" value="Demo" />
         <table border="1px" width="500px">
             <thead>
                 <tr>
+                    <th>Mã loại phòng</th>
                     <th>Loại phòng</th>
                     <th>Mã phòng</th>
                     <th>Phí thuê</th>

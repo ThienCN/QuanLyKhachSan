@@ -1,10 +1,10 @@
 package controler;
 
 
-import java.sql.Connection;
+import java.util.List;
 
-import connectionDB.ConnectDB;
-import connectionDB.NVThuePhongDB;
+import model.DanhSachPhongTrong;
+import model.ThongTinKhachHang;
 
 public class demo {
 
@@ -20,8 +20,19 @@ public class demo {
 //		else
 //			System.out.println("Login khong thanh cong");
 		
-		String maKH=NVThuePhongDB.MaKhachHangMoi("sa", "12345678");
-		System.out.println(maKH);
+//		String maKH=NVThuePhongDB.MaKhachHangMoi("sa", "12345678");
+//		System.out.println(maKH);
+		
+		List<ThongTinKhachHang> dsPhongTrong= 
+				connectionDB.NVTraCuuDB.TraCuuThongTinKhachHang("KH1", "sa", "12345678");
+		
+		
+//		System.out.println(dsPhongTrong.get(1).getLoaiPhong());
+//		System.out.println(dsPhongTrong.get(1).getMaLoaiPhong());
+//		System.out.println(dsPhongTrong.get(1).getTienPhong());
+		
+//		int k = connectionDB.NVThuePhongDB.ThemKhachHangMoi("", "", "", "", "", "sa", "12345678");
+//		System.out.println(k);
 		
 	}
 

@@ -77,25 +77,25 @@ $(document).ready(function () {
             $("li#submenu3 a:first").attr("style", "color: white !important");
         }
         else if (path.lastIndexOf('them-don-thue-phong.jsp') >= 0) {
-            namepage = 'QUẢN LÝ THUÊ PHÒNG > THÊM ĐƠN THUÊ PHÒNG';
+            namepage = 'QUẢN LÝ THUÊ PHÒNG > THÊM GIAO DỊCH THUÊ PHÒNG';
             namefile = 'them-don-thue-phong.jsp';
             $("li#submenu5").css("background-color", "#0d875c");
             $("li#submenu5 a:first").attr("style", "color: white !important");
         }
         else if (path.lastIndexOf('chinh-sua-don-thue-phong.jsp') >= 0) {
-            namepage = 'QUẢN LÝ THUÊ PHÒNG > CHỈNH SỬA ĐƠN THUÊ PHÒNG';
+            namepage = 'QUẢN LÝ THUÊ PHÒNG > CHỈNH SỬA GIAO DỊCH THUÊ PHÒNG';
             namefile = 'chinh-sua-don-thue-phong.jsp';
             $("li#submenu5").css("background-color", "#0d875c");
             $("li#submenu5 a:first").attr("style", "color: white !important");
         }
         else if (path.lastIndexOf('thong-ke-don-thue-phong.jsp') >= 0) {
-            namepage = 'QUẢN LÝ THUÊ PHÒNG > THỐNG KÊ ĐƠN THUÊ PHÒNG';
+            namepage = 'QUẢN LÝ THUÊ PHÒNG > THỐNG KÊ GIAO DỊCH THUÊ PHÒNG';
             namefile = 'thong-ke-don-thue-phong.jsp';
             $("li#submenu5").css("background-color", "#0d875c");
             $("li#submenu5 a:first").attr("style", "color: white !important");
         }
         else if (path.lastIndexOf('huy-don-thue-phong.jsp') >= 0) {
-            namepage = 'QUẢN LÝ THUÊ PHÒNG > HỦY ĐƠN THUÊ PHÒNG';
+            namepage = 'QUẢN LÝ THUÊ PHÒNG > HỦY GIAO DỊCH THUÊ PHÒNG';
             namefile = 'huy-don-thue-phong.jsp';
             $("li#submenu5").css("background-color", "#0d875c");
             $("li#submenu5 a:first").attr("style", "color: white !important");
