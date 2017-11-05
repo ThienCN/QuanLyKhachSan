@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="./CSS/chinh-sua-don-thue-phong.css" />
     <!-- MY JS -->
     <script src="./JS/include-html.js"></script>
-    <script src="./JS/chinh-sua-don-thue-phong.js"></script>
+    <script src="./JS/huy-don-thue-phong.js"></script>
 </head>
 <body>
     <!-- HEADER -->
@@ -33,24 +33,22 @@
     <!-- CONTENT -->
     <section class="phan-noi-dung">
         <h4>HỦY ĐƠN THUÊ PHÒNG</h4>
-        <label> Mã khách hàng: </label>
+        <label> Thông tin tìm kiếm: </label>
         <div class="row">
             <div class="col-xs-12 col-md-6">
-                <form>
-                    <div class="input-group search">
-                        <input type="text" class="form-control" size="50" placeholder="Nhập mã khách hàng vào đây" id="maKhachHang">
-                        <div class="input-group-btn">
-                            <button id="btn-tra-cuu-khach-thue" class="btn btn-default" type="submit" style="background-color: #0d875c; color:white">
-                                Tìm <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </div>
+                <div class="input-group search">
+                    <input type="text"  id="maTimKiem" class="form-control" placeholder="Nhập mã khách hàng hoặc CMND vào đây">
+                    <div class="input-group-btn">
+                        <button id="tim-thong-tin-khach-hang" class="btn btn-default" style="background-color: #0d875c; color:white">
+                            Tìm <i class="glyphicon glyphicon-search"></i>
+                        </button>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
         <br />
-        <div class="co-ket-qua">
-            <label> KẾT QUẢ TÌM KIẾM: </label>
+        <label> KẾT QUẢ TÌM KIẾM: </label>
+        <div id="thong-tin-khach-hang" style="display:none">
             <!-- Thông tin khách hàng -->
             <fieldset>
                 <p style="font-weight: bold; text-decoration: underline">Thông tin khách hàng: </p>
@@ -59,39 +57,40 @@
                         <div class="form-group">
                             <label class="control-label col-xs-12 col-sm-4 col-md-2">Mã KH:</label>
                             <div class="col-xs-12 col-sm-8 col-md-4">
-                                <input type="text" class="form-control" size="20" placeholder="Ví dụ: KH1, KH2, .." value="KH1" readonly>
+                                <input type="text" id="maKH" class="form-control" readonly>
                             </div>
                             <label class="control-label col-xs-12 col-sm-4 col-md-2">Họ tên:</label>
                             <div class="col-xs-12 col-sm-8 col-md-4">
-                                <input type="text" class="form-control" size="30" placeholder="Nguyễn Văn A" value="Hoàng Thị Kim Phụng">
+                                <input type="text" id="hoTenKH" class="form-control" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-xs-12 col-sm-4 col-md-2">CMND:</label>
                             <div class="col-xs-12 col-sm-8 col-md-4">
-                                <input type="text" class="form-control" size="30" placeholder="241386440" value="241386440">
+                                <input type="text" id="CMND" class="form-control" readonly>
                             </div>
                             <label class="control-label col-xs-12 col-sm-4 col-md-2">SĐT:</label>
                             <div class="col-xs-12 col-sm-8 col-md-4">
-                                <input type="text" class="form-control" size="30" placeholder="0123456789" value="01668174561">
+                                <input type="text" id="SDT" class="form-control" readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-xs-12 col-sm-4 col-md-2">Quốc tịch:</label>
                             <div class="col-xs-12 col-sm-8 col-md-4">
-                                <input type="text" class="form-control" size="30" placeholder="Việt Nam" value="Việt Nam">
+                                <input type="text" id="QuocTich" class="form-control" readonly>
                             </div>
                             <label class="control-label col-xs-12 col-sm-4 col-md-2">Địa chỉ:</label>
                             <div class="col-xs-12 col-sm-8 col-md-4">
-                                <input type="text" class="form-control" size="30" placeholder="Đường, Khu phố, Phường, Quận, Tỉnh"
-                                       value="Kha Vạn Cân, Phường Linh Đông, Quận Thủ Đức">
+                                <input type="text" id="DiaChi" class="form-control" readonly>
                             </div>
                         </div>
                     </form>
                 </div>
             </fieldset>
-
-            <hr />
+		</div>
+		
+        <hr />
+        <div id="thong-tin-thue-phong" style="display:none">
             <!-- Thông tin thuê phòng -->
             <fieldset>
                 <p style="font-weight: bold; text-decoration: underline">Thông tin thuê phòng: </p>
@@ -106,41 +105,17 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Phòng đơn</td>
-                                <td>A1</td>
-                                <td>2017-02-02</td>
-                                <td>2017-02-02</td>
-                                <td> <a> Hủy </a> </td>
-                            </tr>
-                            <tr>
-                                <td>Phòng đơn</td>
-                                <td>A1</td>
-                                <td>2017-02-02</td>
-                                <td>2017-02-02</td>
-                                <td> <a> Hủy </a> </td>
-                            </tr>
-                            <tr>
-                                <td>Phòng đơn</td>
-                                <td>A1</td>
-                                <td>2017-02-02</td>
-                                <td>2017-02-02</td>
-                                <td> <a> Hủy </a> </td>
-                            </tr>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
-                </div>
-                <div class="input-group-btn">
-                    <button class="btn btn-default">
-                        Hủy tất cả<i class="glyphicon glyphicon-ok"></i>
-                    </button>
                 </div>
             </fieldset>
         </div>
 
-        <div class="khong-co-ket-qua" style="text-align: center">
-            <label>Không tìm thấy kết quả</label>
+       <div style="text-align: center">
+            <label id="khong-co-ket-qua"></label>
+        </div>
+        <div style="text-align: center">
+            <label id="khong-co-thong-tin-thue-phong"></label>
         </div>
 
     </section>

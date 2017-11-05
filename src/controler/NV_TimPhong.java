@@ -25,24 +25,15 @@ public class NV_TimPhong extends HttpServlet {
 		
 		String ngayNhanPhong=request.getParameter("ngayNhanPhong");
 		String ngayTraPhong=request.getParameter("ngayTraPhong");
-		
 	
-		try {
-//			List<DanhSachPhongTrong> dsPhongTrong = 
-//					NVTimPhongDB.NVTimPhong(ngayNhanPhong, ngayTraPhong, 
-//					(String)getServletContext().getAttribute("user"), 
-//					(String)getServletContext().getAttribute("pass"));
-			List<DanhSachPhongTrong> dsPhongTrong = 
-					NVTimPhongDB.NVTimPhong(ngayNhanPhong, ngayTraPhong, 
-					"sa", "12345678"); 
-			
-			getServletContext().setAttribute("ngayNhanPhong", ngayNhanPhong);
-			getServletContext().setAttribute("ngayTraPhong", ngayTraPhong); 
-			getServletContext().setAttribute("dsPhongTrong", dsPhongTrong); 					
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		List<DanhSachPhongTrong> dsPhongTrong = 
+				NVTimPhongDB.NVTimPhong(ngayNhanPhong, ngayTraPhong, 
+				(String)request.getSession().getAttribute("user"), 
+				(String)request.getSession().getAttribute("pass")); 
+		
+		getServletContext().setAttribute("ngayNhanPhong", ngayNhanPhong);
+		getServletContext().setAttribute("ngayTraPhong", ngayTraPhong); 
+		getServletContext().setAttribute("dsPhongTrong", dsPhongTrong);
 		response.sendRedirect("tim-phong.jsp"); 
 	}
 
