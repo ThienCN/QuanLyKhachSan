@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="connectionDB.SoLuongPhongTrongDB" %>
+<%@page import="connectionDB.KDTimPhongDB" %>
 <%@page import="java.util.List" %>
 <%@page import="model.SoLuongPhongTrong" %>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@page import="connectionDB.KDDatPhongDB" %>
+<%@page import="model.ThongTinDatPhong" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,7 +36,14 @@
 	<div class="container" style="text-align: center">
 		<img src="./Images/logo-hotel.png" alt="logo" class="logo">
 	</div>
-
+	
+	<%
+	  //Khởi tạo list Thông tin Đặt phòng để sử dụng cho việc thêm phòng đặt
+	  List<ThongTinDatPhong> thongtindatphong = new ArrayList<ThongTinDatPhong>();
+	  //Lưu danh sách vào application scope để thuận tiện cho việc thêm sửa
+	  getServletContext().setAttribute("thongtindatphong", thongtindatphong);
+	%>
+	
 	<!--Tìm phòng-->
 	<div class="container">
 		<div class="row" style="margin: 0">
@@ -39,27 +52,16 @@
 					role="banner" id="top-banner"
 					style="margin-bottom: 10px; z-index: 90; min-height: 50px; border: 1px solid transparent; border-radius: 5px; background: #0d875c">
 					<div class="hidden-xs">
-						<form class="hidden-xs form-horizontal ng-pristine ng-valid"
-							role="search" style="padding: 0 5px 10px 5px; margin-top: 8px;">
+						<form class="hidden-xs form-horizontal" style="padding: 0 5px 10px 5px; margin-top: 8px;">
 							<div class="col-lg-12 col-md-12 col-sm-12" id="checkin-form">
 								<label class="nav-label control-label pull-left">Ngày
-									nhận phòng:</label> <span id="checkin"
-									class="pull-left ng-hide input-group date"
-									data-provide="datepicker"> 
-									<input type="text" id="inputcheckin" class="pull-left" name="ngaynhanphong" value="<%=getServletContext().getAttribute("ngaynhanphong") %>"> <span
-									class="input-group-addon glyphicon glyphicon-calendar pull-left"
-									id="iconcheckin"></span>
-								</span> <label class="nav-label control-label pull-left"
-									style="margin-left: 25px">Ngày trả phòng:</label> <span
-									id="checkin" class="pull-left ng-hide input-group date"
-									data-provide="datepicker"> <input type="text"
-									id="inputcheckin" class="pull-left" name="ngaytraphong" value="<%=getServletContext().getAttribute("ngaytraphong") %>"
-									> <span
-									class="input-group-addon glyphicon glyphicon-calendar pull-left"
-									id="iconcheckin"></span>
-								</span> <span class="pull-left" style="width: 10px;">&nbsp;</span>
-								<button class="pull-left btn btn-main" type="submit" id="findroom">Tìm
-									phòng trống</button>
+									nhận phòng:</label>
+								<input class="pull-left form-control" type="date" class="form-control" id="ngaynhanphong" name="ngaynhanphong" value="<%=getServletContext().getAttribute("ngaynhanphong") %>" style="width:150px">
+								<label class="nav-label control-label pull-left"
+									style="margin-left: 25px">Ngày trả phòng:</label>
+								<input class="pull-left form-control" type="date" class="form-control" id="ngaytraphong" name="ngaytraphong" value="<%=getServletContext().getAttribute("ngaytraphong") %>" style="width:150px">
+								<span class="pull-left" style="width: 10px;">&nbsp;</span>
+								<button class="pull-left btn btn-main" id="findroom">Tìm phòng trống</button>
 								<!--<div class="pull-right hidden-xs hidden-sm" style="margin-right: 3px; position: relative">
                                     <a class="btn btn-lg btn-success btn-cart" href="#" style="padding:6px 13px; margin-top:-4px;">
                                         <span class="pull-left" style="text-transform: uppercase;margin-right:3px;">Giỏ hàng</span>
@@ -154,9 +156,7 @@
 			</div>
 
 			<!--Thông tin phòng còn trống-->
-			<div class="row pdon1" style="<%List<SoLuongPhongTrong> listphong = SoLuongPhongTrongDB.soPhongTrongTungLoai(String.valueOf(getServletContext().getAttribute("ngaynhanphong")), String.valueOf(getServletContext().getAttribute("ngaytraphong")));
-					SoLuongPhongTrong phong = listphong.get(0);
-					if(phong.getSoPhongTrong()>0){%>display:none<%}%>">
+			<div class="row pdon1" id="pdon1" style="">
 				<div class="col-md-3 col-sm-3 hidden-xs hidden-sm" id="infodon1">
 					<img src="./Images/roomdon.jpg" style="width: 100%" alt="Phong don"
 						data-toggle="collapse" data-target="#collapse1" />
@@ -181,7 +181,7 @@
 			</div>
 
 			<!--Thông tin phòng còn trống-->
-			<div class="row pdon2" style="<%if(phong.getSoPhongTrong()<=0){ %>display:none<%}%>">
+			<div class="row pdon2" id="pdon2" style="">
 				<div class="col-md-3 col-sm-3 hidden-xs hidden-sm" id="infodon2">
 					<img src="./Images/roomdon.jpg" style="width: 100%" alt="Phong don"
 						data-toggle="collapse" data-target="#collapse1" />
@@ -195,28 +195,27 @@
 							<i class="fa fa-check-circle pull-left" id="btnhide1"
 								style="font-size: 39px; color: green"></i> <strong
 								class="pull-left">Phòng đơn</strong><br /> Giá chỉ từ <strong
-								style="color: #0283df">500 USD</strong> - 
-								<%phong = listphong.get(0); %><strong style="color: red">Chỉ còn lại <%=phong.getSoPhongTrong() %> phòng</strong>
+								style="color: #0283df">500 USD</strong> - <strong style="color: red" id="spcl1"></strong>
 														
 						</div>
 						<div style="padding: 0 17px">
 							<button
 								class="pull-right btn btn-success btn-lg btn-cart add-to-cart"
-								id="product-1" data-name="Phòng đơn" data-price="500"
+								id="q1" data-name="Phòng đơn" data-price="500"
 								style="margin: 10px" field="quantity1">Đặt phòng</button>
 							<span class="pull-right" style="padding: 5px 50px 0 0">Số
 								phòng</span><br />
-							<div style="margin: 10px">
+							<div style="margin: 10px" id="bo1">
 								<i class="fa fa-angle-right" aria-hidden="true"
 									style="font-size: 12px; color: red"></i> <strong
 									style="color: red; font-size: 12px"><i> Thanh toán
 										trước 10% tiền thuê phòng</i></strong> <span
-									style="text-align: center; padding-left: 100px">Số phòng
-									đặt tối đa: 5</span> <input type="button" value="-"
+									style="text-align: center; padding-left: 100px" id="spdtd1"></span>
+									 <input type="button" value="-"
 									class="qtyminus1 btn btn-sm btn-spinner" field="quantity1"
 									style="margin-left: 25px" /> <input type="text"
 									name="quantity1" id="sl1" value="1" class="qty"
-									style="width: 35px; text-align: center" /> <input
+									style="width: 35px; text-align: center" readonly /> <input id=""
 									type="button" value="+" class="qtyplus1 btn btn-sm btn-spinner"
 									field="quantity1" />
 							</div>
@@ -269,7 +268,7 @@
 							<div class="pull-right glyphicon glyphicon-remove x-icon"></div>
 							<div style="padding: 0 5px 0 5px;">
 								<strong>Phòng đôi</strong> <span>giá chỉ từ<strong
-									style="color: #0283df">&nbsp;750&nbsp;USD</strong></span>
+									style="color: #0283df">&nbsp;700&nbsp;USD</strong></span>
 							</div>
 						</div>
 						<div class="x-content hidden-xs x-detail">
@@ -302,8 +301,7 @@
 			</div>
 
 			<!--Thông tin phòng còn trống-->
-			<div class="row pdoi1" style="<%phong = listphong.get(1);
-					if(phong.getSoPhongTrong()>0){%>display:none<%}%>">
+			<div class="row pdoi1" id="pdoi1" style="">
 				<div class="col-md-3 col-sm-3 hidden-xs hidden-sm" id="infodoi1">
 					<img src="./Images/roomdon.jpg" style="width: 100%" alt="Phong doi"
 						data-toggle="collapse" data-target="#collapse2" />
@@ -328,7 +326,7 @@
 			</div>
 
 			<!--Thông tin phòng còn trống-->
-			<div class="row pdoi2" style="<%if(phong.getSoPhongTrong()<=0){ %>display:none<%}%>">
+			<div class="row pdoi2" id="pdoi2" style="">
 				<div class="col-md-3 col-sm-3 hidden-xs hidden-sm" id="infodoi2">
 					<img src="./Images/roomdon.jpg" style="width: 100%" alt="Phong doi"
 						data-toggle="collapse" data-target="#collapse2" />
@@ -342,13 +340,12 @@
 							<i class="fa fa-check-circle pull-left" id="btnhide2"
 								style="font-size: 39px; color: green"></i> <strong
 								class="pull-left">Phòng đôi</strong><br /> Giá chỉ từ <strong
-								style="color: #0283df">750 USD</strong> - 
-								<%phong = listphong.get(1); %><strong style="color: red">Chỉ còn lại <%=phong.getSoPhongTrong() %> phòng</strong>
+								style="color: #0283df">700 USD</strong> - <strong style="color: red" id="spcl2"></strong>
 						</div>
 						<div style="padding: 0 17px">
 							<button
 								class="pull-right btn btn-success btn-lg btn-cart add-to-cart"
-								id="product-2" data-name="Phòng đôi" data-price="750"
+								id="q2" data-name="Phòng đôi" data-price="700"
 								style="margin: 10px" field="quantity2">Đặt phòng</button>
 							<span class="pull-right" style="padding: 5px 50px 0 0">Số
 								phòng</span><br />
@@ -357,13 +354,12 @@
 									style="font-size: 12px; color: red"></i> <strong
 									style="color: red; font-size: 12px"><i> Thanh toán
 										trước 10% tiền thuê phòng</i></strong> <span
-									style="text-align: center; padding-left: 100px">Số phòng
-									đặt tối đa: 5</span> <input type="button" value="-"
+									style="text-align: center; padding-left: 100px" id="spdtd2"></span> <input type="button" value="-"
 									class="qtyminus2 btn btn-sm btn-spinner" field="quantity2"
 									style="margin-left: 25px" /> <input type="text"
 									name="quantity2" id="sl2" value="1" class="qty"
-									style="width: 35px; text-align: center" /> <input
-									type="button" value="+" class="qtyplus2 btn btn-sm btn-spinner"
+									style="width: 35px; text-align: center" /> <input name=""
+									type="button" value="+" class="qtyplus2 btn btn-sm btn-spinner" id="plus2" 
 									field="quantity2" />
 							</div>
 						</div>
@@ -415,7 +411,7 @@
 							<div class="pull-right glyphicon glyphicon-remove x-icon"></div>
 							<div style="padding: 0 5px 0 5px;">
 								<strong>Phòng tập thể</strong> <span>giá chỉ từ<strong
-									style="color: #0283df">&nbsp;1000&nbsp;USD</strong></span>
+									style="color: #0283df">&nbsp;1200&nbsp;USD</strong></span>
 							</div>
 						</div>
 						<div class="x-content hidden-xs x-detail">
@@ -448,8 +444,7 @@
 			</div>
 
 			<!--Thông tin phòng còn trống-->
-			<div class="row ptt1" style="<%phong = listphong.get(2);
-					if(phong.getSoPhongTrong()>0){%>display:none<%}%>">
+			<div class="row ptt1" id="ptt1" style="">
 				<div class="col-md-3 col-sm-3 hidden-xs hidden-sm" id="infott1">
 					<img src="./Images/roomtt.jpg" style="width: 100%" alt="Phong tt"
 						data-toggle="collapse" data-target="#collapse3" />
@@ -474,7 +469,7 @@
 			</div>
 
 			<!--Thông tin phòng còn trống-->
-			<div class="row ptt2" style="<%if(phong.getSoPhongTrong()<=0){ %>display:none<%}%>">
+			<div class="row ptt2" id="ptt2" style="">
 				<div class="col-md-3 col-sm-3 hidden-xs hidden-sm" id="infott2">
 					<img src="./Images/roomtt.jpg" style="width: 100%" alt="Phong tt"
 						data-toggle="collapse" data-target="#collapse3" />
@@ -488,13 +483,12 @@
 							<i class="fa fa-check-circle pull-left" id="btnhide3"
 								style="font-size: 39px; color: green"></i> <strong
 								class="pull-left">Phòng tập thể</strong><br /> Giá chỉ từ <strong
-								style="color: #0283df">1000 USD</strong> - 
-								<%phong = listphong.get(2); %><strong style="color: red">Chỉ còn lại <%=phong.getSoPhongTrong() %> phòng</strong>
+								style="color: #0283df">1200 USD</strong> - <strong style="color: red" id="spcl3"></strong>
 						</div>
 						<div style="padding: 0 17px">
 							<button
 								class="pull-right btn btn-success btn-lg btn-cart add-to-cart"
-								id="product-3" data-name="Phòng tập thể" data-price="1000"
+								id="q3" data-name="Phòng tập thể" data-price="1200"
 								style="margin: 10px" field="quantity3">Đặt phòng</button>
 							<span class="pull-right" style="padding: 5px 50px 0 0">Số
 								phòng</span><br />
@@ -503,13 +497,12 @@
 									style="font-size: 12px; color: red"></i> <strong
 									style="color: red; font-size: 12px"><i> Thanh toán
 										trước 10% tiền thuê phòng</i></strong> <span
-									style="text-align: center; padding-left: 100px">Số phòng
-									đặt tối đa: 5</span> <input type="button" value="-"
+									style="text-align: center; padding-left: 100px" id="spdtd3"></span> <input type="button" value="-"
 									class="qtyminus3 btn btn-sm btn-spinner" field="quantity3"
 									style="margin-left: 25px" /> <input type="text"
 									name="quantity3" id="sl3" value="1" class="qty"
-									style="width: 35px; text-align: center" /> <input
-									type="button" value="+" class="qtyplus3 btn btn-sm btn-spinner"
+									style="width: 35px; text-align: center" /> <input name=""
+									type="button" value="+" class="qtyplus3 btn btn-sm btn-spinner" id="plus3"  
 									field="quantity3" />
 							</div>
 						</div>
@@ -527,27 +520,29 @@
 				<thead>
 					<tr>
 						<th>Loại phòng</th>
-						<th>Đơn giá</th>
+						<th>Đơn giá/ngày</th>
 						<th>Số lượng</th>
+						<th>Ngày nhận phòng</th>
+						<th>Ngày trả phòng</th>
 						<th>Thành tiền (USD)</th>
 					</tr>
 				</thead>
-				<tbody></tbody>
+				<tbody id="tbodyid"></tbody>
 			</table>
 		</div>
 		<br />
-		<form class="myform" action="datphong-thongtinKH.html">
+		<form class="myform" action="datphong-thongtinKD.jsp">
 			<input type="submit" class="pull-right btn btn-main btn-lg"
 				id="btnxacnhan" value="Xác nhận đặt phòng">
-			<h3 style="text-align: center" class="tongtien">
-				<u>Tổng tiền cần phải trả (USD):</u>
+			<h3 style="text-align: center">
+				<u>Tổng tiền cần phải trả (USD):</u><strong class="tongtien"> 0</strong>
 			</h3>
 		</form>
 	</div>
 </body>
 </html>
 
-<script>
+<!-- <script>
 	function deleteRow(r) {
 		var i = r.parentNode.parentNode.rowIndex;
 		document.getElementById("table-products").deleteRow(i);
@@ -557,7 +552,7 @@
 			$(':input[type="submit"]').prop('disabled', true); //Không có đặt phòng thì Disable button xác nhận
 		}
 	}
-</script>
+</script> -->
 <!--<script>
     // Định nghĩa một mảng các phần tử sẽ bỏ vào giỏ hàng
     var shoppingCartItems = [];
