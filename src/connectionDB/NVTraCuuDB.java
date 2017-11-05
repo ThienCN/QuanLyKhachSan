@@ -76,6 +76,7 @@ public class NVTraCuuDB {
 		Connection conn=null;
 		CallableStatement cstmt=null;
 		String maKhachHang,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong;
+		float tienPhong;
 		
 		try {
 			conn=ConnectDB.ConnectDB_Role(user, pass);
@@ -102,8 +103,9 @@ public class NVTraCuuDB {
 				//System.out.println(ngayNhanPhong);
 				ngayTraPhong=kq.getString("ngayTraPhong");
 				//System.out.println(ngayTraPhong);
+				tienPhong=kq.getFloat("tienPhong");
 				
-				thongTinThuePhong.add(new ThongTinThuePhong(maKhachHang,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong));
+				thongTinThuePhong.add(new ThongTinThuePhong(maKhachHang,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong, tienPhong));
 			}		
 			kq.close();	
 			return thongTinThuePhong; 

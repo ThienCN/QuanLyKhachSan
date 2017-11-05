@@ -33,7 +33,7 @@
     <!-- CONTENT -->
     <section class="phan-noi-dung">
         <h4>CHỈNH SỬA ĐƠN THUÊ PHÒNG</h4>
-        <label> Mã khách hàng: </label>
+        <label> Thông tin tìm kiếm: </label>
         <div class="row">
             <div class="col-xs-12 col-md-6">
                 <div class="input-group search">

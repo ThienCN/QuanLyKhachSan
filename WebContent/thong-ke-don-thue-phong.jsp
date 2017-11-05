@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>	
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,6 +22,7 @@
     <link rel="stylesheet" href="./CSS/thong-ke-don-thue-phong.css" />
     <!-- MY JS -->
     <script src="./JS/include-html.js"></script>
+    <script src="./JS/thong-ke-don-thue-phong.js"></script>
 </head>
 <body>
     <!-- HEADER -->
@@ -31,85 +35,71 @@
     <section class="phan-noi-dung">
         <h4>THỐNG KÊ ĐƠN THUÊ PHÒNG</h4>
         <!-- Từ ngày a đến ngày b có bao nhiêu đơn thuê phòng -->
-        <fieldset>       
-            <p style="font-weight: bold; text-decoration: underline">Thống kê các đơn thuê phòng: </p>
-            <div class="w3-half">                
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label class="control-label col-xs-12 col-sm-3 col-md-3"> Bắt đầu từ ngày:</label>
-                        <div class="col-xs-12 col-sm-9 col-md-9">
-                            <input type="date" class="form-control" size="30">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-xs-12 col-sm-3 col-md-3"> Đến ngày:</label>
-                        <div class="col-xs-12 col-sm-9 col-md-9">
-                            <input type="date" class="form-control" size="30">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="w3-half">
+        <p style="font-weight: bold; text-decoration: underline">Thống kê các đơn thuê phòng: </p>
+        <div class="row ">
+        	<div class="col-xs-12 col-md-6">
+        		<form class="form-horizontal">
                 <div class="form-group">
-                    <div style="margin-left:10%;">
-                        <label ><input type="radio" value="HocVien" name="gender" checked> Tất cả</label><br />
-                        <label ><input type="radio" value="GiaoVien" name="gender"> Đang thuê</label><br />
-                        <label ><input type="radio" value="NhanVien" name="gender"> Đã trả phòng</label><br />
+                    <label class="control-label col-xs-12 col-sm-3 col-md-3"> Bắt đầu từ ngày:</label>
+                    <div class="col-xs-12 col-sm-9 col-md-9">
+                        <input type="date" id="ngayBatDau" class="form-control"
+                        	<%
+	                        	Date date1 = new Date();                        			  
+	                			String strDateFormat1 = "yyyy-MM-dd";                        			  
+	                			SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(strDateFormat1);
+                        	%>
+                        		value= <%=simpleDateFormat1.format(date1)%>
+                        >
                     </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 col-md-3"> Đến ngày:</label>
+                    <div class="col-xs-12 col-sm-9 col-md-9">
+                        <input type="date" id="ngayKetThuc" class="form-control"
+                        	<%
+                       			Date date = new Date(new Date().getTime()+60*60*24*1000);                        			  
+                       			String strDateFormat = "yyyy-MM-dd";                        			  
+                       			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(strDateFormat);
+                        	%>
+                        		value= <%=simpleDateFormat.format(date)%>
+                        >
+                    </div>
+                </div>
+            </form>
             <div class="input-group-btn" style="text-align: right">
-                <button id="btn-tim-phong" class="btn btn-default" type="submit" style="background-color: #0d875c; color:white; width:150px; ">
-                    Thống kê <i class="glyphicon glyphicon-list"></i>
-                </button>
-            </div>
-        </fieldset>
+             <button id="btn-thong-ke" class="btn btn-default" style="background-color: #0d875c; color:white; width:150px; ">
+                 Thống kê <i class="glyphicon glyphicon-list"></i>
+             </button>
+        	</div>
+        	</div>         
+    	</div>
 
         <hr />
-        <p style="font-weight: bold; text-decoration: underline">Kết quả: </p>
+        <label> KẾT QUẢ TÌM KIẾM: </label>
         <!-- KẾT QUẢ -->
-        <fieldset>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Mã khách hàng</th>
-                            <th>Họ tên KH</th>
-                            <th>Số phòng đơn</th>
-                            <th>Số phòng đôi</th>
-                            <th>Số phòng tập thể</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>KH1</td>
-                            <td>Hoàng Phụng</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td><a href="chi-tiet-thong-ke-thue-phong.jsp">Chi tiết</a></td>
-                        </tr>
-                        <tr>
-                            <td>KH2</td>
-                            <td>Angel</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td><a href="chi-tiet-thong-ke-thue-phong.jsp">Chi tiết</a></td>
-                        </tr>
-                        <tr>
-                            <td>KH3</td>
-                            <td>July</td>
-                            <td>2</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td><a href="chi-tiet-thong-ke-thue-phong.jsp">Chi tiết</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </fieldset>
-    </section>
+        <div id="ket-qua-thong-ke" style="display:none">        	
+	        <fieldset>
+	            <div class="table-responsive">
+	                <table class="table" id="table-thong-ke-thue-phong">
+	                    <thead>
+	                        <tr>
+	                            <th>Mã khách hàng</th>
+	                            <th>Họ tên KH</th>
+	                            <th>Số phòng đơn</th>
+	                            <th>Số phòng đôi</th>
+	                            <th>Số phòng tập thể</th>
+	                            <th></th>
+	                        </tr>
+	                    </thead>
+	                    <tbody></tbody>
+	                </table>
+	            </div>
+	        </fieldset>
+        </div>
+        
+        <div style="text-align: center">
+            <label id="khong-co-ket-qua" style="display:none"></label>
+        </div>
+</section>
 </body>
 </html>

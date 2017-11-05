@@ -89,6 +89,7 @@
                                 <th>Mã phòng </th>
                                 <th>Ngày nhận phòng</th>
                                 <th>Ngày trả phòng</th>
+                                <th>Tiền phòng (USD)</th>
                             </tr>
                         </thead>
                         <tbody>

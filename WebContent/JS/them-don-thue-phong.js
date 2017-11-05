@@ -198,6 +198,32 @@
         }
         else
         {
+        	//Thêm thông tin phòng chọn vào ds Thông tin thuê phòng dự trữ
+        	var maKH=$("#maKH").val();
+        	$.ajax({
+                type: "GET",
+                url: "NV_CapNhatChiTietThue",
+                data: {
+                	maKH: maKH,
+                	loaiPhong:loaiPhong,
+                    maPhong: maPhong,
+                    ngayNhanPhong: ngayNhanPhong,
+                    ngayTraPhong: ngayTraPhong,
+                    tienPhong:phiThue
+                },
+                dataType: "json",
+                success: function (result) {
+                	if (result.check == "fail") {
+                		alert("Thêm phòng thuê không thành công!"); 
+                        return;
+                	}
+                },
+                error: function(jqXHR, exception) {
+                	if (jqXHR.status == 500)
+                		alert("Thêm phòng thuê không thành công!");  
+                }
+            }); 
+
         	//Thêm dòng thông tin thuê phòng vào bảng Chi tiết phòng thuê
         	$("#table-thong-tin-thue-phong > tbody").append(
                     $('<tr>').append(
@@ -235,9 +261,16 @@
                                         $.ajax({
                                             type: "DELETE",
                                             url: "NV_CapNhatChiTietThue?maPhong="+maPhongPhucHoi+"&ngayNhanPhong="+ngayNhanP+"&maKhachHang="+maKH,
+                                            dataType: "json",
+                                            success: function (result) {
+                                            	if (result.check == "fail") {
+                                            		alert("Xóa phòng thuê không thành công!\n Ngày xóa không hợp lệ!"); 
+                                                    return;
+                                            	}
+                                            },
                                             error: function(jqXHR, exception) {
                                             	if (jqXHR.status == 500)
-                                            		alert("Xóa phòng thuê không thành công!\r\n Ngày xóa không hợp lệ!");  
+                                            		alert("Xóa phòng thuê không thành công!\n Ngày xóa không hợp lệ!");  
                                             }
                                         }); 
                                         
@@ -247,23 +280,6 @@
                         	)
                         )
                 	);
-        	//Thêm thông tin phòng chọn vào ds Thông tin thuê phòng dự trữ
-        	var maKH=$("#maKH").val();
-        	$.ajax({
-                type: "GET",
-                url: "NV_CapNhatChiTietThue",
-                data: {
-                	maKH: maKH,
-                	loaiPhong:loaiPhong,
-                    maPhong: maPhong,
-                    ngayNhanPhong: ngayNhanPhong,
-                    ngayTraPhong: ngayTraPhong
-                },
-                error: function(jqXHR, exception) {
-                	if (jqXHR.status == 500)
-                		alert("Thêm phòng thuê không thành công!");  
-                }
-            });       
         }
     });
     

@@ -49,43 +49,43 @@ public class NVThuePhongDB {
 	public static int ThemKhachHangMoi(String hoTenKH,String CMND, 
 			String DiaChi,String QuocTich,String SDT, String user, String pass) {
 	 
-	Connection conn=null;
-	CallableStatement cstmt=null;
-	
-	try {
-		conn=ConnectDB.ConnectDB_Role(user, pass);
-		if (conn == null) {
-			System.out.println("connect null");
-            return 0;
-        }
-		String sql= "{call spThemKhachHangMoi(?,?,?,?,?)}";
-		cstmt=conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		Connection conn=null;
+		CallableStatement cstmt=null;
 		
-		cstmt.setString(1, hoTenKH);
-		cstmt.setString(2, CMND);
-		cstmt.setString(3, DiaChi);
-		cstmt.setString(4, QuocTich);
-		cstmt.setString(5, SDT);		
-		
-		int k = cstmt.executeUpdate();
-        if (k >= 1)
-        	return k;            
-        
-	}catch (SQLException ex) {
-        ex.printStackTrace();
-	}finally {
-        try {
-            if (conn != null) {
-                conn.close();
-            }
-            if (cstmt != null) {
-                cstmt.close();
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-	return 0;
+		try {
+			conn=ConnectDB.ConnectDB_Role(user, pass);
+			if (conn == null) {
+				System.out.println("connect null");
+	            return 0;
+	        }
+			String sql= "{call spThemKhachHangMoi(?,?,?,?,?)}";
+			cstmt=conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			
+			cstmt.setString(1, hoTenKH);
+			cstmt.setString(2, CMND);
+			cstmt.setString(3, DiaChi);
+			cstmt.setString(4, QuocTich);
+			cstmt.setString(5, SDT);		
+			
+			int k = cstmt.executeUpdate();
+	        if (k >= 1)
+	        	return k;            
+	        
+		}catch (SQLException ex) {
+	        ex.printStackTrace();
+		}finally {
+	        try {
+	            if (conn != null) {
+	                conn.close();
+	            }
+	            if (cstmt != null) {
+	                cstmt.close();
+	            }
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
+		return 0;
 }
 	
 	public static int CapNhatKhachHang(String maKH,String hoTenKH,String CMND, 
@@ -234,10 +234,7 @@ public class NVThuePhongDB {
 			cstmt.setString(1, maKH);
 			cstmt.setString(2, ngayNhanPhong);
 			
-			
 			cstmt.executeUpdate();
-			
-			return 1;
             
 		}catch (SQLException ex) {
             ex.printStackTrace();
@@ -298,5 +295,44 @@ public class NVThuePhongDB {
 	}
 	
 	
+	
+	public static int HuyDonThuePhong(String maKH, String maPhong, String ngayNhanPhong, 
+			String user, String pass) {
+		
+		Connection conn=null;
+		CallableStatement cstmt=null;
+		
+		try {
+			conn=ConnectDB.ConnectDB_Role(user, pass);
+			if (conn == null) {
+				System.out.println("connect null");
+	            return 0;
+	        }
+			String sql= "{call spHuyDonThuePhong(?,?,?)}";
+			cstmt=conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			
+			cstmt.setString(1, maKH);
+			cstmt.setString(2, maPhong);
+			cstmt.setString(3, ngayNhanPhong);
+			
+			cstmt.executeUpdate();
+            
+		}catch (SQLException ex) {
+            ex.printStackTrace();
+		}finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (cstmt != null) {
+                    cstmt.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+		return 0;
+	}
+
 }
 

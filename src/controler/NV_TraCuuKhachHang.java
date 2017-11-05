@@ -60,7 +60,7 @@ public class NV_TraCuuKhachHang extends HttpServlet {
 	
 	}
 
-	/*Lấy mã KH đi tìm kiếm thông tin thuê phòng hiện tại*/
+	/*Lấy mã KH đi tìm kiếm thông tin thuê phòng hiện tại (TRA CỨU KHÁCH HÀNG, CHỈNH SỬA VÀ HỦY ĐƠN THUÊ PHÒNG)*/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String maKH=(String)request.getParameter("maKH");

@@ -2,6 +2,10 @@ package controler;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -58,7 +62,7 @@ public class NV_ChinhSuaDonThuePhong extends HttpServlet {
 	}
 	
 	
-	/*Cập nhật ngày trả phòng mới: ngày trả phòng phải lớn hơn hoặc bằng ngày hiện tại*/
+	/*Cập nhật ngày trả phòng mới: ngày trả phòng phải lớn hơn hoặc bằng ngày hiện tại trên trang CHỈNH SỬA ĐƠN THUÊ PHÒNG*/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
 		String ngayTraPhongMoi=(String)request.getParameter("ngayTraPhongMoi");
@@ -86,6 +90,45 @@ public class NV_ChinhSuaDonThuePhong extends HttpServlet {
 		    out.flush();
 		}
 			
+		
+	}
+	
+
+	/*Hủy 1 phòng thuê với điều kiện ngày hủy phải bằng ngày nhận phòng(kiểm tra trong sql rồi nhưng kiểm tra ở đây luôn cho chắc ăn)
+	 *  trên trang HỦY ĐƠN THUÊ PHÒNG*/	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String maKH=(String)request.getParameter("maKH");
+		String maPhong=(String)request.getParameter("maPhong");
+		String ngayNhanPhong=(String)request.getParameter("ngayNhanPhong");
+		
+		
+		
+		response.setContentType("application/json;charset=UTF-8");
+	    request.setCharacterEncoding("utf-8");
+        
+	    PrintWriter out=response.getWriter();
+		
+	    DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    Date date = new Date();
+	    //System.out.println("Ngày hiện tại: " + sdf.format(date));
+	    //System.out.println("Ngày nhận: " + ngayNhanPhong);
+	    
+	    if(ngayNhanPhong.equals(sdf.format(date))) 
+	    {
+	    	//System.out.println("Ngày nhận bằng ngày hiện tại --> được hủy");
+			NVThuePhongDB.HuyDonThuePhong(maKH, maPhong, ngayNhanPhong,
+					(String)request.getSession().getAttribute("user"), 
+					(String)request.getSession().getAttribute("pass"));
+			out.write("{\"check\":\"ok\"}"); 
+		    out.flush();
+	    }
+	    else
+	    {
+	    	//System.out.println("Ngày nhận ko bằng ngày hiện tại --> Ko đc hủy");
+			out.write("{\"check\":\"fail\"}");
+			out.flush();
+	    }			
 		
 	}
 	

@@ -120,6 +120,8 @@
                                 $('<td>').text(result[i].ngayNhanPhong)
                                 ).append(
                                 $('<td>').text(result[i].ngayTraPhong)
+                                ).append(
+                                $('<td>').text(result[i].tienPhong)
                                 )
                         );
                 	}

@@ -3,17 +3,27 @@ package model;
 public class ThongTinThuePhong {
 
 	String maKH, loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong;
+	float tienPhong;
 	
 	public ThongTinThuePhong() {
 	}
 
-	public ThongTinThuePhong(String maKH, String loaiPhong,String maPhong,String ngayNhanPhong,String ngayTraPhong)
+	public ThongTinThuePhong(String maKH, String loaiPhong,String maPhong,String ngayNhanPhong,String ngayTraPhong, float tienPhong)
 	{
 		this.maKH=maKH;
 		this.loaiPhong=loaiPhong;
 		this.maPhong=maPhong;
 		this.ngayNhanPhong=ngayNhanPhong;
 		this.ngayTraPhong=ngayTraPhong;
+		this.tienPhong=tienPhong;
+	}
+
+	public float getTienPhong() {
+		return tienPhong;
+	}
+
+	public void setTienPhong(float tienPhong) {
+		this.tienPhong = tienPhong;
 	}
 
 	public String getLoaiPhong() {

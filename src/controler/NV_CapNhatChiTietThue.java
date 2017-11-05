@@ -29,7 +29,10 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 		String maPhong=(String)request.getParameter("maPhong");
 		String ngayNhanPhong=(String)request.getParameter("ngayNhanPhong");
 		String ngayTraPhong=(String)request.getParameter("ngayTraPhong");
-	
+		//System.out.println(request.getParameter("tienPhong"));
+		float tienPhong=Float.parseFloat(request.getParameter("tienPhong"));
+		//System.out.println(tienPhong);
+		
 		String user=(String)request.getSession().getAttribute("user");
 		String pass =(String)request.getSession().getAttribute("pass");
 		
@@ -42,21 +45,30 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 		{
 			//System.out.println("Khởi tạo list thuê tạm"); 
 			thongtinThuePhongTamThoi=new ArrayList<ThongTinThuePhong>(); 
-			thongtinThuePhongTamThoi.add(new ThongTinThuePhong(maKH,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong));
+			thongtinThuePhongTamThoi.add(new ThongTinThuePhong(maKH,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong,tienPhong));
 			getServletContext().setAttribute("thongtinThuePhongTamThoi", thongtinThuePhongTamThoi);
 		}			
 		else//Nếu có rồi thì chỉ việc thêm vào
-			thongtinThuePhongTamThoi.add(new ThongTinThuePhong(maKH,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong));
+			thongtinThuePhongTamThoi.add(new ThongTinThuePhong(maKH,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong,tienPhong));
 				
 		int kq=connectionDB.NVThuePhongDB.ThemChiTietThue(maKH, maPhong, ngayNhanPhong, ngayTraPhong,user, pass);
+        
+		
+		response.setContentType("application/json;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
+        
+        PrintWriter out=response.getWriter();
         
 		if(kq>0)
 		{
 			//System.out.println("Thêm phòng thuê thành công");
-			return;
+			out.write("{\"check\":\"ok\"}");
+		    out.flush();
 		}
 		else {
 			//System.out.println("Thêm phòng thuê không thành công");
+			out.write("{\"check\":\"fail\"}");
+		    out.flush();
 		}	
 		
 		
@@ -65,8 +77,6 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 	
 	/*Hủy toàn bộ giao dịch thuê phòng*/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int kq;
-		boolean flag=false;
         String user=(String)request.getSession().getAttribute("user");
 		String pass =(String)request.getSession().getAttribute("pass");
 		
@@ -85,9 +95,7 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 				makhachhang=p.getMaKH();
 				maphong=p.getMaPhong();
 				ngaynhanphong=p.getNgayNhanPhong();
-				kq = connectionDB.NVThuePhongDB.XoaChiTietThue(makhachhang, maphong, ngaynhanphong, user, pass);
-				if(kq>0 && !flag)
-					flag=true;
+				connectionDB.NVThuePhongDB.XoaChiTietThue(makhachhang, maphong, ngaynhanphong, user, pass);
 			}
 			getServletContext().setAttribute("thongtinThuePhongTamThoi", null);
 		}		
@@ -105,16 +113,9 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 		//Hủy giao dịch thuê phòng thực hiện việc xóa thông tin KH nếu như KH này là KH mới
 		connectionDB.NVThuePhongDB.HuyGiaoDichThuePhong(maKH, ngayNhanPhong, user, pass);
 		
-		if(flag)
-		{
-			//System.out.println("Hủy giao dịch thuê phòng thành công");	
-			out.write("Yes");
-			out.flush();
-		}	
-		else {
-			out.write("No");
-			out.flush();
-		}
+		//System.out.println("Hủy giao dịch thuê phòng thành công");	
+		out.write("Yes");
+		out.flush();
 	}
 	
 	/*Xóa một chi tiết thuê với điều kiện phòng đó chưa được sử dụng 
@@ -134,14 +135,21 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 		
 		int kq=connectionDB.NVThuePhongDB.XoaChiTietThue(maKH, maPhong, ngayNhanPhong, user, pass);
 		
+		response.setContentType("application/json;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
+        
+        PrintWriter out=response.getWriter();
 		if(kq>0)
 		{
-			//System.out.println("Xóa phòng thuê thành công");
-			return;
+			//System.out.println("Thêm phòng thuê thành công");
+			out.write("{\"check\":\"ok\"}");
+		    out.flush();
 		}
 		else {
-			//System.out.println("Xóa phòng thuê không thành công");
-		}	
+			//System.out.println("Thêm phòng thuê không thành công");
+			out.write("{\"check\":\"fail\"}");
+		    out.flush();
+		}		
 		
 		
 	}
