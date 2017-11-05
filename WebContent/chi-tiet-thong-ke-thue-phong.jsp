@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,6 +23,7 @@
     <link rel="stylesheet" href="./CSS/header-menu-footer.css" />
     <!-- MY JS -->
     <script src="./JS/include-html.js"></script>
+    <script src="./JS/thong-ke-don-thue-phong.js"></script>
 </head>
 <body>
     <!-- HEADER -->
@@ -29,13 +34,15 @@
 
     <!-- CONTENT -->
     <section class="phan-noi-dung">     
-        <div>
+        <label> THÔNG TIN CHI TIẾT GIAO DỊCH THUÊ PHÒNG: </label>
+        <div id="thong-tin-khach-hang">
             <fieldset>
-                <p style="color: #0d875c; font-weight: bold; text-decoration: underline">Thông tin khách hàng: </p>
+            	<p style="color: #0d875c; font-weight: bold; text-decoration: underline">Thông tin khách hàng: </p>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" id="table-thong-tin-khach-hang">
                         <thead>
                             <tr>
+                            	<th>Mã KH</th>
                                 <th>Họ tên </th>
                                 <th>CMND</th>
                                 <th>Địa chỉ</th>
@@ -44,44 +51,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td id="HoTen">Hoàng Phụng</td>
-                                <td id="CMND">241386440</td>
-                                <td id="DiaChi">01 Kha Vạn Cân, Phường Linh Đông, Quận Thủ Đức, Tp.HCM</td>
-                                <td id="QuocTich">Việt Nam</td>
-                                <td id="SDT">01668174561</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
             </fieldset>
-            <br />
+        </div>
+            
+        <br />
+        <div id="thong-tin-thue-phong">
             <fieldset>
                 <p style="color: #0d875c; font-weight: bold; text-decoration: underline">Thông tin thuê phòng: </p>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" id="table-thong-tin-thue-phong">
                         <thead>
                             <tr>
                                 <th>Mã phòng </th>
                                 <th>Ngày nhận phòng</th>
                                 <th>Ngày trả phòng</th>
+                                <th>Tiền phòng (USD)</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td id="maPhong">A1</td>
-                                <td id="ngayNhanPhong">02/02/2017</td>
-                                <td id="ngayTraPhong">05/02/2017</td>
-                            </tr>
-                            <tr>
-                                <td id="maPhong">A2</td>
-                                <td id="ngayNhanPhong">02/02/2017</td>
-                                <td id="ngayTraPhong">05/02/2017</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
-                <label style="font-style:italic">Tổng số phòng thuê: <span>2</span> </label><br /><br />
             </fieldset>
         </div>
 

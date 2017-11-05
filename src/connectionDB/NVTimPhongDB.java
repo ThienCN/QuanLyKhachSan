@@ -13,8 +13,7 @@ import model.DanhSachPhongTrong;
 
 public class NVTimPhongDB {
 
-	public static List<DanhSachPhongTrong> NVTimPhong(String ngayNhanPhong, String ngayTraPhong, String user, String pass) throws SQLException
-	{
+	public static List<DanhSachPhongTrong> NVTimPhong(String ngayNhanPhong, String ngayTraPhong, String user, String pass) {
 		Connection conn=null;
 		CallableStatement cstmt=null;
 		String maPhong, maLoaiPhong, loaiPhong;
@@ -23,6 +22,7 @@ public class NVTimPhongDB {
 		try {
 			conn=ConnectDB.ConnectDB_Role(user, pass);
 			if (conn == null) {
+				System.out.println("connect null");
 	            return null;
 	        }
 			
@@ -37,22 +37,28 @@ public class NVTimPhongDB {
 			
 			List<DanhSachPhongTrong> dsPhongTrong= new ArrayList<DanhSachPhongTrong>();
 			while(kq.next()) {
-				maPhong=kq.getString("maPhong");
-				//System.out.println(maPhong);
 				maLoaiPhong=kq.getString("maLoaiPhong");
 				//System.out.println(maLoaiPhong);
+				
 				loaiPhong=kq.getString("loaiPhong");
 				//System.out.println(loaiPhong);
+				
+				maPhong=kq.getString("maPhong");
+				//System.out.println(loaiPhong);
+				
 				tienPhong=kq.getFloat("tienPhong");		
 				//System.out.println(tienPhong);
 				
-				dsPhongTrong.add(new DanhSachPhongTrong(maPhong,maLoaiPhong,loaiPhong,tienPhong));				
+				dsPhongTrong.add(new DanhSachPhongTrong(maLoaiPhong,loaiPhong,maPhong,tienPhong));		
 				 
-			}			
+			}		
 			
 			kq.close();	
 			return dsPhongTrong; 
 			
+		}catch (SQLException ex) {
+			System.out.println("Loi");
+            ex.printStackTrace();
 		}finally {
             try {
                 if (conn != null) {
@@ -65,5 +71,6 @@ public class NVTimPhongDB {
                 ex.printStackTrace();
             }
         }
+		return null;
 	}
 }

@@ -21,18 +21,23 @@ table tbody tr td a {
     text-align: right
 }
 
-.input-group-btn button {
+.input-group-btn button, .input-group-btn a {
     background-color: #0d875c;
     color: white;
     width: 150px;
     margin-right: 10px;
 }
 
-.input-group-btn button:hover {
+.input-group-btn button:hover, .input-group-btn a:hover {
     color: white;
     background-color: #0d875c;
 }
 
+.w3-third .form-group {
+    margin-left:0px;
+    margin-right:0px;
+    margin-top:15px;
+}
 
 @media only screen and (max-width:768px) {
     h4 {

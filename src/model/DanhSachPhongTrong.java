@@ -8,10 +8,10 @@ public class DanhSachPhongTrong {
 	public DanhSachPhongTrong() {
 	}
 	
-	public DanhSachPhongTrong(String maPhong, String maLoaiPhong, String loaiPhong, float tienPhong) {
-		this.maPhong=maPhong;
+	public DanhSachPhongTrong( String maLoaiPhong, String loaiPhong, String maPhong, float tienPhong) {
 		this.maLoaiPhong=maLoaiPhong;
 		this.loaiPhong=loaiPhong;
+		this.maPhong=maPhong;
 		this.tienPhong=tienPhong;
 	}
 	
