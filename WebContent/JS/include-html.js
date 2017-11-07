@@ -107,6 +107,13 @@ $(document).ready(function () {
             $("li#submenu5 a:first").attr("style", "color: white !important");
         }
 
+        else if (path.lastIndexOf('lap-hoa-don.jsp') >= 0) {
+            namepage = 'LẬP HÓA ĐƠN';
+            namefile = 'lap-hoa-don.jsp';
+            $("#submenu10").css("background-color", "#0d875c");
+            $("#submenu10 a:first").attr("style", "color: white !important");
+        }
+
         $('#page-trich-dan').attr("href", namefile);
         $('#page-trich-dan').text(namepage);
     });

@@ -51,14 +51,19 @@ $(document).ready(function (e){
             								$('<td>').append(
             									$('<a>').text("Chi tiết")
             											.click(function(e){
-            												var maKH = $(this).closest('<tr>').find('<td>:nth-child(1)').text();
+            												e.preventDefault();
+            												var maKH = $(this).closest('tr').find('td:nth-child(1)').text();
+            												console.log(maKH);
             												$.ajax({
             													type:"POST",
             													url:"NV_ThongKeThuePhong?maKH="+maKH,
             													dataType:"json",
             													success:function(result){
-            														if (result.check != "fail") {
+            														if (result.check == "ok") {
             									        				window.location.assign("chi-tiet-thong-ke-thue-phong.jsp");
+            									                    }
+            														else if (result.check == "fail") {
+            															alert("Server hiện đang bận!\nMời bạn xem khi khác!"); 
             									                    }
             													},
             									                error: function(jqXHR, exception) {

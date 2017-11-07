@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="model.ThongTinThuePhong" %>
 <%@ page import="model.ThongTinKhachHang" %>
 <%@ page import="java.util.List" %>
 <%@page import="java.util.Date"%>
@@ -38,6 +39,12 @@
 
     <!-- MENU-LEFT -->
     <section id="menu"> </section>
+
+	<!-- Khởi tạo danh sách thuê phòng tạm thời -->
+	<%
+		List<ThongTinThuePhong> thongtinThuePhongTamThoi = new ArrayList<ThongTinThuePhong>();  					
+		request.getSession().setAttribute("thongtinThuePhongTamThoi", thongtinThuePhongTamThoi);
+	%>
 
 
     <!-- CONTENT -->
@@ -186,12 +193,12 @@
                             <label class="control-label col-xs-12 col-sm-4 col-md-4">Ngày trả phòng:</label>
                             <div class="col-xs-12 col-sm-8 col-md-8">
                                 <input type="date" id="ngayTraPhong" class="form-control"
-                                	<%
-                        		if(getServletContext().getAttribute("ngayTraPhong") == null)
-                        		{
-                        			Date date2 = new Date(new Date().getTime()+60*60*24*1000);                        			  
-                        			String strDateFormat2 = "yyyy-MM-dd";                        			  
-                        			SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(strDateFormat2);
+                                <%
+	                        		if(getServletContext().getAttribute("ngayTraPhong") == null)
+	                        		{
+	                        			Date date2 = new Date(new Date().getTime()+60*60*24*1000);                        			  
+	                        			String strDateFormat2 = "yyyy-MM-dd";                        			  
+	                        			SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(strDateFormat2);
 	                        	%>
 	                        		value= <%=simpleDateFormat2.format(date2)%>
 	                        	<%

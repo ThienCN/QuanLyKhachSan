@@ -32,7 +32,7 @@
     <!-- CONTENT -->
     <section class="phan-noi-dung">
         <h4>TRA CỨU KHÁCH THUÊ</h4>
-        <label> Mã khách hàng: </label>
+        <label> Mã tra cứu: </label>
         <div class="row">
             <div class="col-xs-12 col-md-6">
                 <div class="input-group search">

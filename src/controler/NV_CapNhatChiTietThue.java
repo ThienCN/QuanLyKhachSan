@@ -36,21 +36,16 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 		String user=(String)request.getSession().getAttribute("user");
 		String pass =(String)request.getSession().getAttribute("pass");
 		
-		//Lưu lại thông tin để sử dụng cho việc hủy giao dịch thuê phòng
-		//Lấy thông tin thuê phòng trong quá trình thực hiện giao dịch 
-		List<ThongTinThuePhong> thongtinThuePhongTamThoi=
-				(List<ThongTinThuePhong>)getServletContext().getAttribute("thongtinThuePhongTamThoi");
-		//Nếu thông tin chưa tồn tại trong application scope thì khởi tạo rồi lưu nó vào scope
-		if(thongtinThuePhongTamThoi == null)
-		{
-			//System.out.println("Khởi tạo list thuê tạm"); 
-			thongtinThuePhongTamThoi=new ArrayList<ThongTinThuePhong>(); 
-			thongtinThuePhongTamThoi.add(new ThongTinThuePhong(maKH,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong,tienPhong));
-			getServletContext().setAttribute("thongtinThuePhongTamThoi", thongtinThuePhongTamThoi);
-		}			
-		else//Nếu có rồi thì chỉ việc thêm vào
-			thongtinThuePhongTamThoi.add(new ThongTinThuePhong(maKH,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong,tienPhong));
+		//Lấy danh sách thông tin thuê phòng tạm thời 
+		List<ThongTinThuePhong> thongtinThuePhongTamThoi =
+					(List<ThongTinThuePhong>)request.getSession().getAttribute("thongtinThuePhongTamThoi");
 				
+		//Lưu chi tiết thuê vào danh sách thuê phòng tạm thời
+		//System.out.println("Thêm chi tiết thuê vào ds thuê phòng tạm thời-->ds đã đc tạo rồi"); 
+		thongtinThuePhongTamThoi.add(new ThongTinThuePhong(maKH,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong,tienPhong));
+		//System.out.println(thongtinThuePhongTamThoi.get(0).getMaKH()); 
+		
+		
 		int kq=connectionDB.NVThuePhongDB.ThemChiTietThue(maKH, maPhong, ngayNhanPhong, ngayTraPhong,user, pass);
         
 		
@@ -73,7 +68,6 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 		
 		
 	}
-
 	
 	/*Hủy toàn bộ giao dịch thuê phòng*/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -82,11 +76,12 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 		
 		//Lấy thông tin thuê phòng tạm thời được lưu trong quá trình thực hiện giao dịch thuê phòng
 		List<ThongTinThuePhong> thongtinThuePhongTamThoi=
-				(List<ThongTinThuePhong>)getServletContext().getAttribute("thongtinThuePhongTamThoi");
+				(List<ThongTinThuePhong>)request.getSession().getAttribute("thongtinThuePhongTamThoi"); 
 		
 		//Nếu có tồn tại thì thực hiện xóa các chi tiết thuê này
 		if(thongtinThuePhongTamThoi != null)   
 		{
+			//System.out.println("Có danh sách thuê phòng tạm thời-->Xóa ds thuê phòng tạm thời");
 			String makhachhang,maphong,ngaynhanphong;
 			int n=thongtinThuePhongTamThoi.size();
 			for(int i=0; i<n; i++)
@@ -97,7 +92,8 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 				ngaynhanphong=p.getNgayNhanPhong();
 				connectionDB.NVThuePhongDB.XoaChiTietThue(makhachhang, maphong, ngaynhanphong, user, pass);
 			}
-			getServletContext().setAttribute("thongtinThuePhongTamThoi", null);
+			//System.out.println("Servel hủy giao dịch: Đã set null cho danh sách tạm thời!");
+			thongtinThuePhongTamThoi=null;
 		}		
 		
 		String maKH = (String)request.getParameter("maKH");
@@ -119,7 +115,7 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 	}
 	
 	/*Xóa một chi tiết thuê với điều kiện phòng đó chưa được sử dụng 
-	 * --> tức là ngày xóa phải là ngày ban đầu thuê*/
+	 * --> tức là chỉ đươc xóa khi đang trong quá trình thực hiện giao dịch thuê phòng*/
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Lấy thông tin phòng vừa xóa khỏi Bảng Chi tiết thuê phòng
 		String maKH = (String)request.getParameter("maKhachHang");
@@ -153,5 +149,8 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 		
 		
 	}
+
+
+
 
 }

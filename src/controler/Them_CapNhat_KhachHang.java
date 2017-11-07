@@ -2,6 +2,7 @@ package controler;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+
+import model.ThongTinThuePhong;
 
 @WebServlet("/Them_CapNhat_KhachHang")
 public class Them_CapNhat_KhachHang extends HttpServlet {
@@ -27,11 +30,11 @@ public class Them_CapNhat_KhachHang extends HttpServlet {
 		String maKHMoi= connectionDB.NVThuePhongDB.MaKhachHangMoi(user, pass);
 
 		//		
-		String hoten=(String)request.getParameter("hoten");
-		String cmnd=(String)request.getParameter("cmnd");
-		String diachi=(String)request.getParameter("sdt");
-		String quoctich=(String)request.getParameter("quoctich");
-		String sdt=(String)request.getParameter("diachi");
+		String hoten=(String)request.getParameter("hoTenKH");
+		String cmnd=(String)request.getParameter("CMND");
+		String diachi=(String)request.getParameter("DiaChi");
+		String quoctich=(String)request.getParameter("QuocTich");
+		String sdt=(String)request.getParameter("SDT");
 		
 		int kq=connectionDB.NVThuePhongDB.ThemKhachHangMoi(hoten, cmnd, diachi, quoctich, sdt, user, pass);
 		
@@ -85,4 +88,5 @@ public class Them_CapNhat_KhachHang extends HttpServlet {
 		
 	}
 
+	
 }

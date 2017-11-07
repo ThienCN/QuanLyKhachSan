@@ -18,11 +18,11 @@
                 type: "GET",
                 url: "Them_CapNhat_KhachHang",
                 data: {
-                	hoten: hoten,
-                	cmnd: cmnd,
-                	sdt: sdt,
-                	quoctich: quoctich,
-                	diachi: diachi
+                	hoTenKH: hoten,
+                	CMND: cmnd,
+                	SDT: sdt,
+                	QuocTich: quoctich,
+                	DiaChi: diachi
                 },
                 dataType: "text",
                 success: function (result) {
@@ -285,7 +285,7 @@
     
     /*Sự kiện Click vào nút Xác nhận giao dịch thuê phòng*/
     $("#xac-nhan-giao-dich-thue-phong").click(function (e) {
-
+    	e.preventDefault();
         var n = $("#table-thong-tin-thue-phong > tbody").find("> tr:first").length;
 
         //Nếu chưa đăng ký phòng thuê thì không được xác nhận thành công
