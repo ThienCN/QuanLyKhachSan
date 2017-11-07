@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="model.ThongTinThuePhong" %>
+<%@ page import="java.util.List" %> 
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,6 +33,18 @@
 
     <!-- MENU-LEFT -->
     <section id="menu"> </section>
+
+
+	<!-- Hủy danh sách thuê phòng tạm thời sau khi giao dịch thuê phòng thành công -->
+	<% //Nhớ đăng xuất thì hủy session này nhé Phụng
+		List<ThongTinThuePhong> thongtinThuePhongTamThoi=
+					(List<ThongTinThuePhong>)request.getSession().getAttribute("thongtinThuePhongTamThoi");
+		if(thongtinThuePhongTamThoi != null)
+		{
+			//System.out.println("Trang chủ NV: Đã set null cho danh sách tạm thời!");
+			thongtinThuePhongTamThoi = null;
+		}
+	%>
 
     <!-- CONTENT -->
     <section class="phan-noi-dung">

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="model.ThongTinKhachHang" %>
+<%@ page import="model.ThongTinThuePhong" %> 
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -36,6 +38,16 @@
     <section class="phan-noi-dung">     
         <label> THÔNG TIN CHI TIẾT GIAO DỊCH THUÊ PHÒNG: </label>
         <div id="thong-tin-khach-hang">
+        	<%
+        		List<ThongTinKhachHang> thongKeThongTinKH = 
+        						(List<ThongTinKhachHang>)getServletContext().getAttribute("thongKeThongTinKH");
+        	
+        		List<ThongTinThuePhong> thongKeThongTinThuePhong =  
+        						(List<ThongTinThuePhong>)getServletContext().getAttribute("thongKeThongTinThuePhong");
+        		int n=thongKeThongTinThuePhong.size();
+        	%>
+        
+        
             <fieldset>
             	<p style="color: #0d875c; font-weight: bold; text-decoration: underline">Thông tin khách hàng: </p>
                 <div class="table-responsive">
@@ -51,6 +63,14 @@
                             </tr>
                         </thead>
                         <tbody>
+                        		<tr>
+                        			<td><%=thongKeThongTinKH.get(0).getMaKH() %> </td>
+                        			<td><%=thongKeThongTinKH.get(0).getHoTenKH() %> </td>
+                        			<td><%=thongKeThongTinKH.get(0).getCMND() %> </td>
+                        			<td><%=thongKeThongTinKH.get(0).getDiaChi() %> </td>
+                        			<td><%=thongKeThongTinKH.get(0).getQuocTich() %> </td>
+                        			<td><%=thongKeThongTinKH.get(0).getSDT() %> </td>
+                        		</tr>
                         </tbody>
                     </table>
                 </div>
@@ -72,6 +92,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                        	<%for(int i=0; i<n; i++){
+                        		ThongTinThuePhong p=thongKeThongTinThuePhong.get(i);
+                        	%>
+                        		  <tr>
+                        		  		<td><%=p.getMaPhong() %> </td>
+                        		  		<td><%=p.getNgayNhanPhong() %> </td>
+                        		  		<td><%=p.getNgayTraPhong() %> </td>
+                        		  		<td><%=p.getTienPhong() %> </td>
+                        		  </tr>        	
+                        	<%}%>
                         </tbody>
                     </table>
                 </div>
