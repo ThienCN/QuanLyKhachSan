@@ -27,7 +27,7 @@ $(document).ready(function () {
                 dataType: "text",
                 success: function (result) {
                 	if(result == "No"){
-                		alert("Khách đặt đã tồn tại trong lịch sử! Mời bạn tra cứu thông tin khách đặt và chọn đặt phòng!");  
+                		alert("Không thể thêm mới khách đặt!");  
                 	}
                 	else
             		{
@@ -64,7 +64,7 @@ $(document).ready(function () {
     	var maKD = $("#maKD").val().trim().length;
     	if(maKD<=0)
 		{
-    		alert("Mời bạn nhập và lưu thông tin cá nhân của khách hàng trước khi chọn phòng thuê!!!");
+    		alert("Mời bạn nhập và lưu thông tin cá nhân của khách hàng trước khi chọn phòng đặt!!!");
 		}
     	else if(maKD>0)
 		{
@@ -86,10 +86,10 @@ $(document).ready(function () {
                 var ngayTra = $("#ngayTraPhong").val();
                 $.ajax({
                     type: "GET", //method
-                    url: "NV_TimPhongThue_Dat", //Tên servlet
+                    url: "NV_TimPhong", //Tên servlet
                     data: {
-                        ngayNhan: ngayNhan, 
-                        ngayTra: ngayTra
+                        ngayNhanPhong: ngayNhan, 
+                        ngayTraPhong: ngayTra
                     },
                     dataType: "json",
                     success: function (result) {

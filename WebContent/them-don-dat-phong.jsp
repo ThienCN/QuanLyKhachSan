@@ -119,10 +119,10 @@
                 </table>
             </div>
             <div class="input-group-btn">
-            	<button id="huy-giao-dich-dat-phong" class="btn btn-default">
+            	<button id="huy-giao-dich-dat-phong" class="btn btn-default" disabled>
                     Hủy giao dịch <i class="glyphicon glyphicon-trash"></i>
                  </button>
-                <button id="xac-nhan-giao-dich-dat-phong"  class="btn btn-default"  style="width: 200px;">
+                <button id="xac-nhan-giao-dich-dat-phong"  class="btn btn-default"  style="width: 200px;" disabled>
                     Xác nhận giao dịch <i class="glyphicon glyphicon-ok"></i>
                 </button>
             </div>
@@ -138,7 +138,7 @@
                         <div class="form-group">
                             <label class="control-label col-xs-12 col-sm-4 col-md-4">Ngày nhận phòng:</label>
                             <div class="col-xs-12 col-sm-8 col-md-8">
-                                <input type="date" id="ngayNhanPhong" class="form-control" readonly
+                                <input type="date" id="ngayNhanPhong" class="form-control"
                                 <%
                         			Date date1 = new Date();                        			  
                         			String strDateFormat1 = "yyyy-MM-dd";                        			  
@@ -151,7 +151,7 @@
                         <div class="form-group">
                             <label class="control-label col-xs-12 col-sm-4 col-md-4">Ngày trả phòng:</label>
                             <div class="col-xs-12 col-sm-8 col-md-8">
-                                <input type="date" id="ngayTraPhong" class="form-control" readonly
+                                <input type="date" id="ngayTraPhong" class="form-control"
                                 <%
 	                        		if(getServletContext().getAttribute("ngayTraPhong") == null)
 	                        		{
