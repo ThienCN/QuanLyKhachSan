@@ -29,9 +29,7 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 		String maPhong=(String)request.getParameter("maPhong");
 		String ngayNhanPhong=(String)request.getParameter("ngayNhanPhong");
 		String ngayTraPhong=(String)request.getParameter("ngayTraPhong");
-		//System.out.println(request.getParameter("tienPhong"));
 		float tienPhong=Float.parseFloat(request.getParameter("tienPhong"));
-		//System.out.println(tienPhong);
 		
 		String user=(String)request.getSession().getAttribute("user");
 		String pass =(String)request.getSession().getAttribute("pass");
@@ -42,7 +40,7 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 				
 		//Lưu chi tiết thuê vào danh sách thuê phòng tạm thời
 		//System.out.println("Thêm chi tiết thuê vào ds thuê phòng tạm thời-->ds đã đc tạo rồi"); 
-		thongtinThuePhongTamThoi.add(new ThongTinThuePhong(maKH,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong,tienPhong));
+		thongtinThuePhongTamThoi.add(new ThongTinThuePhong(maKH,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong,tienPhong, null));
 		//System.out.println(thongtinThuePhongTamThoi.get(0).getMaKH()); 
 		
 		
@@ -56,12 +54,10 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
         
 		if(kq>0)
 		{
-			//System.out.println("Thêm phòng thuê thành công");
 			out.write("{\"check\":\"ok\"}");
 		    out.flush();
 		}
 		else {
-			//System.out.println("Thêm phòng thuê không thành công");
 			out.write("{\"check\":\"fail\"}");
 		    out.flush();
 		}	
@@ -107,7 +103,7 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		
 		//Hủy giao dịch thuê phòng thực hiện việc xóa thông tin KH nếu như KH này là KH mới
-		connectionDB.NVThuePhongDB.HuyGiaoDichThuePhong(maKH, ngayNhanPhong, user, pass);
+		connectionDB.NVThuePhongDB.XoaKhachHang(maKH, ngayNhanPhong, user, pass);
 		
 		//System.out.println("Hủy giao dịch thuê phòng thành công");	
 		out.write("Yes");
@@ -122,10 +118,6 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 		String maPhong=(String)request.getParameter("maPhong");
 		String ngayNhanPhong=(String)request.getParameter("ngayNhanPhong");
 		
-//		System.out.println(maKH);
-//        System.out.println(maPhong);
-//        System.out.println(ngayNhanPhong);
-		
         String user=(String)request.getSession().getAttribute("user");
 		String pass =(String)request.getSession().getAttribute("pass");
 		
@@ -137,12 +129,10 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
         PrintWriter out=response.getWriter();
 		if(kq>0)
 		{
-			//System.out.println("Thêm phòng thuê thành công");
 			out.write("{\"check\":\"ok\"}");
 		    out.flush();
 		}
 		else {
-			//System.out.println("Thêm phòng thuê không thành công");
 			out.write("{\"check\":\"fail\"}");
 		    out.flush();
 		}		

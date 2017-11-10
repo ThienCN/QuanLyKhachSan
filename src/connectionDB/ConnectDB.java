@@ -36,7 +36,7 @@ public class ConnectDB {
             connect=DriverManager.getConnection(url+"user=sa;password=12345678");            
             
         } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("SA Database Connect Failed.");
+            //System.out.println("SA Database Connect Failed.");
             return null;
         }
         return connect;

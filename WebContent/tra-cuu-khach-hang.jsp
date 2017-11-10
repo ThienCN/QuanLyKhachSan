@@ -72,7 +72,7 @@
                   Tra cứu thông tin thuê phòng hiện tại <i class="glyphicon glyphicon-search"></i>
                </button>
               <button id="thue-them-phong"  type="button" class="btn btn-default" style="width: 250px;" >
-                  Thuê thêm phòng <i class="glyphicon glyphicon-check"></i>
+                  Thuê phòng <i class="glyphicon glyphicon-check"></i>
               </button>
         		</div>
             </fieldset>
@@ -90,6 +90,7 @@
                                 <th>Ngày nhận phòng</th>
                                 <th>Ngày trả phòng</th>
                                 <th>Tiền phòng (USD)</th>
+                                <th>Mã code đặt phòng </th>
                             </tr>
                         </thead>
                         <tbody>

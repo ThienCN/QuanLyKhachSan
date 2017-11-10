@@ -30,14 +30,45 @@ $(document).ready(function(e){
 							$("#QuocTich").val(result[0].QuocTich);
 							$("#SDT").val(result[0].SDT);
 						}
+						//Lấy thông tin hóa đơn hiển thị ra bảng THÔNG TIN HÓA ĐƠN
+						var maKH = result[0].maKH;
+						$.ajax({
+							type:"POST",
+							url:"NV_LapHoaDon?maKH="+maKH,
+							dataType:"json",
+							success: function(result){
+								if(result.check == "fail"){
+									alert("Không tìm thấy thông tin hóa đơn!");
+									return;
+								}
+								else{
+									var n = Object.keys(result).length;
+									if(n > 0){
+										$("#maHoaDon").val(result[0].maHD);
+										$("#tongTienThuePhong").val(result[0].tienPhong);
+										$("#tongTienSuDungDichVu").val(result[0].tienSuDungDichVu);
+										$("#tongTienDenBu").val(result[0].tienDenBu);
+										$("#tienCoc").val(result[0].tienCoc);
+										var temp = result[0].tienPhong + 
+													result[0].tienSuDungDichVu + 
+													result[0].tienDenBu - 
+													result[0].tienCoc;										
+										$("#tongTienCanThanhToan").val(temp);
+									}
+								}
+							},
+				        	error: function(jqXHR, exception) {
+				             	if (jqXHR.status == 500)
+				             		alert("Không tìm thấy thông tin hóa đơn!");  
+				            }
+						});
 					}
 				},
 	        	error: function(jqXHR, exception) {
 	             	if (jqXHR.status == 500)
 	             		alert("Tìm phòng không thành công!");  
 	            }
-			});
-			
+			});			
 		}
 	});
 });

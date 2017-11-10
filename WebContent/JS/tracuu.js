@@ -57,6 +57,8 @@
                 },
                 dataType: "json",
                 success: function (result) { 
+                	console.log(result.check);
+                	
                     if (result.check == "fail") {
                     	$("#khong-co-ket-qua").text("Không tìm thấy kết quả");
                     	$("#khong-co-ket-qua").css("display","inline-block");
@@ -122,6 +124,8 @@
                                 $('<td>').text(result[i].ngayTraPhong)
                                 ).append(
                                 $('<td>').text(result[i].tienPhong)
+                                ).append(
+                                $('<td>').text(result[i].maCodeDatPhong)
                                 )
                         );
                 	}

@@ -36,14 +36,11 @@
 
 
 	<!-- Hủy danh sách thuê phòng tạm thời sau khi giao dịch thuê phòng thành công -->
-	<% //Nhớ đăng xuất thì hủy session này nhé Phụng
+	<% 
 		List<ThongTinThuePhong> thongtinThuePhongTamThoi=
 					(List<ThongTinThuePhong>)request.getSession().getAttribute("thongtinThuePhongTamThoi");
 		if(thongtinThuePhongTamThoi != null)
-		{
-			//System.out.println("Trang chủ NV: Đã set null cho danh sách tạm thời!");
-			thongtinThuePhongTamThoi = null;
-		}
+			request.getSession().removeAttribute("thongtinThuePhongTamThoi");
 	%>
 
     <!-- CONTENT -->
