@@ -125,8 +125,8 @@ $(document).ready(function () {
 			var SDT = $("#SDT").val();
 			
 			$.ajax({
-		    	type: "HEAD",
-		    	url: "KD_ThongTinDatPhong",
+		    	type: "GET",
+		    	url: "KD_ThemDonDatPhong",
 		    	data: {
 		    		phongdon: phongdon,
 		    		phongdoi: phongdoi,
@@ -141,11 +141,18 @@ $(document).ready(function () {
 		    	},
         		dataType:"json",
         		success: function(result){
-        			window.location.assign("datphong-thanhcong.jsp");
+        			if(result.check == "fail")
+    				{
+        				alert("Đơn đặt phòng không thành công!");
+    				}
+        			if(result.check == "ok")
+    				{
+            			window.location.assign("datphong-thanhcong.jsp");
+    				}
         		},
                 error: function(jqXHR, exception) {
                 	if (jqXHR.status == 500)
-                		alert("Thống kê danh sách thuê phòng không thành công!");  
+                		alert("Đơn đặt phòng không thành công!");  
                 }
 			
 			});

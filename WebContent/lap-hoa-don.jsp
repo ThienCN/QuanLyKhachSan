@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -126,16 +128,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-xs-12 col-sm-12 col-md-12" style="float:left">Nhập mã code đặt phòng để tra cứu tiền cọc (nếu có):</label>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12 col-sm-4 col-md-4">
-                                <input type="text" id="maCodeDatPhong" class="form-control" placeholder="Mã code">
-                            </div>
-                            <div class="col-xs-12 col-sm-2 col-md-2">
-                                <input type="button" class="form-control btn-default" style="width: 100px; background-color: #0d875c; color:white;" value="<< Tìm >>">
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6">
+                            <label class="control-label col-xs-12 col-sm-4 col-md-4">Tiền cọc (nếu có):</label>
+                            <div class="col-xs-12 col-sm-8 col-md-8">
                                 <input type="text" id="tienCoc" class="form-control" readonly>
                             </div>
                         </div>
@@ -149,9 +143,12 @@
                             <label class="control-label col-xs-12 col-sm-4 col-md-4">Ngày thanh toán:</label>
                             <div class="col-xs-12 col-sm-8 col-md-8">
                                 <input type="date" id="ngayThanhToan" class="form-control" readonly
-                                
-                                
-                                
+                                <%
+                        			Date date = new Date();                        			  
+                        			String strDateFormat = "yyyy-MM-dd";                        			  
+                        			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(strDateFormat);
+	                        	%>
+	                        		value= <%=simpleDateFormat.format(date)%>
                                 >
                             </div>
                         </div>

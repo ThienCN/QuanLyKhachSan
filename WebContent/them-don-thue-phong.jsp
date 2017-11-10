@@ -57,7 +57,7 @@
         	if(thongTinKHCu!=null)
         	{
         		flagKHCu=true;
-        		getServletContext().setAttribute("thongTinKHCu", null);
+        		getServletContext().removeAttribute("thongTinKHCu");
         	}
         %>
         <fieldset>

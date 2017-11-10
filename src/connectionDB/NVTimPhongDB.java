@@ -32,8 +32,7 @@ public class NVTimPhongDB {
 			cstmt.setString(1, ngayNhanPhong);
 			cstmt.setString(2, ngayTraPhong);
 			
-			ResultSet kq=cstmt.executeQuery();
-			
+			ResultSet kq=cstmt.executeQuery();			
 			
 			List<DanhSachPhongTrong> dsPhongTrong= new ArrayList<DanhSachPhongTrong>();
 			while(kq.next()) {
@@ -52,12 +51,10 @@ public class NVTimPhongDB {
 				dsPhongTrong.add(new DanhSachPhongTrong(maLoaiPhong,loaiPhong,maPhong,tienPhong));		
 				 
 			}		
-			
 			kq.close();	
 			return dsPhongTrong; 
 			
 		}catch (SQLException ex) {
-			System.out.println("Loi");
             ex.printStackTrace();
 		}finally {
             try {

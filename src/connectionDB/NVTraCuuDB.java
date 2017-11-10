@@ -75,13 +75,12 @@ public class NVTraCuuDB {
 	public static List<ThongTinThuePhong> TraCuuThongTinThuePhongHienTaiCuaKhachHang(String maKH, String user, String pass) {
 		Connection conn=null;
 		CallableStatement cstmt=null;
-		String maKhachHang,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong;
+		String maKhachHang,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong, maCodeDatPhong;
 		float tienPhong;
 		
 		try {
 			conn=ConnectDB.ConnectDB_Role(user, pass);
 			if (conn == null) {
-				System.out.println("connect null");
 	            return null;
 	        }
 			
@@ -94,24 +93,20 @@ public class NVTraCuuDB {
 			List<ThongTinThuePhong> thongTinThuePhong= new ArrayList<ThongTinThuePhong>();
 			while(kq.next()) {
 				maKhachHang=kq.getString("maKH");
-				//System.out.println(maKhachHang);
 				loaiPhong=kq.getString("loaiPhong");
-				//System.out.println(loaiPhong);				
 				maPhong=kq.getString("maPhong");
-				//System.out.println(maPhong);
 				ngayNhanPhong=kq.getString("ngayNhanPhong");
-				//System.out.println(ngayNhanPhong);
 				ngayTraPhong=kq.getString("ngayTraPhong");
-				//System.out.println(ngayTraPhong);
 				tienPhong=kq.getFloat("tienPhong");
+				maCodeDatPhong=kq.getString("maCodeDatPhong");
 				
-				thongTinThuePhong.add(new ThongTinThuePhong(maKhachHang,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong, tienPhong));
+				thongTinThuePhong.add(new ThongTinThuePhong(maKhachHang,loaiPhong, maPhong, ngayNhanPhong, 
+									ngayTraPhong, tienPhong, maCodeDatPhong));
 			}		
 			kq.close();	
 			return thongTinThuePhong; 
 			
 		}catch (SQLException ex) {
-			//System.out.println("Loi");
             ex.printStackTrace();
 		}finally {
             try {

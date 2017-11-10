@@ -26,8 +26,6 @@ public class Them_CapNhat_KhachHang extends HttpServlet {
 		String user=(String)request.getSession().getAttribute("user");
 		String pass =(String)request.getSession().getAttribute("pass");
 		
-		//Lấy mã KH mới tiếp theo sẽ được thêm
-		String maKHMoi= connectionDB.NVThuePhongDB.MaKhachHangMoi(user, pass);
 
 		//		
 		String hoten=(String)request.getParameter("hoTenKH");
@@ -36,22 +34,20 @@ public class Them_CapNhat_KhachHang extends HttpServlet {
 		String quoctich=(String)request.getParameter("QuocTich");
 		String sdt=(String)request.getParameter("SDT");
 		
-		int kq=connectionDB.NVThuePhongDB.ThemKhachHangMoi(hoten, cmnd, diachi, quoctich, sdt, user, pass);
+		String kq=connectionDB.NVThuePhongDB.ThemKhachHangMoi(hoten, cmnd, diachi, quoctich, sdt, user, pass);
 		
 		response.setContentType("application/json;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         
         PrintWriter out=response.getWriter();
         
-		if(kq>0)
+		if(kq != null)           
 		{
-			//System.out.println("Lưu khách hàng mới thành công");			
-			out.write(maKHMoi);
+			out.write("{\"check\":\""+ kq +"\"}");
 			out.flush();
 		}
 		else {
-			//System.out.println("Thêm khách hàng không thành công");
-			out.write("No");
+			out.write("{\"check\":\"fail\"}");
 		    out.flush();
 		}	
 	
