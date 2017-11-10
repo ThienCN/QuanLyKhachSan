@@ -137,6 +137,16 @@ public class KD_ThongTinDatPhong extends HttpServlet {
 		}
 		
 	}
+<<<<<<< HEAD
 
 
+=======
+	
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		List<ThongTinDatPhong> thongtindatphong = (List<ThongTinDatPhong>)getServletContext().getAttribute("thongtindatphong");
+		thongtindatphong.clear();
+	}
+	
+>>>>>>> 762ef639cd5b22591330c3e096f8c5b95e26be25
 }

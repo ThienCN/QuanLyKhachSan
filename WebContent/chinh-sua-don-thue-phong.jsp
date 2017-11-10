@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-xs-12 col-md-6">
                 <div class="input-group search">
-                    <input type="text"  id="maTimKiem" class="form-control" placeholder="Nhập mã khách hàng hoặc CMND vào đây">
+                    <input type="text"  id="maTimKiem" class="form-control" placeholder="Nhập mã khách hàng vào đây">
                     <div class="input-group-btn">
                         <button id="tim-thong-tin-khach-hang" class="btn btn-default" style="background-color: #0d875c; color:white">
                             Tìm <i class="glyphicon glyphicon-search"></i>

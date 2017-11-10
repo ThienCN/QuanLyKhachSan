@@ -13,7 +13,6 @@
             confirm("Mời bạn nhập đầy đủ thông tin cá nhân của khách hàng!!");
         }//Thông tin đầy đủ thì lưu
         else{          	
-        	
     		$.ajax({
                 type: "GET",
                 url: "Them_CapNhat_KhachHang",
@@ -24,14 +23,14 @@
                 	QuocTich: quoctich,
                 	DiaChi: diachi
                 },
-                dataType: "text",
+                dataType: "json",
                 success: function (result) {
-                	if(result == "No"){
+                	if(result.check == "fail"){
                 		alert("Khách hàng đã tồn tại trong lịch sử! Mời bạn tra cứu thông tin khách hàng và chọn thuê phòng!");  
                 	}
-                	else
+                	if(result.check != "fail")
             		{
-                		$("#maKH").val(result);
+                		$("#maKH").val(result.check);
                 		$("#luu-thong-tin-KH").prop("disabled", true);
                 		$("#huy-giao-dich-thue-phong").prop("disabled", false);
                 		$("#xac-nhan-giao-dich-thue-phong").prop("disabled", false);
@@ -86,10 +85,10 @@
                 var ngayTra = $("#ngayTraPhong").val();
                 $.ajax({
                     type: "GET", //method
-                    url: "NV_TimPhongThue_Dat", //Tên servlet
+                    url: "NV_TimPhong", //Tên servlet
                     data: {
-                        ngayNhan: ngayNhan, 
-                        ngayTra: ngayTra
+                        ngayNhanPhong: ngayNhan, 
+                        ngayTraPhong: ngayTra
                     },
                     dataType: "json",
                     success: function (result) {
@@ -314,7 +313,7 @@
                 		alert("Hủy giao dịch thành công!");
                 		window.location.assign("nhan-vien.jsp");
             		}
-                	else if(result == "No")
+                	else if(result != "Yes")
                 		alert("Hủy giao dịch không thành công!"); 
                 },
                 error: function(jqXHR, exception) {

@@ -193,7 +193,7 @@
     		success: function(result){
     			if(result.check == "fail")
 				{
-    				alert("Cập nhật thông tin khách hàng không thành công!");
+    				alert("Thông tin cập nhật không hợp lệ!");
     				return;
 				}
     			if(result.check == "ok")
