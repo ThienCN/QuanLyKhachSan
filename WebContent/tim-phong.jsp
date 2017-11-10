@@ -100,7 +100,7 @@
 	
 	        <br />
 	        <div class="input-group-btn">                  
-	            <a href="#" class="btn btn-default">
+	            <a href="them-don-dat-phong.jsp" class="btn btn-default">
 	                Đặt phòng <i class="glyphicon glyphicon-edit"></i>
 	            </a>
 	            <a href="them-don-thue-phong.jsp" class="btn btn-default">

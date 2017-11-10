@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.ThongTinDatPhong_NV;
+import model.ThongTinKhachDat;
 import model.ThongTinKhachHang;
 import model.ThongTinThuePhong;
 
@@ -52,6 +54,66 @@ public class NVTraCuuDB {
 			
 			kq.close();	
 			return thongtinKH; 
+			
+		}catch (SQLException ex) {
+			System.out.println("Loi");
+            ex.printStackTrace();
+		}finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (cstmt != null) {
+                    cstmt.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+		
+		return null;
+	}
+	
+	public static List<ThongTinKhachDat> TraCuuThongTinKhachDat(String maTraCuu, String user, String pass) {
+		Connection conn=null;
+		CallableStatement cstmt=null;
+		String maKD, hoTenKD, CMND, DiaChi, QuocTich, SDT;
+		
+		try {
+			conn=ConnectDB.ConnectDB_Role(user, pass);
+			if (conn == null) {
+				System.out.println("connect null");
+	            return null;
+	        }
+			
+			String sql= "{call spTraCuuThongTinKhachDat(?)}";
+			cstmt=conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			
+			cstmt.setString(1, maTraCuu);
+			ResultSet kq=cstmt.executeQuery();
+			
+			
+			List<ThongTinKhachDat> thongtinKD= new ArrayList<ThongTinKhachDat>();
+			while(kq.next()) {
+				maKD=kq.getString("maKhachDat");
+				//System.out.println(maKH);
+				hoTenKD=kq.getString("HoTen");
+				//System.out.println(hoTenKH);
+				CMND=kq.getString("CMND");
+				//System.out.println(CMND);
+				DiaChi=kq.getString("DiaChi");
+				//System.out.println(DiaChi);
+				QuocTich=kq.getString("QuocTich");
+				//System.out.println(DiaChi);
+				SDT=kq.getString("SDT");
+				//System.out.println(DiaChi);
+				
+				thongtinKD.add(new ThongTinKhachDat(maKD, hoTenKD, CMND, DiaChi, QuocTich, SDT));	
+				 
+			}		
+			
+			kq.close();	
+			return thongtinKD; 
 			
 		}catch (SQLException ex) {
 			System.out.println("Loi");
@@ -123,4 +185,63 @@ public class NVTraCuuDB {
 		return null;
 	}
 
+	public static List<ThongTinDatPhong_NV> TraCuuThongTinDatPhongHienTaiCuaKhachDat(String maKD, String user, String pass) {
+		Connection conn=null;
+		CallableStatement cstmt=null;
+		String maKhachDat,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong;
+		int tinhTrang;
+		float tienPhong;
+		
+		try {
+			conn=ConnectDB.ConnectDB_Role(user, pass);
+			if (conn == null) {
+				System.out.println("connect null");
+	            return null;
+	        }
+			
+			String sql= "{call spTraCuuThongTinDatPhongHienTai(?)}";
+			cstmt=conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			
+			cstmt.setString(1, maKD);
+			ResultSet kq=cstmt.executeQuery();
+			
+			List<ThongTinDatPhong_NV> thongTinDatPhong_NV= new ArrayList<ThongTinDatPhong_NV>();
+			while(kq.next()) {
+				maKhachDat=kq.getString("maKhachDat");
+				//System.out.println(maKhachDat);
+				loaiPhong=kq.getString("loaiPhong");
+				//System.out.println(loaiPhong);				
+				maPhong=kq.getString("maPhong");
+				//System.out.println(maPhong);
+				ngayNhanPhong=kq.getString("ngayNhanPhong");
+				//System.out.println(ngayNhanPhong);
+				ngayTraPhong=kq.getString("ngayTraPhong");
+				//System.out.println(ngayTraPhong);
+				tinhTrang=kq.getInt("tinhTrang");
+				//System.out.println(tinhTrang);
+				tienPhong=kq.getFloat("tienPhong");
+				//System.out.println(tienPhong);
+				
+				thongTinDatPhong_NV.add(new ThongTinDatPhong_NV(maKhachDat,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong, tinhTrang, tienPhong));
+			}		
+			kq.close();	
+			return thongTinDatPhong_NV; 
+			
+		}catch (SQLException ex) {
+			//System.out.println("Loi");
+            ex.printStackTrace();
+		}finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (cstmt != null) {
+                    cstmt.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }		
+		return null;
+	}
 }
