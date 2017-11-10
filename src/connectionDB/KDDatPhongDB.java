@@ -206,19 +206,19 @@ public class KDDatPhongDB {
 				return k;
 			}
 
-			cstm = cnn.prepareCall("{call spThemChiTietDatPhong(?,?,?,?,?)}", ResultSet.TYPE_SCROLL_INSENSITIVE,
+			cstm = cnn.prepareCall("{call spThemChiTietDatPhong(?,?,?,?,?,?)}", ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);
 			cstm.setString(1, maKD);
 			cstm.setString(2, maPhong);
 			cstm.setString(3, ngaynhanphong);
 			cstm.setString(4, ngaytraphong);
 			cstm.setFloat(5, tiencoc);
+			cstm.registerOutParameter(6, java.sql.Types.INTEGER);
 
-			k = cstm.executeUpdate();
-			if(k<=0) {
-				return k;
-			}
-			return k;
+			cstm.executeUpdate();
+			if (cstm.getInt(6)!=0)
+	        	return cstm.getInt(6);   
+	        return 0;
 
 		} catch (SQLException e) {
 			e.printStackTrace();

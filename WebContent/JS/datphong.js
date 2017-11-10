@@ -483,8 +483,8 @@
             });
             
             $.ajax({
-            	type: "PUT", //method
-                url: "KD_ThongTinDatPhong",
+            	type: "DELETE", //method
+                url: "KD_ThemDonDatPhong",
                 dataType: "json"
             });
         }
