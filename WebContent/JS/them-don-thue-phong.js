@@ -26,19 +26,19 @@
                 dataType: "json",
                 success: function (result) {
                 	if(result.check == "fail"){
-                		alert("Khách hàng đã tồn tại trong lịch sử! Mời bạn tra cứu thông tin khách hàng và chọn thuê phòng!");  
+                		alert("Thêm khách hàng không thành công!");  
                 	}
-                	if(result.check != "fail")
+                	else if(result.MaKH != null)
             		{
-                		$("#maKH").val(result.check);
+                		$("#maKH").val(result.MaKH);
                 		$("#luu-thong-tin-KH").prop("disabled", true);
                 		$("#huy-giao-dich-thue-phong").prop("disabled", false);
                 		$("#xac-nhan-giao-dich-thue-phong").prop("disabled", false);
-            		}                	
+            		}  
                 },
                 error: function(jqXHR, exception) {
                 	if (jqXHR.status == 500)
-                		alert("Khách hàng đã tồn tại trong lịch sử! Mời bạn tra cứu thông tin khách hàng và chọn thuê phòng!");  
+                		alert("Thêm khách hàng không thành công!");  
                 }
             });
         }
@@ -275,10 +275,14 @@
                                         
                                         $(this).closest('tr').remove();
                                     }
-                                })
-                        	)
+                             })
                         )
-                	);
+                     )
+            );
+        	
+        	//
+        	var tongTienThue = $("#tongTienThue").text();         	
+        	$("#tongTienThue").text(parseFloat(tongTienThue) + parseFloat(phiThue));
         }
     });
     
@@ -302,10 +306,9 @@
     $("#huy-giao-dich-thue-phong").click(function (e){
     	if(confirm("Bạn có chắc chắn muốn hủy hoàn toàn giao dịch thuê này hay không?")){
     		var maKH=$("#maKH").val();
-    		var ngayNhanP=$("#ngayNhanPhong").val();    		
     		$.ajax({
                 type: "POST",
-                url: "NV_CapNhatChiTietThue?maKH="+maKH+"&ngayNhanPhong="+ngayNhanP,
+                url: "NV_CapNhatChiTietThue?maKH="+maKH,
                 dataType:"text",
                 success: function (result){
                 	if(result == "Yes")

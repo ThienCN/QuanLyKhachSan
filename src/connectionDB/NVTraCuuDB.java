@@ -82,7 +82,6 @@ public class NVTraCuuDB {
 		try {
 			conn=ConnectDB.ConnectDB_Role(user, pass);
 			if (conn == null) {
-				System.out.println("connect null");
 	            return null;
 	        }
 			
@@ -244,4 +243,6 @@ public class NVTraCuuDB {
         }		
 		return null;
 	}
+
+	
 }

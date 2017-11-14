@@ -12,22 +12,37 @@ $(document).ready(function () {
     });
     
     $("#btntimphong").click(function (e){
-        var ngayNhanPhong = new Date($("#ngaynhanphong").val());
-        var ngayTraPhong = new Date($("#ngaytraphong").val());
-
-        var d = new Date();
-        var ngayHienTai = new Date(d.getFullYear(), d.getMonth(), d.getDate());
         
-        if (ngayNhanPhong == "Invalid Date" || ngayTraPhong == "Invalid Date"){
+        var ngayHienTai = new Date();
+        dayHienTai = ngayHienTai.getDate();
+        monthHienTai = ngayHienTai.getMonth() + 1;
+        yearHienTai = ngayHienTai.getFullYear();
+        var ngayhientai=[dayHienTai, monthHienTai, yearHienTai].join('/');
+        
+        var ngayNhan = new Date($("#ngaynhanphong").val());
+        var ngayTra = new Date($("#ngaytraphong").val());
+        
+        dayNhan = ngayNhan.getDate();
+        monthNhan = ngayNhan.getMonth() + 1;
+        yearNhan = ngayNhan.getFullYear();
+        
+        dayTra = ngayTra.getDate();
+        monthTra = ngayTra.getMonth() + 1;
+        yearTra = ngayTra.getFullYear();
+        
+        var ngaynhanphong=[dayNhan, monthNhan, yearNhan].join('/');
+        var ngaytraphong=[dayTra, monthTra, yearTra].join('/');
+        
+        if (ngaynhanphong == "NaN/NaN/NaN" || ngaytraphong == "NaN/NaN/NaN"){
             alert("Nhập đầy đủ ngày nhận phòng và ngày trả phòng!!!");
             e.preventDefault();
         }
-        else if (ngayNhanPhong >= ngayTraPhong){
+        else if (ngaynhanphong >= ngaytraphong){
             alert("Ngày nhận phòng và ngày trả phòng không hợp lệ!!!");
             e.preventDefault();
         }
-        else if (ngayNhanPhong < ngayHienTai){
-            alert("Ngày nhận phòng phải lớn hơn hoặc bằng ngày hiện tại!!!");
+        else if (ngayhientai >= ngaynhanphong){
+            alert("Ngày nhận phòng phải lớn hơn ngày hiện tại!!!");
             e.preventDefault();
         }
     	

@@ -139,8 +139,7 @@ public class NVThuePhongDB {
     }
 	return 0;
 }
-	
-	
+		
 	public static int ThemChiTietThue(String maKH,String maPhong, String ngayNhanPhong, 
 			String ngayTraPhong, String user, String pass) {
 		
@@ -222,8 +221,7 @@ public class NVThuePhongDB {
 		return 0;
 	}
 
-
-	public static int XoaKhachHang(String maKH, String ngayNhanPhong, 
+	public static int XoaKhachHang(String maKH, 
 			String user, String pass) {
 		
 		Connection conn=null;
@@ -234,11 +232,10 @@ public class NVThuePhongDB {
 			if (conn == null) {
 	            return 0;
 	        }
-			String sql= "{call spXoaKhachHang(?,?)}";
+			String sql= "{call spXoaKhachHang(?)}";
 			cstmt=conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			
 			cstmt.setString(1, maKH);
-			cstmt.setString(2, ngayNhanPhong);
 			
 			cstmt.executeUpdate();
             
@@ -298,9 +295,7 @@ public class NVThuePhongDB {
 	    }
 		return 0;
 	}
-	
-	
-	
+		
 	public static int HuyDonThuePhong(String maKH, String maPhong, String ngayNhanPhong, 
 			String user, String pass) {
 		
@@ -338,5 +333,44 @@ public class NVThuePhongDB {
 		return 0;
 	}
 
+	
+	public static String KiemTraKhachHang(String CMND, String user, String pass) {
+		Connection conn=null;
+		CallableStatement cstmt=null;		
+		
+		try {
+			conn=ConnectDB.ConnectDB_Role(user, pass);
+			if (conn == null) {
+	            return null;
+	        }
+			
+			cstmt=conn.prepareCall("{?=call fn_KiemTraKhachHang(?)}"); 
+			
+			cstmt.registerOutParameter(1, java.sql.Types.CHAR);
+			cstmt.setString(2, CMND);
+			
+			cstmt.execute();
+					
+			String kq = cstmt.getString(1);
+			return kq;			 
+			
+		}catch (SQLException ex) {
+            ex.printStackTrace();
+		}finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (cstmt != null) {
+                    cstmt.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }		
+		return null;
+	}
+
+	
 }
 

@@ -55,7 +55,6 @@ public class KD_TimPhong extends HttpServlet {
 			}
 			else
 			{
-				System.out.println("danh sach trong");
 				out.write("{\"check\":\"fail\"}");
 			    out.flush();
 			}
