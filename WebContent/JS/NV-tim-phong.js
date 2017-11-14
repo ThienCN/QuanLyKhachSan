@@ -61,6 +61,37 @@ $(document).ready(function (e){
 	             		alert("Tìm phòng không thành công!");  
 	            }
             });
+            
+            
+            $.ajax({
+            	type:"POST",
+            	url:"NV_TimPhong",
+            	data:{
+            		ngaynhanphong: ngayNhanPhong,
+            		ngaytraphong: ngayTraPhong
+            	},
+            	dataType: "json",
+            	success:function(result){
+            		if(result.check == "fail"){
+            			$("#khong-co-ket-qua").css("display","block");
+            			$("#khong-co-ket-qua").text("Không còn phòng trống trong thời gian này!");
+            			alert("Tìm phòng không thành công!!");
+            			return;
+        			}
+            		else{
+            			var n = Object.keys(result).length;
+            			for(i=0; i<n; i++){
+            				if(result[i].tenLoaiPhong == "Phòng đơn")
+            					$("#soPhongDonTrong").text(result[i].soPhongTrong);
+        					if(result[i].tenLoaiPhong == "Phòng đôi")
+        						$("#soPhongDoiTrong").text(result[i].soPhongTrong);
+        					if(result[i].tenLoaiPhong == "Phòng tập thể")
+        						$("#soPhongTapTheTrong").text(result[i].soPhongTrong);
+        					
+            			}            			
+            		}
+            	}
+            });
         }
 	});
 });

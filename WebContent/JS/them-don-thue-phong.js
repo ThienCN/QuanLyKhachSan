@@ -275,10 +275,14 @@
                                         
                                         $(this).closest('tr').remove();
                                     }
-                                })
-                        	)
+                             })
                         )
-                	);
+                     )
+            );
+        	
+        	//
+        	var tongTienThue = $("#tongTienThue").text();         	
+        	$("#tongTienThue").text(parseFloat(tongTienThue) + parseFloat(phiThue));
         }
     });
     

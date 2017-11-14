@@ -141,7 +141,10 @@ $(document).ready(function () {
 		    	},
         		dataType:"json",
         		success: function(result){
+<<<<<<< HEAD
 
+=======
+>>>>>>> 122dd028750722b2ea045a50fdd7e77d6d0865af
         			console.log(result.check);
         			if(result.check=="fail"){
         				alert("Không thêm được khách đặt mới!");
@@ -152,9 +155,26 @@ $(document).ready(function () {
         		},
                 error: function(jqXHR, exception) {
                 	if (jqXHR.status == 500)
+<<<<<<< HEAD
                 		alert("Đơn đặt phòng không thành công!");  
                 }
 			
+=======
+                		alert("Thêm đơn thuê phòng không thành công!");  
+        			if(result.check == "fail")
+    				{
+        				alert("Đơn đặt phòng không thành công!");
+    				}
+        			if(result.check == "ok")
+    				{
+            			window.location.assign("datphong-thanhcong.jsp");
+    				}
+        		},
+                error: function(jqXHR, exception) {
+                	if (jqXHR.status == 500)
+                		alert("Đơn đặt phòng không thành công!");  
+                }			
+>>>>>>> 122dd028750722b2ea045a50fdd7e77d6d0865af
 			});
 //			Ngoài này ko thực hiện được
 //			console.log("OK");
