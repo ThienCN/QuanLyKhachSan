@@ -9,330 +9,360 @@ import java.util.List;
 import model.ThongTinDatPhong_NV;
 
 public class NVDatPhongDB {
-	public static String MaKhachDatMoi(String user, String pass)
-	{
-		Connection conn=null;
-		CallableStatement cstmt=null;
-		
+	public static String MaKhachDatMoi(String user, String pass) {
+		Connection conn = null;
+		CallableStatement cstmt = null;
+
 		try {
-			conn=ConnectDB.ConnectDB_Role(user, pass);
-			
-			cstmt=conn.prepareCall("{?=call fn_TaoMaKhachDat()}");
-			
+			conn = ConnectDB.ConnectDB_Role(user, pass);
+
+			cstmt = conn.prepareCall("{?=call fn_TaoMaKhachDat()}");
+
 			cstmt.registerOutParameter(1, java.sql.Types.CHAR);
-			
+
 			cstmt.execute();
-			
-			String maKD=cstmt.getString(1);
-			
+
+			String maKD = cstmt.getString(1);
+
 			return maKD;
-			
-		}catch (SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+				if (cstmt != null) {
+					cstmt.close();
+				}
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
 		}
-		finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-                if (cstmt != null) {
-                    cstmt.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
 		return null;
 	}
 
-	public static String ThemKhachDatMoi(String hoTenKD,String CMND, 
-			String DiaChi,String QuocTich,String SDT, String user, String pass) {
-	 
-		Connection conn=null;
-		CallableStatement cstmt=null;
-		
+	public static String ThemKhachDatMoi(String hoTenKD, String CMND, String DiaChi, String QuocTich, String SDT,
+			String user, String pass) {
+
+		Connection conn = null;
+		CallableStatement cstmt = null;
+
 		try {
-			conn=ConnectDB.ConnectDB_Role(user, pass);
+			conn = ConnectDB.ConnectDB_Role(user, pass);
 			if (conn == null) {
 				System.out.println("connect null");
-	            return null;
-	        }
-			String sql= "{call spThemKhachDatMoi(?,?,?,?,?,?)}";
-			cstmt=conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			
+				return null;
+			}
+			String sql = "{call spThemKhachDatMoi(?,?,?,?,?,?)}";
+			cstmt = conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
 			cstmt.setString(1, hoTenKD);
 			cstmt.setString(2, CMND);
 			cstmt.setString(3, DiaChi);
 			cstmt.setString(4, QuocTich);
-			cstmt.setString(5, SDT);	
+			cstmt.setString(5, SDT);
 			cstmt.registerOutParameter(6, java.sql.Types.CHAR);
-			
-			
+
 			cstmt.executeUpdate();
-	        if (cstmt.getString(6)!=null)
-	        	return cstmt.getString(6);   
-	        return null;
-	        
-		}catch (SQLException ex) {
-	        ex.printStackTrace();
-		}finally {
-	        try {
-	            if (conn != null) {
-	                conn.close();
-	            }
-	            if (cstmt != null) {
-	                cstmt.close();
-	            }
-	        } catch (SQLException ex) {
-	            ex.printStackTrace();
-	        }
-	    }
+			if (cstmt.getString(6) != null)
+				return cstmt.getString(6);
+			return null;
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+				if (cstmt != null) {
+					cstmt.close();
+				}
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
 		return null;
-}
-	
-	public static int CapNhatKhachHang(String maKH,String hoTenKH,String CMND, 
-			String DiaChi,String QuocTich,String SDT, String user, String pass) {
-	 
-	Connection conn=null;
-	CallableStatement cstmt=null;
-	
-	try {
-		conn=ConnectDB.ConnectDB_Role(user, pass);
-		if (conn == null) {
-			System.out.println("connect null");
-            return 0;
-        }
-		String sql= "{call spCapNhatKhachHang(?,?,?,?,?,?)}";
-		cstmt=conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-		
-		cstmt.setString(1, maKH);
-		cstmt.setString(2, hoTenKH);
-		cstmt.setString(3, CMND);
-		cstmt.setString(4, DiaChi);
-		cstmt.setString(5, QuocTich);
-		cstmt.setString(6, SDT);		
-		
-		int k = cstmt.executeUpdate();
-        if (k >= 1)
-        	return k;            
-        
-	}catch (SQLException ex) {
-        ex.printStackTrace();
-	}finally {
-        try {
-            if (conn != null) {
-                conn.close();
-            }
-            if (cstmt != null) {
-                cstmt.close();
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-	return 0;
-}
-	
-	
-	public static int ThemChiTietThue(String maKH,String maPhong, String ngayNhanPhong, 
-			String ngayTraPhong, String user, String pass) {
-		
-		Connection conn=null;
-		CallableStatement cstmt=null;
-		
+	}
+
+	public static String KiemTraKhachDat(String CMND, String user, String pass) {
+		Connection conn = null;
+		CallableStatement cstmt = null;
+		String kq = null;
+
 		try {
-			conn=ConnectDB.ConnectDB_Role(user, pass);
+			conn = ConnectDB.ConnectDB_Role(user, pass);
 			if (conn == null) {
 				System.out.println("connect null");
-	            return 0;
-	        }
-			String sql= "{call spThemChiTietThue(?,?,?,?)}";
-			cstmt=conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			
-			cstmt.setString(1, maKH);
+				return null;
+			}
+			String sql = "{call fn_KiemTraKhachHang(?)}";
+			cstmt = conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+			cstmt.setString(1, CMND);
+
+			cstmt.execute();
+			kq = cstmt.getString(1);
+			if (kq != null) {
+				return kq;
+			}
+			return null;
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+				if (cstmt != null) {
+					cstmt.close();
+				}
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	public static int CapNhatKhachDat(String maKD, String hoTenKD, String CMND, String DiaChi, String QuocTich,
+			String SDT, String user, String pass) {
+
+		Connection conn = null;
+		CallableStatement cstmt = null;
+
+		try {
+			conn = ConnectDB.ConnectDB_Role(user, pass);
+			if (conn == null) {
+				System.out.println("connect null");
+				return 0;
+			}
+			String sql = "{call spCapNhatKhachDat(?,?,?,?,?,?)}";
+			cstmt = conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+			cstmt.setString(1, maKD);
+			cstmt.setString(2, hoTenKD);
+			cstmt.setString(3, CMND);
+			cstmt.setString(4, DiaChi);
+			cstmt.setString(5, QuocTich);
+			cstmt.setString(6, SDT);
+
+			int k = cstmt.executeUpdate();
+			if (k >= 1)
+				return k;
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+				if (cstmt != null) {
+					cstmt.close();
+				}
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+		return 0;
+	}
+
+	public static int ThemChiTietDatPhong(String maKD, String maPhong, String ngayNhanPhong, String ngayTraPhong,
+			float tienCoc, String user, String pass) {
+
+		Connection conn = null;
+		CallableStatement cstmt = null;
+
+		try {
+			conn = ConnectDB.ConnectDB_Role(user, pass);
+			if (conn == null) {
+				System.out.println("connect null");
+				return 0;
+			}
+			String sql = "{call spThemChiTietDatPhong(?,?,?,?,?,?)}";
+			cstmt = conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+			cstmt.setString(1, maKD);
 			cstmt.setString(2, maPhong);
 			cstmt.setString(3, ngayNhanPhong);
 			cstmt.setString(4, ngayTraPhong);
-			
-			
-			int k = cstmt.executeUpdate();
-            if (k >= 1)
-                return k;
-            
-		}catch (SQLException ex) {
-            ex.printStackTrace();
-		}finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-                if (cstmt != null) {
-                    cstmt.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
+			cstmt.setFloat(5, tienCoc);
+			cstmt.registerOutParameter(6, java.sql.Types.INTEGER);
+
+			cstmt.executeUpdate();
+			if (cstmt.getInt(6) != 0)
+				return cstmt.getInt(6);
+			return 0;
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+				if (cstmt != null) {
+					cstmt.close();
+				}
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
 		return 0;
 	}
 
-	public static int XoaChiTietThue(String maKH,String maPhong, String ngayNhanPhong, 
-			String user, String pass) {
-		
-		Connection conn=null;
-		CallableStatement cstmt=null;
-		
+	public static int XoaChiTietDatPhong(String maKD, String maPhong, String ngayNhanPhong, String user, String pass) {
+
+		Connection conn = null;
+		CallableStatement cstmt = null;
+
 		try {
-			conn=ConnectDB.ConnectDB_Role(user, pass);
+			conn = ConnectDB.ConnectDB_Role(user, pass);
 			if (conn == null) {
 				System.out.println("connect null");
-	            return 0;
-	        }
-			String sql= "{call spXoaChiTietThue(?,?,?)}";
-			cstmt=conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			
-			cstmt.setString(1, maKH);
+				return 0;
+			}
+			String sql = "{call spXoaChiTietDatPhong(?,?,?)}";
+			cstmt = conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+			cstmt.setString(1, maKD);
 			cstmt.setString(2, maPhong);
 			cstmt.setString(3, ngayNhanPhong);
-			
-			
+
 			int k = cstmt.executeUpdate();
-            if (k >= 1)
-                return k;
-            
-		}catch (SQLException ex) {
-            ex.printStackTrace();
-		}finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-                if (cstmt != null) {
-                    cstmt.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
+			if (k >= 1)
+				return k;
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+				if (cstmt != null) {
+					cstmt.close();
+				}
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
 		return 0;
 	}
 
+	public static int HuyGiaoDichDatPhong(String maKD, String user, String pass) {
 
-	public static int HuyGiaoDichThuePhong(String maKH, String ngayNhanPhong, 
-			String user, String pass) {
-		
-		Connection conn=null;
-		CallableStatement cstmt=null;
-		
+		Connection conn = null;
+		CallableStatement cstmt = null;
+
 		try {
-			conn=ConnectDB.ConnectDB_Role(user, pass);
+			conn = ConnectDB.ConnectDB_Role(user, pass);
 			if (conn == null) {
 				System.out.println("connect null");
-	            return 0;
-	        }
-			String sql= "{call spHuyGiaoDichThuePhong(?,?)}";
-			cstmt=conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			
-			cstmt.setString(1, maKH);
-			cstmt.setString(2, ngayNhanPhong);
-			
+				return 0;
+			}
+			String sql = "{call spHuyGiaoDichDatPhong(?)}";
+			cstmt = conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+			cstmt.setString(1, maKD);
+
 			cstmt.executeUpdate();
-            
-		}catch (SQLException ex) {
-            ex.printStackTrace();
-		}finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-                if (cstmt != null) {
-                    cstmt.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+				if (cstmt != null) {
+					cstmt.close();
+				}
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
 		return 0;
 	}
 
-	public static int CapNhatChiTietThue(String maKH,String maPhong, 
-			String ngayTraPhongCu,String ngayTraPhongMoi, String user, String pass) {
-	 
-		Connection conn=null;
-		CallableStatement cstmt=null;
-		
+	public static int CapNhatChiTietDatPhong(String maKD, String maPhong, String ngayTraPhongCu, String ngayTraPhongMoi,
+			String user, String pass) {
+
+		Connection conn = null;
+		CallableStatement cstmt = null;
+
 		try {
-			conn=ConnectDB.ConnectDB_Role(user, pass);
+			conn = ConnectDB.ConnectDB_Role(user, pass);
 			if (conn == null) {
 				System.out.println("connect null");
-	            return 0;
-	        }
-			String sql= "{call spCapNhatChiTietThue(?,?,?,?)}";
-			cstmt=conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			
-			cstmt.setString(1, maKH);
+				return 0;
+			}
+			String sql = "{call spCapNhatChiTietDat(?,?,?,?)}";
+			cstmt = conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+			cstmt.setString(1, maKD);
 			cstmt.setString(2, maPhong);
 			cstmt.setString(3, ngayTraPhongCu);
 			cstmt.setString(4, ngayTraPhongMoi);
-			
+
 			int k = cstmt.executeUpdate();
-	        if (k >= 1)
-	        	return k;            
-	        
-		}catch (SQLException ex) {
-	        ex.printStackTrace();
-		}finally {
-	        try {
-	            if (conn != null) {
-	                conn.close();
-	            }
-	            if (cstmt != null) {
-	                cstmt.close();
-	            }
-	        } catch (SQLException ex) {
-	            ex.printStackTrace();
-	        }
-	    }
+			if (k >= 1)
+				return k;
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+				if (cstmt != null) {
+					cstmt.close();
+				}
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
 		return 0;
 	}
-	
-	
-	
-	public static int HuyDonThuePhong(String maKH, String maPhong, String ngayNhanPhong, 
-			String user, String pass) {
-		
-		Connection conn=null;
-		CallableStatement cstmt=null;
-		
+
+	public static int HuyDonDatPhong(String maKD, String maPhong, String ngayNhanPhong, String user, String pass) {
+
+		Connection conn = null;
+		CallableStatement cstmt = null;
+
 		try {
-			conn=ConnectDB.ConnectDB_Role(user, pass);
+			conn = ConnectDB.ConnectDB_Role(user, pass);
 			if (conn == null) {
 				System.out.println("connect null");
-	            return 0;
-	        }
-			String sql= "{call spHuyDonThuePhong(?,?,?)}";
-			cstmt=conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			
-			cstmt.setString(1, maKH);
+				return 0;
+			}
+			String sql = "{call spHuyDonDatPhong(?,?,?)}";
+			cstmt = conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+			cstmt.setString(1, maKD);
 			cstmt.setString(2, maPhong);
 			cstmt.setString(3, ngayNhanPhong);
-			
+
 			cstmt.executeUpdate();
-            
-		}catch (SQLException ex) {
-            ex.printStackTrace();
-		}finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-                if (cstmt != null) {
-                    cstmt.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+				if (cstmt != null) {
+					cstmt.close();
+				}
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
 		return 0;
 	}
 }

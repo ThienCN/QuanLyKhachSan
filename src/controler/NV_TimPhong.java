@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +28,8 @@ public class NV_TimPhong extends HttpServlet {
 		
 		String ngayNhanPhong=request.getParameter("ngayNhanPhong");
 		String ngayTraPhong=request.getParameter("ngayTraPhong");
+		request.getSession().setAttribute("ngaynhanphong", ngayNhanPhong);
+		request.getSession().setAttribute("ngaytraphong", ngayTraPhong);
 	
 		List<DanhSachPhongTrong> dsPhongTrong = 
 				NVTimPhongDB.NVTimPhong(ngayNhanPhong, ngayTraPhong, 

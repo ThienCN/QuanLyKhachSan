@@ -1,14 +1,14 @@
 package model;
 
 public class ThongTinDatPhong_NV {
-	String maKD, loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong;
+	String maKD, loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong, nguoiHuy;
 	int tinhTrang;
 	float tienPhong;
 	
 	public ThongTinDatPhong_NV() {
 	}
 
-	public ThongTinDatPhong_NV(String maKD, String loaiPhong,String maPhong,String ngayNhanPhong,String ngayTraPhong,int tinhTrang, float tienPhong)
+	public ThongTinDatPhong_NV(String maKD, String loaiPhong,String maPhong,String ngayNhanPhong,String ngayTraPhong,int tinhTrang, float tienPhong, String nguoiHuy)
 	{
 		this.maKD=maKD;
 		this.loaiPhong=loaiPhong;
@@ -17,6 +17,7 @@ public class ThongTinDatPhong_NV {
 		this.ngayTraPhong=ngayTraPhong;
 		this.tinhTrang=tinhTrang;
 		this.tienPhong=tienPhong;
+		this.nguoiHuy=nguoiHuy;
 	}
 
 	public float getTienPhong() {

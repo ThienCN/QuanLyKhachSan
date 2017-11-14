@@ -155,26 +155,29 @@ public class KDDatPhongDB {
 		return tienthue;
 	}
 	
-	public static int ThemKhachDatMoi(String maKD, String hotenKD, String CMND,
+	public static String ThemKhachDatMoi(String hotenKD, String CMND,
 											String DiaChi, String QuocTich, String SDT) {
-		int k=0;
 		
 		try {
 			cnn = ConnectDB.getConnect_sa();
 			if (cnn == null) {
-				return k;
+				return null;
 			}
 			
 			cstm = cnn.prepareCall("{call spThemKhachDatMoi(?,?,?,?,?,?)}", ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);
-			cstm.setString(1, maKD);
-			cstm.setString(2, hotenKD);
-			cstm.setString(3, CMND);
-			cstm.setString(4, DiaChi);
-			cstm.setString(5, QuocTich);
-			cstm.setString(6, SDT);
+			cstm.setString(1, hotenKD);
+			cstm.setString(2, CMND);
+			cstm.setString(3, DiaChi);
+			cstm.setString(4, QuocTich);
+			cstm.setString(5, SDT);
+			cstm.registerOutParameter(6, java.sql.Types.CHAR);
 			
-			k = cstm.executeUpdate();
+			
+			cstm.executeUpdate();
+	        if (cstm.getString(6)!=null)
+	        	return cstm.getString(6);   
+	        return null;
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -192,7 +195,7 @@ public class KDDatPhongDB {
 			}
 		}
 		
-		return k;
+		return null;
 	}
 
 	public static int ChiTietDatPhong(String maKD, String maPhong,

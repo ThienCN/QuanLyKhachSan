@@ -106,6 +106,36 @@ $(document).ready(function () {
             $("li#submenu5").css("background-color", "#0d875c");
             $("li#submenu5 a:first").attr("style", "color: white !important");
         }
+        else if (path.lastIndexOf('them-don-dat-phong.jsp') >= 0) {
+            namepage = 'QUẢN LÝ ĐẶT PHÒNG > THÊM GIAO DỊCH ĐẶT PHÒNG';
+            namefile = 'them-don-dat-phong.jsp';
+            $("li#submenu4").css("background-color", "#0d875c");
+            $("li#submenu4 a:first").attr("style", "color: white !important");
+        }
+        else if (path.lastIndexOf('chinh-sua-don-dat-phong.jsp') >= 0) {
+            namepage = 'QUẢN LÝ ĐẶT PHÒNG > CHỈNH SỬA GIAO DỊCH ĐẶT PHÒNG';
+            namefile = 'chinh-sua-don-dat-phong.jsp';
+            $("li#submenu4").css("background-color", "#0d875c");
+            $("li#submenu4 a:first").attr("style", "color: white !important");
+        }
+        else if (path.lastIndexOf('thong-ke-don-dat-phong.jsp') >= 0) {
+            namepage = 'QUẢN LÝ ĐẶT PHÒNG > THỐNG KÊ GIAO DỊCH ĐẶT PHÒNG';
+            namefile = 'thong-ke-don-dat-phong.jsp';
+            $("li#submenu4").css("background-color", "#0d875c");
+            $("li#submenu4 a:first").attr("style", "color: white !important");
+        }
+        else if (path.lastIndexOf('huy-don-dat-phong.jsp') >= 0) {
+            namepage = 'QUẢN LÝ ĐẶT PHÒNG > HỦY GIAO DỊCH ĐẶT PHÒNG';
+            namefile = 'huy-don-dat-phong.jsp';
+            $("li#submenu4").css("background-color", "#0d875c");
+            $("li#submenu4 a:first").attr("style", "color: white !important");
+        }
+        else if (path.lastIndexOf('chi-tiet-thong-ke-dat-phong.jsp') >= 0) {
+            namepage = 'QUẢN LÝ ĐẶT PHÒNG > THỐNG KÊ ĐƠN ĐẶT PHÒNG > CHI TIẾT';
+            namefile = 'chi-tiet-thong-ke-dat-phong.jsp';
+            $("li#submenu4").css("background-color", "#0d875c");
+            $("li#submenu4 a:first").attr("style", "color: white !important");
+        }
 
         else if (path.lastIndexOf('lap-hoa-don.jsp') >= 0) {
             namepage = 'LẬP HÓA ĐƠN';

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import connectionDB.NVThuePhongDB;
+import connectionDB.NVTraCuuDB;
 import model.ThongTinThuePhong;
 
 @WebServlet("/Them_CapNhat_KhachHang")
@@ -25,8 +27,11 @@ public class Them_CapNhat_KhachHang extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String user=(String)request.getSession().getAttribute("user");
 		String pass =(String)request.getSession().getAttribute("pass");
-		
-
+		//
+		response.setContentType("application/json;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
+        
+        PrintWriter out=response.getWriter();
 		//		
 		String hoten=(String)request.getParameter("hoTenKH");
 		String cmnd=(String)request.getParameter("CMND");
@@ -34,23 +39,38 @@ public class Them_CapNhat_KhachHang extends HttpServlet {
 		String quoctich=(String)request.getParameter("QuocTich");
 		String sdt=(String)request.getParameter("SDT");
 		
-		String kq=connectionDB.NVThuePhongDB.ThemKhachHangMoi(hoten, cmnd, diachi, quoctich, sdt, user, pass);
+		//Lấy cmnd đi kiểm tra khách hàng này đã tồn tại trong dữ liệu chưa?
+		String maKHCu = NVThuePhongDB.KiemTraKhachHang(cmnd, user, pass);
 		
-		response.setContentType("application/json;charset=UTF-8");
-        request.setCharacterEncoding("utf-8");
-        
-        PrintWriter out=response.getWriter();
-        
-		if(kq != null)           
-		{
-			out.write("{\"check\":\""+ kq +"\"}");
-			out.flush();
+		
+		//Nếu khách hàng đã tồn tại trong csdl (đã từng thuê phòng)
+		if(maKHCu != null) {
+			//Thì ta cập nhật thông tin mới của khách hàng
+			int kq = NVThuePhongDB.CapNhatKhachHang(maKHCu, hoten, cmnd, diachi, quoctich, sdt, user, pass);
+			if(kq == 1) {
+				out.write("{\"MaKH\":\""+ maKHCu +"\"}");
+				out.flush();
+			}
+			else {
+				out.write("{\"check\":\"fail\"}"); 
+				out.flush();
+			}	
+			return;
 		}
-		else {
-			out.write("{\"check\":\"fail\"}");
-		    out.flush();
-		}	
-	
+		else { //Nếu là khách hàng mới thì thêm vào csdl
+			String kq=connectionDB.NVThuePhongDB.ThemKhachHangMoi(hoten, cmnd, diachi, quoctich, sdt, user, pass);
+			if(kq != null)           
+			{
+				out.write("{\"MaKH\":\""+ kq +"\"}");
+				System.out.println(kq); 
+				out.flush();
+			}
+			else {
+				out.write("{\"check\":\"fail\"}");
+			    out.flush();
+			}	
+			return;
+		}
 	}
 	
 	

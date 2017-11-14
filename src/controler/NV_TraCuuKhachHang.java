@@ -38,10 +38,6 @@ public class NV_TraCuuKhachHang extends HttpServlet {
 				(String)request.getSession().getAttribute("user"), 
 				(String)request.getSession().getAttribute("pass"));
 		
-		//Bỏ thông tin KH này vào application scope để nếu KH có thuê thêm phòng
-		//thì lấy thông tin bỏ lên bảng Thông tin khách hàng bên trang Thêm đơn thuê phòng
-		getServletContext().setAttribute("thongTinKHCu", thongtinKH); 
-		
 		if(!thongtinKH.isEmpty())
 		{
 			//System.out.println("Tìm kiếm khách hàng thành công");
@@ -93,5 +89,27 @@ public class NV_TraCuuKhachHang extends HttpServlet {
 		}
 	}
 
-	
+	/*Lưu thông tin khách hàng để sử dụng cho việc hiển thị thông tin khách hàng từ trang tra cứu sang trang thuê phòng */
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String maKH=(String)request.getParameter("maKH");
+		
+		List<ThongTinKhachHang> thongtinKH=
+				NVTraCuuDB.TraCuuThongTinKhachHang(maKH, 
+				(String)request.getSession().getAttribute("user"), 
+				(String)request.getSession().getAttribute("pass"));
+		
+		//Bỏ thông tin KH này vào application scope để nếu KH có thuê thêm phòng
+		//thì lấy thông tin bỏ lên bảng Thông tin khách hàng bên trang Thêm đơn thuê phòng
+		getServletContext().setAttribute("thongTinKHCu", thongtinKH); 
+		
+		response.setContentType("application/json;charset=UTF-8");
+	    request.setCharacterEncoding("utf-8");
+        
+	    PrintWriter out=response.getWriter();
+	    out.write("{\"check\":\"ok\"}");
+	    out.flush();
+		
+	}
+
 }
