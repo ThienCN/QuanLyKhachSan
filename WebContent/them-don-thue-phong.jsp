@@ -57,7 +57,7 @@
         	if(thongTinKHCu!=null)
         	{
         		flagKHCu=true;
-        		getServletContext().removeAttribute("thongTinKHCu");
+        		getServletContext().removeAttribute("thongTinKHCu"); 
         	}
         %>
         <fieldset>
@@ -69,7 +69,7 @@
                         <div class="col-xs-12 col-sm-8 col-md-4">
                             <input type="text" class="form-control" id="maKH" readonly 
                             <% if(flagKHCu){%>
-                            	value="<%= thongTinKHCu.get(0).getMaKH()%>"
+                            	value="<%= thongTinKHCu.get(0).getMaKH() %>"
                             <%}%> 
                             >
                         </div>
@@ -95,7 +95,7 @@
                         <div class="col-xs-12 col-sm-8 col-md-4">
                             <input type="text" class="form-control" id="SDT" placeholder="0123456789" required
                             <% if(flagKHCu){%>
-                            	value="<%= thongTinKHCu.get(0).getSDT()%>" readonly
+                            	value="<%= thongTinKHCu.get(0).getSDT()%>"
                             <%}%>                            
                             >
                         </div>
@@ -105,7 +105,7 @@
                         <div class="col-xs-12 col-sm-8 col-md-4">
                             <input type="text" class="form-control" id="QuocTich"  placeholder="Việt Nam" required
                             <% if(flagKHCu){%>
-                            	value="<%= thongTinKHCu.get(0).getSDT()%>" readonly
+                            	value="<%= thongTinKHCu.get(0).getQuocTich()%>" 
                             <%}%>
                             >
                         </div>
@@ -113,18 +113,14 @@
                         <div class="col-xs-12 col-sm-8 col-md-4">
                             <input type="text" class="form-control" id="DiaChi"  placeholder="Đường, Khu phố, Phường, Quận, Tỉnh" required
                             <% if(flagKHCu){%>
-                            	value="<%= thongTinKHCu.get(0).getDiaChi()%>" readonly
+                            	value="<%= thongTinKHCu.get(0).getDiaChi()%>"
                             <%}%>
                             >
                         </div>
                     </div>                   
                 </form>
                 <div class="input-group-btn">
-	                <button id="luu-thong-tin-KH"  class="btn btn-default"
-	                <% if(flagKHCu){%>
-                         disabled
-                    <%}%>
-	                >
+	                <button id="luu-thong-tin-KH"  class="btn btn-default">
 	                    Lưu <i class="glyphicon glyphicon-ok"></i>
 	                </button> 
 	            </div>
@@ -151,6 +147,7 @@
                     </tbody>
                 </table>
             </div>
+            <label>Tổng tiền thuê phòng: <span id="tongTienThue" style="color:red" >0</span> USD</label>
             <div class="input-group-btn">
             	<button id="huy-giao-dich-thue-phong" class="btn btn-default" 
             	<% if(!flagKHCu){%>

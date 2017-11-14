@@ -92,7 +92,7 @@
                            					<%
 			                        		if(getServletContext().getAttribute("ngaynhanphong") == null)
 			                        		{
-			                        			Date date = new Date();                        			  
+			                        			Date date = new Date(new Date().getTime() + 60*60*24*1000);                        			  
 			                        			String strDateFormat = "yyyy-MM-dd";                        			  
 			                        			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(strDateFormat);
 				                        	%>
@@ -113,7 +113,7 @@
                             				<%
 			                        		if(getServletContext().getAttribute("ngaytraphong") == null)
 			                        		{
-			                        			Date date = new Date(new Date().getTime() + 60*60*24*1000);                        			  
+			                        			Date date = new Date(new Date().getTime() + 60*60*24*1000 + 60*60*24*1000);                        			  
 			                        			String strDateFormat = "yyyy-MM-dd";                        			  
 			                        			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(strDateFormat);
 				                        	%>

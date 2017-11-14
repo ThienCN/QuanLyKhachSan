@@ -14,6 +14,8 @@ import com.google.gson.Gson;
 
 import java.util.List;
 import model.DanhSachPhongTrong;
+import model.SoLuongPhongTrong;
+import connectionDB.KDTimPhongDB;
 import connectionDB.NVTimPhongDB;
 
 @WebServlet("/NV_TimPhong")
@@ -51,7 +53,32 @@ public class NV_TimPhong extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		String ngaynhanphong = request.getParameter("ngaynhanphong");
+		String ngaytraphong = request.getParameter("ngaytraphong");
+		
+		response.setContentType("application/json;charset=UTF-8");
+	    request.setCharacterEncoding("utf-8");
+	    
+		PrintWriter out=response.getWriter();
+		
+		List<SoLuongPhongTrong> phongtrong;
+		try {
+			phongtrong = NVTimPhongDB.SoLuongLoaiPhongTrong(ngaynhanphong, ngaytraphong);				
+			
+			if(!phongtrong.isEmpty()) {
+				Gson gson=new Gson();
+				String objectToReturn=gson.toJson(phongtrong);
+				out.write(objectToReturn);
+				out.flush();
+			}
+			else
+			{
+				out.write("{\"check\":\"fail\"}");
+			    out.flush();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
