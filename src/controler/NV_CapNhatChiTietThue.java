@@ -88,22 +88,18 @@ public class NV_CapNhatChiTietThue extends HttpServlet {
 				ngaynhanphong=p.getNgayNhanPhong();
 				connectionDB.NVThuePhongDB.XoaChiTietThue(makhachhang, maphong, ngaynhanphong, user, pass);
 			}
-			//System.out.println("Servel hủy giao dịch: Đã set null cho danh sách tạm thời!");
-			thongtinThuePhongTamThoi=null;
 		}		
 		
 		String maKH = (String)request.getParameter("maKH");
-		String ngayNhanPhong = (String)request.getParameter("ngayNhanPhong");
 		
 		//System.out.println(maKH);
-		//System.out.println(ngayNhanPhong);
 
 		response.setContentType("application/json;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
 		PrintWriter out=response.getWriter();
 		
 		//Hủy giao dịch thuê phòng thực hiện việc xóa thông tin KH nếu như KH này là KH mới
-		connectionDB.NVThuePhongDB.XoaKhachHang(maKH, ngayNhanPhong, user, pass);
+		connectionDB.NVThuePhongDB.XoaKhachHang(maKH, user, pass);
 		
 		//System.out.println("Hủy giao dịch thuê phòng thành công");	
 		out.write("Yes");

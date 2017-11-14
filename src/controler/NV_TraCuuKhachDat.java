@@ -27,7 +27,7 @@ public class NV_TraCuuKhachDat extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String maTimKiemKD=(String)request.getParameter("maTimKiemKD");
 		
-		//System.out.println(maTimKiemKH);
+		//System.out.println(maTimKiemKD);
 		response.setContentType("application/json;charset=UTF-8");
 	    request.setCharacterEncoding("utf-8");
         
@@ -38,12 +38,9 @@ public class NV_TraCuuKhachDat extends HttpServlet {
 				(String)request.getSession().getAttribute("user"), 
 				(String)request.getSession().getAttribute("pass"));
 		
-		//Bỏ thông tin KH này vào application scope để nếu KH có thuê thêm phòng
-		//thì lấy thông tin bỏ lên bảng Thông tin khách hàng bên trang Thêm đơn thuê phòng
-		getServletContext().setAttribute("thongTinKDCu", thongtinKD); 
-		
 		if(!thongtinKD.isEmpty())
 		{
+			getServletContext().setAttribute("maCodeDatPhong", thongtinKD.get(0).getMaKD());
 			//System.out.println("Tìm kiếm khách hàng thành công");
 		    //Import gson-2.2.2.jar
 		    Gson gson = new Gson();
@@ -60,7 +57,7 @@ public class NV_TraCuuKhachDat extends HttpServlet {
 	
 	}
 
-	/*Lấy mã KH đi tìm kiếm thông tin thuê phòng hiện tại (TRA CỨU KHÁCH HÀNG, CHỈNH SỬA VÀ HỦY ĐƠN THUÊ PHÒNG)*/
+	/*Lấy mã KD đi tìm kiếm thông tin đặt phòng hiện tại (TRA CỨU KHÁCH ĐẶT, CHỈNH SỬA VÀ HỦY ĐƠN ĐẶT PHÒNG)*/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String maKD=(String)request.getParameter("maKD");
@@ -76,10 +73,12 @@ public class NV_TraCuuKhachDat extends HttpServlet {
 				(String)request.getSession().getAttribute("user"), 
 				(String)request.getSession().getAttribute("pass"));
 		
+		
+		
 		if(!thongtinDatPhong_NV.isEmpty())
 		{
-			//System.out.println("Tìm kiếm khách hàng thành công");
-		    //Import gson-2.2.2.jar
+			getServletContext().setAttribute("thongtinDatPhong_NV", thongtinDatPhong_NV);
+			
 		    Gson gson = new Gson();
 		    String objectToReturn = gson.toJson(thongtinDatPhong_NV); //Convert List -> Json
 		    out.write(objectToReturn); //Đưa Json trả về Ajax
@@ -92,5 +91,28 @@ public class NV_TraCuuKhachDat extends HttpServlet {
 		    out.flush();
 		}
 	}
-
+	
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String maTimKiemKD=(String)request.getParameter("maTimKiemKD");
+		
+		//System.out.println(maTimKiemKD);
+		response.setContentType("application/json;charset=UTF-8");
+	    request.setCharacterEncoding("utf-8");
+        
+	    PrintWriter out=response.getWriter();
+		
+		List<ThongTinKhachDat> thongtinKD=
+				NVTraCuuDB.TraCuuThongTinKhachDat(maTimKiemKD, 
+				(String)request.getSession().getAttribute("user"), 
+				(String)request.getSession().getAttribute("pass"));
+		
+		
+		//Bỏ thông tin KD này vào application scope để nếu KD có đặt thêm phòng
+		//thì lấy thông tin bỏ lên bảng Thông tin khách đặt bên trang Thêm đơn đặt phòng
+		getServletContext().setAttribute("thongTinKDCu", thongtinKD);
+		
+		out.write("{\"check\":\"ok\"}");
+		out.flush();
+	
+	}
 }

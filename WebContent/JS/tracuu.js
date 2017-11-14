@@ -79,7 +79,8 @@
                    /*TRA CỨU KHÁCH THUÊ*/
     //Sự kiện click vào button TÌM trong TRA CỨU KHÁCH THUÊ
     $("#btn-tra-cuu-khach-thue").click(function (e) {
-    	$("#thong-tin-khach-hang").css("display","none"); 
+    	$("#thong-tin-khach-hang").css("display","none");
+    	$("#thong-tin-thue-phong").css("display","none"); 
     	$("#khong-co-ket-qua").css("display","none");
         var maTimKiemKHlength = $("#maTimKiemKH").val().trim().length;
         if(maTimKiemKHlength < 1)
@@ -96,8 +97,6 @@
                 },
                 dataType: "json",
                 success: function (result) { 
-                	console.log(result.check);
-                	
                     if (result.check == "fail") {
                     	$("#khong-co-ket-qua").text("Không tìm thấy kết quả");
                     	$("#khong-co-ket-qua").css("display","inline-block");
@@ -178,7 +177,6 @@
         });
     });
     
-    /*TRA CỨU THÔNG TIN THUÊ PHÒNG HIỆN TẠI CỦA KHÁCH HÀNG TRONG TRA CỨU KHÁCH THUÊ*/
     $("#tra-cuu-thong-tin-dat-phong-hien-tai").click(function (e) {
     	var maKD = $("#table-thong-tin-khach-dat > tbody").find("> tr:first").find('td:nth-child(1)').text();
     	
@@ -259,12 +257,28 @@
         });
     });
     
-    			/*CHO KHÁCH HÀNG THUÊ THÊM PHÒNG TRONG TRA CỨU KHÁCH THUÊ*/
-    $("#thue-them-phong").click(function (e) {
-    	window.location.assign("them-don-thue-phong.jsp");
+    			/*CHO KHÁCH HÀNG THUÊ PHÒNG TRONG TRA CỨU KHÁCH THUÊ*/
+    $("#thue-phong").click(function (e) {    	
+    	var maKH = $("#table-thong-tin-khach-hang > tbody").find("> tr:first").find('td:nth-child(1)').text();
+    	$.ajax({
+            type: "PUT",
+            url: "NV_TraCuuKhachHang?maKH="+maKH, 
+            dataType: "json",
+            success: function (result) { 
+                if (result.check == "ok") {
+                	window.location.assign("them-don-thue-phong.jsp");
+                	return;
+                }
+            },
+        	error: function(jqXHR, exception) {
+             	if (jqXHR.status == 500)
+             		alert("Thêm phòng!");  
+            }
+    	});
     });
     
-    /*CHO KHÁCH HÀNG ĐẶT THÊM PHÒNG TRONG TRA CỨU KHÁCH THUÊ*/
+    
+    
     $("#dat-them-phong").click(function (e) {
     	window.location.assign("them-don-dat-phong.jsp");
     });
