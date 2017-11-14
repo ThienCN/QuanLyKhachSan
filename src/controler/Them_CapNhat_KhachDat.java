@@ -53,7 +53,7 @@ public class Them_CapNhat_KhachDat extends HttpServlet {
 	
 	}
 
-	//Cập nhật thông tin khách hàng vào cơ sở dữ liệu --SỬ DỤNG TRONG TRANG CẬP NHẬT ĐƠN THUÊ PHÒNG
+	//Cập nhật thông tin khách hàng vào cơ sở dữ liệu --SỬ DỤNG TRONG TRANG CẬP NHẬT ĐƠN ĐẶT PHÒNG
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String user=(String)request.getSession().getAttribute("user");
 		String pass =(String)request.getSession().getAttribute("pass");

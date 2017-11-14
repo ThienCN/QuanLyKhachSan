@@ -88,7 +88,7 @@
         	alert("Mời bạn nhập thông tin tra cứu!");
     	}
         else{
-        	var maTimKiemKH = $("#maTimKiemKH").val().trim();        	
+        	var maTimKiemKH = $("#maTimKiemKH").val().trim();
         	$.ajax({
                 type: "GET",
                 url: "NV_TraCuuKhachHang",
@@ -179,7 +179,7 @@
     
     $("#tra-cuu-thong-tin-dat-phong-hien-tai").click(function (e) {
     	var maKD = $("#table-thong-tin-khach-dat > tbody").find("> tr:first").find('td:nth-child(1)').text();
-    	
+    	var color=null;
     	var tinhTrang=null;
   
     	$("#thong-tin-dat-phong").css("display","none"); 
@@ -219,17 +219,23 @@
                         yearTra = ngayTra.getFullYear();
                         
                         var ngaynhanphong=[dayNhan, monthNhan, yearNhan].join('/');
-                        ngaytraphong=[dayTra, monthTra, yearTra].join('/');
-                        
-                        if(ngaynhanphong>ngayhientai){
-                        	alert("Perfect");
-                        }
-                        else{
-                        	alert("no");
-                        }
+                        var ngaytraphong=[dayTra, monthTra, yearTra].join('/');
                 		
-                		if(result[i].tinhTrang == 1){
-                			tinhTrang="Chưa nhận phòng"
+                        if(ngayhientai > ngaynhanphong){
+                        	tinhTrang="Quá hạn";
+                			color="red";
+                        }
+                		if(result[i].tinhTrang == "1"){
+                			tinhTrang="Chưa nhận phòng";
+                			color="blue";
+                		}
+                		if(result[i].tinhTrang == "2"){
+                			tinhTrang="Đã nhận phòng";
+                			color="black";
+                		}
+                		if(result[i].tinhTrang == "0"){
+                			tinhTrang="Đã hủy";
+                			color="red";
                 		}
                     	$("#table-thong-tin-dat-phong > tbody").append(
                             $('<tr>').append(
@@ -237,13 +243,13 @@
                             	).append(
                             	$('<td>').text(result[i].maPhong)
                                 ).append(
-                                $('<td>').text(result[i].ngayNhanPhong)
+                                $('<td>').text(ngaynhanphong)
                                 ).append(
-                                $('<td>').text(result[i].ngayTraPhong)
+                                $('<td>').text(ngaytraphong)
                                 ).append(
                                 $('<td>').text(result[i].tienPhong)
                                 ).append(
-                                $('<td>').text(result[i].tinhTrang)
+                                $('<td style="color:'+color+'">').text(tinhTrang)
                                 )
                         );
                 	}
@@ -277,10 +283,51 @@
     	});
     });
     
+<<<<<<< HEAD
+    /*CHO KHÁCH HÀNG ĐẶT THÊM PHÒNG TRONG TRA CỨU KHÁCH ĐẶT*/
+=======
     
     
+>>>>>>> 122dd028750722b2ea045a50fdd7e77d6d0865af
     $("#dat-them-phong").click(function (e) {
-    	window.location.assign("them-don-dat-phong.jsp");
+    	var maTimKiemKD = $("#maTimKiemKD").val().trim();
+    	$.ajax({
+            type: "PUT",
+            url: "NV_TraCuuKhachDat?maTimKiemKD="+maTimKiemKD,
+            dataType: "json",
+            success: function (result) { 
+            	console.log(result.check);
+            	
+                if (result.check == "ok") {
+                	window.location.assign("them-don-dat-phong.jsp");
+                }
+            },
+            error: function (jqXHR, exception) {
+                if (jqXHR.status == 500)
+                    alert("Đặt thêm phòng không thành công!");
+            }
+        });
+    });
+    
+    /*CHO KHÁCH ĐẶT NHẬN PHÒNG*/
+    $("#xac-nhan-nhan-phong").click(function (e) {
+    	var maTimKiemKD = $("#maTimKiemKD").val().trim();
+    	$.ajax({
+            type: "PUT",
+            url: "NV_TraCuuKhachDat?maTimKiemKD="+maTimKiemKD,
+            dataType: "json",
+            success: function (result) { 
+            	console.log(result.check);
+            	
+                if (result.check == "ok") {
+                	window.location.assign("xac-nhan-nhan-phong.jsp");
+                }
+            },
+            error: function (jqXHR, exception) {
+                if (jqXHR.status == 500)
+                    alert("Xác nhận nhận phòng không thành công!");
+            }
+        });
     });
 
                    /*TRA CỨU DỊCH VỤ*/

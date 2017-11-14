@@ -30,7 +30,7 @@
 
     <div class="container" style="border:2px solid beige">
     	<h1 style="text-align:center"><strong>Chúc mừng bạn đã đặt phòng thành công!</strong></h1>
-    	<h3 class="makhachdat"><u>Mã khách đặt của bạn là:</u><span style="color:red">&nbsp;&nbsp;<%=getServletContext().getAttribute("maKD") %></span><i style="color:red; font-size:17px">&nbsp;&nbsp;(Khi đến nhận phòng vui lòng đọc mã khách đặt hoặc CMND)</i></h3><br/>
+    	<h3 class="makhachdat"><u>Mã code đặt phòng của bạn là:</u><span style="color:red">&nbsp;&nbsp;<%=getServletContext().getAttribute("maKD") %></span><i style="color:red; font-size:17px">&nbsp;&nbsp;(Khi đến nhận phòng vui lòng đọc mã khách đặt hoặc CMND)</i></h3><br/>
     	<div>
     		<table class="table table" id="table-products" style="font-size:25px">
                <thead>

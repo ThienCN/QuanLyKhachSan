@@ -1,4 +1,8 @@
 $(document).ready(function () {
+	var sum = 0;
+	$(".sumtien").css("display","none");
+	var maKhachDat = null;
+	
 	/*Sự kiện click nút Lưu thông tin cá nhân khách hàng*/
 	$("#luu-thong-tin-KD").click(function(e){
 		var hoten = $("#hotenKD").val().trim();
@@ -51,6 +55,7 @@ $(document).ready(function () {
     $("#thay-doi-ngay-tim-phong").click(function (e) {
         $("#tim-phong").prop("disabled", false);
         $("#ngayTraPhong").attr("readonly", false);
+        $("#ngayNhanPhong").attr("readonly", false);
         $("#thay-doi-ngay-tim-phong").prop("disabled", true);
         $("#phongDon").prop("disabled", true);
         $("#phongDoi").prop("disabled", true);
@@ -68,18 +73,32 @@ $(document).ready(function () {
 		}
     	else if(maKD>0)
 		{
-    		var ngayNhanPhong = new Date($("#ngayNhanPhong").val());
-            var ngayTraPhong = new Date($("#ngayTraPhong").val());
-
-            var d = new Date();
-            var ngayHienTai = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    		var ngayHienTai = new Date();
+            dayHienTai = ngayHienTai.getDate();
+            monthHienTai = ngayHienTai.getMonth() + 1;
+            yearHienTai = ngayHienTai.getFullYear();
+            var ngayhientai=[dayHienTai, monthHienTai, yearHienTai].join('/');
             
-            if (ngayNhanPhong == "Invalid Date" || ngayTraPhong == "Invalid Date")
+            var ngayNhan = new Date($("#ngayNhanPhong").val());
+            var ngayTra = new Date($("#ngayTraPhong").val());
+            
+            dayNhan = ngayNhan.getDate();
+            monthNhan = ngayNhan.getMonth() + 1;
+            yearNhan = ngayNhan.getFullYear();
+            
+            dayTra = ngayTra.getDate();
+            monthTra = ngayTra.getMonth() + 1;
+            yearTra = ngayTra.getFullYear();
+            
+            var ngaynhanphong=[dayNhan, monthNhan, yearNhan].join('/');
+            var ngaytraphong=[dayTra, monthTra, yearTra].join('/');
+            
+            if (ngaynhanphong == "NaN/NaN/NaN" || ngaytraphong == "NaN/NaN/NaN")
                 alert("Nhập đầy đủ ngày nhận phòng và ngày trả phòng!!!");
-            else if (ngayNhanPhong >= ngayTraPhong)
+            else if (ngaynhanphong >= ngaytraphong)
                 alert("Ngày nhận phòng và ngày trả phòng không hợp lệ!!!");
-            else if (ngayNhanPhong < ngayHienTai)
-                alert("Ngày nhận phòng phải lớn hơn hoặc bằng ngày hiện tại!!!");
+            else if (ngayhientai >= ngaynhanphong)
+                alert("Ngày nhận phòng phải lớn hơn ngày hiện tại!!!");
             else
             {
             	var ngayNhan = $("#ngayNhanPhong").val();
@@ -138,6 +157,7 @@ $(document).ready(function () {
                 $("#thay-doi-ngay-tim-phong").prop("disabled", false);
                 $("#phongDon").prop("disabled", false);
                 $("#ngayTraPhong").attr("readonly", true);
+                $("#ngayNhanPhong").attr("readonly", true);
                 $("#tim-phong").prop("disabled", true);
                 $("#btn-chon-phong").prop("disabled", false);
             }  
@@ -169,11 +189,13 @@ $(document).ready(function () {
     /*Sự kiện Click vào nút Chọn phòng*/
     $("#btn-chon-phong").click(function () {
         var loaiPhong, maPhong, phiThue;
+        var tinhTrang = 1;
         if (document.getElementById("phongDon").disabled == false)
         {
             loaiPhong = "Phòng đơn";
             maPhong = $("select#phongDon").val();            
             phiThue = $("#phiThuePhongDon").text();
+            sum += parseFloat(phiThue);
             $("#phongDon option:selected").remove();
         }            
         if (document.getElementById("phongDoi").disabled == false)
@@ -181,6 +203,7 @@ $(document).ready(function () {
             loaiPhong = "Phòng đôi";
             maPhong = $("select#phongDoi").val();
             phiThue = $("#phiThuePhongDoi").text();
+            sum += parseFloat(phiThue);
             $("#phongDoi option:selected").remove();
         }            
         if (document.getElementById("phongTapThe").disabled == false)
@@ -188,6 +211,7 @@ $(document).ready(function () {
             loaiPhong = "Phòng tập thể";
             maPhong = $("select#phongTapThe").val();
             phiThue = $("#phiThuePhongTapThe").text();
+            sum += parseFloat(phiThue);
             $("#phongTapThe option:selected").remove();
         }
         var ngayNhanPhong = $("#ngayNhanPhong").val();
@@ -198,11 +222,13 @@ $(document).ready(function () {
         }
         else
         {
+        	
         	//Thêm thông tin phòng chọn vào ds Thông tin thuê phòng dự trữ
         	var maKD=$("#maKD").val();
+        	maKhachDat = maKD;
         	$.ajax({
                 type: "GET",
-                url: "NV_CapNhatChiTietThue",
+                url: "NV_CapNhatChiTietDatPhong",
                 data: {
                 	maKD: maKD,
                 	loaiPhong:loaiPhong,
@@ -224,7 +250,7 @@ $(document).ready(function () {
                 }
             }); 
 
-        	//Thêm dòng thông tin thuê phòng vào bảng Chi tiết phòng thuê
+        	//Thêm dòng thông tin đặt phòng vào bảng Chi tiết phòng đặt
         	$("#table-thong-tin-dat-phong > tbody").append(
                     $('<tr>').append(
                         $('<td>').text(loaiPhong)
@@ -257,10 +283,11 @@ $(document).ready(function () {
                                         //Lấy ngày nhận ngày trả để xóa thông tin thuê phòng này trong dsThongTinPhongThue
                                         var maKD=$("#maKD").val();
                                         var ngayNhanP = $(this).closest('tr').find('td:nth-child(3)').text();
+                                        var tienPhong = $(this).closest('tr').find('td:nth-child(5)').text();
                                         
                                         $.ajax({
                                             type: "DELETE",
-                                            url: "NV_CapNhatChiTietThue?maPhong="+maPhongPhucHoi+"&ngayNhanPhong="+ngayNhanP+"&maKhachHang="+maKD,
+                                            url: "NV_CapNhatChiTietDatPhong?maPhong="+maPhongPhucHoi+"&ngayNhanPhong="+ngayNhanP+"&maKD="+maKD,
                                             dataType: "json",
                                             success: function (result) {
                                             	if (result.check == "fail") {
@@ -275,38 +302,49 @@ $(document).ready(function () {
                                         }); 
                                         
                                         $(this).closest('tr').remove();
+                                        sum -= parseFloat(tienPhong);
+                                        if(sum == 0){
+                                        	$(".sumtien").css("display","none");
+                                        }
+                                        $(".tongtien").text(": " + sum);
+                                        $(".tiencoc").text("Tiền cọc (USD): " + (sum*0.1));
                                     }
                                 })
                         	)
                         )
                 	);
         }
+        
+        if(sum > 0){
+        	$(".sumtien").css("display","block");
+            $(".tongtien").text(": " + sum);
+            $(".tiencoc").text("Tiền cọc (USD): " + (sum*0.1));
+        }
     });
     
-    /*Sự kiện Click vào nút Xác nhận giao dịch thuê phòng*/
+    /*Sự kiện Click vào nút Xác nhận giao dịch đặt phòng*/
     $("#xac-nhan-giao-dich-dat-phong").click(function (e) {
     	e.preventDefault();
         var n = $("#table-thong-tin-dat-phong > tbody").find("> tr:first").length;
 
-        //Nếu chưa đăng ký phòng thuê thì không được xác nhận thành công
+        //Nếu chưa đăng ký phòng đặt thì không được xác nhận thành công
         if (n <= 0)
         {
-            confirm("Mời bạn chọn phòng cho giao dịch đặt phòng!!!");
+            alert("Mời bạn chọn phòng cho giao dịch đặt phòng!!!");
         }//Thông tin đầy đủ thì lưu
         else{
-        	alert("Giao dịch thành công!");
+        	alert("Giao dịch thành công!\nMã code đặt phòng của bạn là: " + maKhachDat);
         	window.location.assign("nhan-vien.jsp");
         }
     });
     
-    /*Sự kiện hủy giao dịch thuê phòng*/
+    /*Sự kiện hủy giao dịch đặt phòng*/
     $("#huy-giao-dich-dat-phong").click(function (e){
     	if(confirm("Bạn có chắc chắn muốn hủy hoàn toàn giao dịch đặt này hay không?")){
-    		var maKD=$("#maKD").val();
-    		var ngayNhanP=$("#ngayNhanPhong").val();    		
+    		var maKD=$("#maKD").val();		
     		$.ajax({
                 type: "POST",
-                url: "NV_CapNhatChiTietThue?maKH="+maKD+"&ngayNhanPhong="+ngayNhanP,
+                url: "NV_CapNhatChiTietDatPhong?maKD="+maKD,
                 dataType:"text",
                 success: function (result){
                 	if(result == "Yes")

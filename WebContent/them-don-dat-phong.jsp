@@ -50,11 +50,12 @@
         <!-- Thông tin khách đặt -->
         <%
         	boolean flagKDCu = false;
-        	List<ThongTinKhachDat> thongTinKDCu=(List<ThongTinKhachDat>)getServletContext().getAttribute("thongTinKDCu"); 
+        	List<ThongTinKhachDat> thongTinKDCu=(List<ThongTinKhachDat>)getServletContext().getAttribute("thongTinKDCu");
+
         	if(thongTinKDCu!=null)
         	{
         		flagKDCu=true;
-        		getServletContext().setAttribute("thongTinKDCu", null);
+        		getServletContext().removeAttribute("thongTinKDCu");
         	}
         %>
         <fieldset>
@@ -64,36 +65,64 @@
                     <div class="form-group">
                         <label class="control-label col-xs-12 col-sm-4 col-md-2">Mã KD:</label>
                         <div class="col-xs-12 col-sm-8 col-md-4">
-                            <input type="text" class="form-control" id="maKD" size="20" readonly>
+                            <input type="text" class="form-control" id="maKD" readonly
+                            <% if(flagKDCu){%>
+                            	value="<%= thongTinKDCu.get(0).getMaKD()%>"
+                            <%}%> 
+                            >
                         </div>
                         <label class="control-label col-xs-12 col-sm-4 col-md-2">Họ tên:</label>
                         <div class="col-xs-12 col-sm-8 col-md-4">
-                            <input type="text" class="form-control" id="hotenKD" size="30" placeholder="Nguyễn Văn A">
+                            <input type="text" class="form-control" id="hotenKD" placeholder="Nguyễn Văn A"
+                            <% if(flagKDCu){%>
+                            	value="<%= thongTinKDCu.get(0).getHoTenKD()%>" readonly
+                            <%}%>
+                            >
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-xs-12 col-sm-4 col-md-2">CMND:</label>
                         <div class="col-xs-12 col-sm-8 col-md-4">
-                            <input type="text" class="form-control" id="CMND" size="30" placeholder="241386440">
+                            <input type="text" class="form-control" id="CMND" placeholder="241386440"
+                            <% if(flagKDCu){%>
+                            	value="<%= thongTinKDCu.get(0).getCMND()%>" readonly
+                            <%}%>
+                            >
                         </div>
                         <label class="control-label col-xs-12 col-sm-4 col-md-2">SĐT:</label>
                         <div class="col-xs-12 col-sm-8 col-md-4">
-                            <input type="text" class="form-control" id="SDT" size="30" placeholder="0123456789">
+                            <input type="text" class="form-control" id="SDT" placeholder="0123456789"
+                            <% if(flagKDCu){%>
+                            	value="<%= thongTinKDCu.get(0).getSDT()%>" readonly
+                            <%}%>
+                            >
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-xs-12 col-sm-4 col-md-2">Quốc tịch:</label>
                         <div class="col-xs-12 col-sm-8 col-md-4">
-                            <input type="text" class="form-control" id="quoctich" size="30" placeholder="Việt Nam">
+                            <input type="text" class="form-control" id="quoctich" placeholder="Việt Nam"
+                            <% if(flagKDCu){%>
+                            	value="<%= thongTinKDCu.get(0).getQuocTich()%>" readonly
+                            <%}%>
+                            >
                         </div>
                         <label class="control-label col-xs-12 col-sm-4 col-md-2">Địa chỉ:</label>
                         <div class="col-xs-12 col-sm-8 col-md-4">
-                            <input type="text" class="form-control" id="diachi" size="30" placeholder="Đường, Khu phố, Phường, Quận, Tỉnh">
+                            <input type="text" class="form-control" id="diachi" placeholder="Đường, Khu phố, Phường, Quận, Tỉnh"
+                            <% if(flagKDCu){%>
+                            	value="<%= thongTinKDCu.get(0).getDiaChi()%>" readonly
+                            <%}%>
+                            >
                         </div>
                     </div>
                 </form>
                 <div class="input-group-btn">
-	                <button id="luu-thong-tin-KD"  class="btn btn-default">
+	                <button id="luu-thong-tin-KD"  class="btn btn-default"
+	                <% if(flagKDCu){%>
+                         disabled
+                    <%}%>
+	                >
 	                    Lưu <i class="glyphicon glyphicon-ok"></i>
 	                </button> 
 	            </div>
@@ -112,17 +141,29 @@
                             <th>Mã phòng</th>
                             <th>Ngày nhận phòng</th>
                             <th>Ngày trả phòng</th>
-                            <th>Phí thuê phòng</th>
+                            <th>Tiền phòng</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
             </div>
+			<div class="sumtien">
+				<u><strong>Tổng tiền phòng (USD)</strong></u><span class="tongtien" style="font-weight: bold"></span><br />
+				<span class="tiencoc" style="color:red; font-weight: bold"></span>
+			</div>
             <div class="input-group-btn">
-            	<button id="huy-giao-dich-dat-phong" class="btn btn-default" disabled>
+            	<button id="huy-giao-dich-dat-phong" class="btn btn-default"
+            	<% if(!flagKDCu){%>
+                         disabled
+                <%}%>
+            	>
                     Hủy giao dịch <i class="glyphicon glyphicon-trash"></i>
                  </button>
-                <button id="xac-nhan-giao-dich-dat-phong"  class="btn btn-default"  style="width: 200px;" disabled>
+                <button id="xac-nhan-giao-dich-dat-phong"  class="btn btn-default"  style="width: 200px;"
+                <% if(!flagKDCu){%>
+                         disabled
+                <%}%>
+                >
                     Xác nhận giao dịch <i class="glyphicon glyphicon-ok"></i>
                 </button>
             </div>
@@ -139,12 +180,23 @@
                             <label class="control-label col-xs-12 col-sm-4 col-md-4">Ngày nhận phòng:</label>
                             <div class="col-xs-12 col-sm-8 col-md-8">
                                 <input type="date" id="ngayNhanPhong" class="form-control"
-                                <%
-                        			Date date1 = new Date();                        			  
-                        			String strDateFormat1 = "yyyy-MM-dd";                        			  
-                        			SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(strDateFormat1);
+                                 <%
+	                        		if(request.getSession().getAttribute("ngaynhanphong") == null)
+	                        		{
+	                        			Date date1 = new Date();                        			  
+	                        			String strDateFormat1 = "yyyy-MM-dd";                        			  
+	                        			SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(strDateFormat1);
 	                        	%>
-	                        		value= <%=simpleDateFormat1.format(date1)%>
+	                        		value= "<%=simpleDateFormat1.format(date1)%>"
+	                        	<%
+	                        		}
+	                        		else
+	                        		{
+	                        	%>	                        
+	                        		value= "<%=request.getSession().getAttribute("ngaynhanphong")%>"
+	                        	<%
+	                        		}
+	                        	%> 
                                 >
                             </div>
                         </div>
@@ -152,23 +204,23 @@
                             <label class="control-label col-xs-12 col-sm-4 col-md-4">Ngày trả phòng:</label>
                             <div class="col-xs-12 col-sm-8 col-md-8">
                                 <input type="date" id="ngayTraPhong" class="form-control"
-                                <%
-	                        		if(getServletContext().getAttribute("ngayTraPhong") == null)
+	                        		<%
+	                        		if(request.getSession().getAttribute("ngaytraphong") == null)
 	                        		{
 	                        			Date date2 = new Date(new Date().getTime()+60*60*24*1000);                        			  
 	                        			String strDateFormat2 = "yyyy-MM-dd";                        			  
 	                        			SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(strDateFormat2);
 	                        	%>
-	                        		value= <%=simpleDateFormat2.format(date2)%>
+	                        		value= "<%=simpleDateFormat2.format(date2)%>"
 	                        	<%
 	                        		}
 	                        		else
 	                        		{
 	                        	%>	                        
-	                        		value= <%=getServletContext().getAttribute("ngayTraPhong")%>
+	                        		value= "<%=request.getSession().getAttribute("ngaytraphong")%>"
 	                        	<%
 	                        		}
-	                        	%>  
+	                        	%> 
                                 >
                             </div>
                         </div>
@@ -234,13 +286,3 @@
     </section>
 </body>
 </html>
-<script>
-    function deleteRow(r) {
-        var i = r.parentNode.parentNode.rowIndex;
-        document.getElementById("table-thong-tin-dat-phong").deleteRow(i);
-        var rows = document.getElementById("table-thong-tin-dat-phong").getElementsByTagName("tbody")[0].getElementsByTagName("tr").length;
-        if (rows == 0) {
-            $("#btnxacnhan").prop('disabled', true); //Không có đặt phòng thì Disable button xác nhận
-        }
-    }
-</script>

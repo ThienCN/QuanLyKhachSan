@@ -44,12 +44,12 @@ public class KD_ThemDonDatPhong extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 
-		String maKD = KDDatPhongDB.TaoMaKhachDat();
-		request.getServletContext().setAttribute("maKD", maKD);
 
-		int k = KDDatPhongDB.ThemKhachDatMoi(maKD, hoten, CMND, diachi, quoctich, SDT);
-		if (k >= 1) {
+		String maKD = KDDatPhongDB.ThemKhachDatMoi(hoten, CMND, diachi, quoctich, SDT);
+		if (maKD != null) {
 
+			request.getServletContext().setAttribute("maKD", maKD);
+			
 			int j;
 			boolean flag = false;
 

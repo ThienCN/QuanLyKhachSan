@@ -138,7 +138,10 @@ public class KD_ThongTinDatPhong extends HttpServlet {
 		
 	}
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 122dd028750722b2ea045a50fdd7e77d6d0865af
 	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -146,4 +149,8 @@ public class KD_ThongTinDatPhong extends HttpServlet {
 		thongtindatphong.clear();
 	}
 	
+<<<<<<< HEAD
+
+=======
+>>>>>>> 122dd028750722b2ea045a50fdd7e77d6d0865af
 }

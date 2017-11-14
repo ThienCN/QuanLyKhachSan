@@ -221,7 +221,7 @@ public class NVTraCuuDB {
 				tienPhong=kq.getFloat("tienPhong");
 				//System.out.println(tienPhong);
 				
-				thongTinDatPhong_NV.add(new ThongTinDatPhong_NV(maKhachDat,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong, tinhTrang, tienPhong));
+				thongTinDatPhong_NV.add(new ThongTinDatPhong_NV(maKhachDat,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong, tinhTrang, tienPhong, null));
 			}		
 			kq.close();	
 			return thongTinDatPhong_NV; 
