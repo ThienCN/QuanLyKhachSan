@@ -71,7 +71,7 @@
           	<button id="tra-cuu-thong-tin-thue-phong-hien-tai" type="button" style="width: 300px;"  class="btn btn-default" >
                   Tra cứu thông tin thuê phòng hiện tại <i class="glyphicon glyphicon-search"></i>
                </button>
-              <button id="thue-phong"  type="button" class="btn btn-default" style="width: 250px;" >
+              <button id="thue-them-phong"  type="button" class="btn btn-default" style="width: 250px;" >
                   Thuê phòng <i class="glyphicon glyphicon-check"></i>
               </button>
         		</div>

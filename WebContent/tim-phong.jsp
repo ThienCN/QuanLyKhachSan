@@ -95,10 +95,7 @@
 	                    </thead>
 	                    <tbody></tbody>
 	                </table>
-	            </div> 
-	            <label>Phòng đơn trống: <span id="soPhongDonTrong"></span> phòng</label>   <br/>
-	            <label>Phòng đôi trống: <span id="soPhongDoiTrong"></span> phòng</label>   <br/>
-	            <label>Phòng tập thể trống: <span id="soPhongTapTheTrong"></span> phòng</label>  <br/>          
+	            </div>             
 	        </fieldset>
 	
 	        <br />

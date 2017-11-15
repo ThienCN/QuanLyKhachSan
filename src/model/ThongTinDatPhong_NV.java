@@ -75,5 +75,13 @@ public class ThongTinDatPhong_NV {
 	public void setTinhTrang(int tinhTrang) {
 		this.tinhTrang = tinhTrang;
 	}
+
+	public String getNguoiHuy() {
+		return nguoiHuy;
+	}
+
+	public void setNguoiHuy(String nguoiHuy) {
+		this.nguoiHuy = nguoiHuy;
+	}
 	
 }
