@@ -52,8 +52,8 @@
             <hr />
 
             <!-- Thông tin khách hàng -->
-            <div id="thong-tin-khach-hang" style="display: none">
-            	<fieldset class="w3-half" style="margin:0px;">
+            <fieldset class="w3-half" style="margin:0px;">
+                <div id="thong-tin-khach-hang">
                     <label style="text-decoration:underline; color:#0d875c;">THÔNG TIN KHÁCH HÀNG	:</label>
                     <div class="form-horizontal">
                         <div class="form-group">
@@ -93,14 +93,14 @@
                             </div>
                         </div>
                     </div>
-            	</fieldset>
-            </div>
+                </div>
+            </fieldset>
             
            
 
             <!-- Thông tin hóa đơn -->
-            <div id="thong-tin-hoa-don" style="display: none">
-            	<fieldset class="w3-half" style="margin:0px">
+            <fieldset class="w3-half" style="margin:0px">
+                <div id="thong-tin-hoa-don">
                     <label style="text-decoration:underline; color:#0d875c;">THÔNG TIN HÓA ĐƠN:</label>
                     <div class="form-horizontal">
                         <div class="form-group">
@@ -153,14 +153,15 @@
                             </div>
                         </div>
                     </div>
-            	</fieldset>
-            	<!-- Nút thanh toán -->
-	            <hr />
-	            <div class="input-group-btn" style="text-align: right">
-	                <button id="btn-thanh-toan" class="btn btn-default" type="submit" style="background-color: #0d875c; color:white; width:150px; ">
-	                    Thanh toán <i class="glyphicon glyphicon-ok"></i>
-	                </button>
-	            </div>
+                </div>
+            </fieldset>
+            <hr />
+            <!-- Nút thanh toán -->
+            <br />
+            <div class="input-group-btn" style="text-align: right">
+                <button id="btn-thanh-toan" class="btn btn-default" type="submit" style="background-color: #0d875c; color:white; width:150px; ">
+                    Thanh toán <i class="glyphicon glyphicon-ok"></i>
+                </button>
             </div>
         </div>
         

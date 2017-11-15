@@ -3,11 +3,10 @@ package connectionDB;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Date;
 
 public class NVLapHoaDon {
 	
-	public static float TinhTienCoc(String maKD, String user, String pass) {
+public static float TinhTienCoc(String maKD, String user, String pass) {
 		
 		Connection conn=null;
 		CallableStatement cstmt=null;
@@ -15,7 +14,7 @@ public class NVLapHoaDon {
 		try {
 			conn=ConnectDB.ConnectDB_Role(user, pass);
 			
-			cstmt=conn.prepareCall("{?=call fn_TinhTienCocChoMotHoaDon(?)}");
+			cstmt=conn.prepareCall("{?=call fn_TinhTienCoc(?)}");
 			
 			cstmt.registerOutParameter(1, java.sql.Types.FLOAT);
 			cstmt.setString(2, maKD); 
@@ -44,6 +43,7 @@ public class NVLapHoaDon {
 		return 0; 
 		
 	}
+
 
 	public static String MaHoaDonMoi(String user, String pass) {
 		
@@ -196,83 +196,5 @@ public class NVLapHoaDon {
 		
 	}
 
-	public static Date KiemTraXuatHoaDon(String maKH, String user, String pass) {
-		
-		Connection conn=null;
-		CallableStatement cstmt=null;
-		
-		try {
-			conn=ConnectDB.ConnectDB_Role(user, pass);
-			
-			cstmt=conn.prepareCall("{?=call fn_KiemTraXuatHoaDon(?)}");
-			
-			cstmt.registerOutParameter(1, java.sql.Types.CHAR);
-			cstmt.setString(2, maKH);
-			
-			cstmt.execute();
-			
-			Date ngayThanhToan =cstmt.getDate(1);
-			
-			return ngayThanhToan;
-			
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-                if (cstmt != null) {
-                    cstmt.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-		return null; 
-		
-	}
-
-	public static void LapHoaDon(String maKH, float tongTienPhong, float tongTienSuDungDichVu,
-			float tienDenBu, float tienDatCoc, float tongTienCanThanhToan, String user, String pass) {
-		
-		Connection conn=null;
-		CallableStatement cstmt=null;
-		
-		try {
-			conn=ConnectDB.ConnectDB_Role(user, pass);
-			
-			cstmt=conn.prepareCall("{call spLapHoaDon(?,?,?,?,?,?,?)}");
-			
-			cstmt.setString(1, maKH);
-			cstmt.setString(2, user);
-			cstmt.setFloat(3, tienDatCoc);
-			cstmt.setFloat(4, tienDenBu);
-			cstmt.setFloat(5, tongTienPhong);
-			cstmt.setFloat(6, tongTienSuDungDichVu);
-			cstmt.setFloat(7, tongTienCanThanhToan);
-			
-			cstmt.execute();
-			
-			return;			
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-                if (cstmt != null) {
-                    cstmt.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-		return; 
-		
-	}
 
 }
