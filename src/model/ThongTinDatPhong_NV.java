@@ -83,10 +83,7 @@ public class ThongTinDatPhong_NV {
 	public void setNguoiHuy(String nguoiHuy) {
 		this.nguoiHuy = nguoiHuy;
 	}
-<<<<<<< HEAD
 	
 	
-=======
->>>>>>> 7f4f29fffcc64868817a0828d173bc0225a6cc45
 	
 }

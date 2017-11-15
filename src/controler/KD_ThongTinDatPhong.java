@@ -138,10 +138,7 @@ public class KD_ThongTinDatPhong extends HttpServlet {
 		
 	}
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 7f4f29fffcc64868817a0828d173bc0225a6cc45
 	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

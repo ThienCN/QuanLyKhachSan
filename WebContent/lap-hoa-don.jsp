@@ -52,8 +52,8 @@
             <hr />
 
             <!-- Thông tin khách hàng -->
-            <fieldset class="w3-half" style="margin:0px;">
-                <div id="thong-tin-khach-hang">
+            <div id="thong-tin-khach-hang" style="display: none">
+            	<fieldset class="w3-half" style="margin:0px;">
                     <label style="text-decoration:underline; color:#0d875c;">THÔNG TIN KHÁCH HÀNG	:</label>
                     <div class="form-horizontal">
                         <div class="form-group">
@@ -93,14 +93,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </fieldset>
+            	</fieldset>
+            </div>
             
            
 
             <!-- Thông tin hóa đơn -->
-            <fieldset class="w3-half" style="margin:0px">
-                <div id="thong-tin-hoa-don">
+            <div id="thong-tin-hoa-don" style="display: none">
+            	<fieldset class="w3-half" style="margin:0px">
                     <label style="text-decoration:underline; color:#0d875c;">THÔNG TIN HÓA ĐƠN:</label>
                     <div class="form-horizontal">
                         <div class="form-group">
@@ -153,15 +153,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </fieldset>
-            <hr />
-            <!-- Nút thanh toán -->
-            <br />
-            <div class="input-group-btn" style="text-align: right">
-                <button id="btn-thanh-toan" class="btn btn-default" type="submit" style="background-color: #0d875c; color:white; width:150px; ">
-                    Thanh toán <i class="glyphicon glyphicon-ok"></i>
-                </button>
+            	</fieldset>
+            	<!-- Nút thanh toán -->
+	            <hr />
+	            <div class="input-group-btn" style="text-align: right">
+	                <button id="btn-thanh-toan" class="btn btn-default" type="submit" style="background-color: #0d875c; color:white; width:150px; ">
+	                    Thanh toán <i class="glyphicon glyphicon-ok"></i>
+	                </button>
+	            </div>
             </div>
         </div>
         
