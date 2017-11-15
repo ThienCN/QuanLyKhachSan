@@ -77,18 +77,10 @@ public class NV_TraCuuKhachDat extends HttpServlet {
 		
 		if(!thongtinDatPhong_NV.isEmpty())
 		{
-<<<<<<< HEAD
 			//System.out.println("Tìm kiếm khách hàng thành công");
 		    //Import gson-2.2.2.jar
 			getServletContext().setAttribute("thongtinDatPhong_NV", thongtinDatPhong_NV);
 			
-=======
-			//Luu lai thong tin dat phong de chuyen tu trang tra cuu sang trang xac nhan nhan phong
-			getServletContext().setAttribute("thongtinDatPhong_NV", thongtinDatPhong_NV);
-			
-			//System.out.println("Tìm kiếm khách hàng thành công");
-		    //Import gson-2.2.2.jar
->>>>>>> 7f4f29fffcc64868817a0828d173bc0225a6cc45
 		    Gson gson = new Gson();
 		    String objectToReturn = gson.toJson(thongtinDatPhong_NV); //Convert List -> Json
 		    out.write(objectToReturn); //Đưa Json trả về Ajax

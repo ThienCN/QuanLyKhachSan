@@ -44,20 +44,6 @@
 		if (thongtinThuePhongTamThoi != null)
 			request.getSession().removeAttribute("thongtinThuePhongTamThoi");
 	%>
-	<!-- Hủy danh sách đặt phòng của khách đặt khi khách nhận phòng -->
-	<%
-		List<ThongTinDatPhong_NV> thongtinDatPhong_NV = (List<ThongTinDatPhong_NV>) getServletContext()
-				.getAttribute("thongtinDatPhong_NV");
-		if (thongtinDatPhong_NV != null)
-			getServletContext().removeAttribute("thongtinDatPhong_NV");
-	%>
-	<!-- Xóa mã code đặt phòng khi khách đã nhận phòng -->
-	<%
-		String maCodeDatPhong = (String)getServletContext().getAttribute("maCodeDatPhong");
-		if(maCodeDatPhong!=null){
-			getServletContext().removeAttribute("maCodeDatPhong");
-		}
-	%>
 	<%
 		List<ThongTinDatPhong_NV> thongtinDatPhongTamThoi = (List<ThongTinDatPhong_NV>) request.getSession()
 				.getAttribute("thongtinDatPhongTamThoi");

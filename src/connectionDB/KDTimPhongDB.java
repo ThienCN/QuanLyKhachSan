@@ -10,6 +10,7 @@ import java.util.List;
 import model.SoLuongPhongTrong;;
 
 public class KDTimPhongDB {
+	
 	public static List<SoLuongPhongTrong> soPhongTrongTungLoai(String ngaynhanphong, String ngaytraphong) throws SQLException
 	{
 		Connection conn=null;

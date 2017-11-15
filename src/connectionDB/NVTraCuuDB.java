@@ -82,7 +82,6 @@ public class NVTraCuuDB {
 		try {
 			conn=ConnectDB.ConnectDB_Role(user, pass);
 			if (conn == null) {
-				System.out.println("connect null");
 	            return null;
 	        }
 			
@@ -186,7 +185,6 @@ public class NVTraCuuDB {
 	}
 
 	public static List<ThongTinDatPhong_NV> TraCuuThongTinDatPhongHienTaiCuaKhachDat(String maKD, String user, String pass) {
-<<<<<<< HEAD
 		Connection conn=null;
 		CallableStatement cstmt=null;
 		String maKhachDat,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong, nguoiHuy;
@@ -247,64 +245,4 @@ public class NVTraCuuDB {
 	}
 
 	
-=======
-			Connection conn=null;
-			CallableStatement cstmt=null;
-			String maKhachDat,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong, nguoiHuy;
-			int tinhTrang;
-			float tienPhong;
-			
-			try {
-				conn=ConnectDB.ConnectDB_Role(user, pass);
-				if (conn == null) {
-		            return null;
-		        }
-				
-				String sql= "{call spTraCuuThongTinDatPhongHienTai(?)}";
-				cstmt=conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-				
-				cstmt.setString(1, maKD);
-				ResultSet kq=cstmt.executeQuery();
-				
-				List<ThongTinDatPhong_NV> thongTinDatPhong_NV= new ArrayList<ThongTinDatPhong_NV>();
-				while(kq.next()) {
-					maKhachDat=kq.getString("maKhachDat");
-					//System.out.println(maKhachDat);
-					loaiPhong=kq.getString("loaiPhong");
-					//System.out.println(loaiPhong);				
-					maPhong=kq.getString("maPhong");
-					//System.out.println(maPhong);
-					ngayNhanPhong=kq.getString("ngayNhanPhong");
-					//System.out.println(ngayNhanPhong);
-					ngayTraPhong=kq.getString("ngayTraPhong");
-					//System.out.println(ngayTraPhong);
-					tinhTrang=kq.getInt("tinhTrang");
-					//System.out.println(tinhTrang);
-					tienPhong=kq.getFloat("tienPhong");
-					//System.out.println(tienPhong);
-					nguoiHuy=kq.getString("nguoiHuy");
-					
-					thongTinDatPhong_NV.add(new ThongTinDatPhong_NV(maKhachDat,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong, tinhTrang, tienPhong, nguoiHuy));
-				}		
-				kq.close();	
-				return thongTinDatPhong_NV; 
-				
-			}catch (SQLException ex) {
-				//System.out.println("Loi");
-	            ex.printStackTrace();
-			}finally {
-	            try {
-	                if (conn != null) {
-	                    conn.close();
-	                }
-	                if (cstmt != null) {
-	                    cstmt.close();
-	                }
-	            } catch (SQLException ex) {
-	                ex.printStackTrace();
-	            }
-	        }		
-			return null;
-		}
->>>>>>> 7f4f29fffcc64868817a0828d173bc0225a6cc45
 }

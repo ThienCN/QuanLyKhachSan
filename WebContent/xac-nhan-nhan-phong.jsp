@@ -140,7 +140,7 @@
             </div>
             <div class="input-group-btn">
             	<button id="chap-nhan-thue-phong" class="btn btn-default">
-                    Xác nhận thuê phòng
+                    Xác nhận thuê phòng <i class="glyphicon glyphicon-trash"></i>
                  </button>
             </div>
         </fieldset>

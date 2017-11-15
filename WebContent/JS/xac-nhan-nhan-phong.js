@@ -1,7 +1,6 @@
 $(document).ready(function () {
 	var color =null;
 	var sum=0;
-	var cophong=0;
 	$.ajax({
         type: "GET",
         url: "KD_XacNhanNhanPhong",
@@ -21,10 +20,9 @@ $(document).ready(function () {
             var listSize = Object.keys(result).length;
             if (listSize > 0) {
             	$("#table-thong-tin-dat-phong > tbody").children().remove();
-            	$("#table-xac-nhan-thue-phong > tbody").children().remove();
             	for(i=0; i<listSize; i++){
             		
-            		sum = sum +parseFloat(result[i].tienPhong);
+            		sum = sum +(result[i].tienPhong);
             		
             		var ngayNhan = new Date(result[i].ngayNhanPhong);
                     dayNhan = ngayNhan.getDate();
@@ -60,8 +58,8 @@ $(document).ready(function () {
                             )
                    );
             	
+            	$("#table-xac-nhan-thue-phong > tbody").children().remove();
             		if(ngayhientai == ngaynhanphong){
-            			cophong=1;
 	                	$("#table-xac-nhan-thue-phong > tbody").append(
 	                        $('<tr>').append(
 	                            $('<td>').text(result[i].loaiPhong)
@@ -78,7 +76,10 @@ $(document).ready(function () {
             		}
             	}
             	
-            	
+            	var n = $("#table-thong-tin-thue-phong > tbody").find("> tr:first").length;
+            	if(n<=0){
+            		$("#chap-nhan-thue-phong").prop("disabled", true);
+            	}
             }
         },
         error: function (jqXHR, exception) {
@@ -137,27 +138,17 @@ $(document).ready(function () {
 	
 	/*Sự kiện click nút Xác nhận thuê phòng*/
 	$("#chap-nhan-thue-phong").click(function(e){
-		var maKH = $("#maKH").val().trim();
-		console.log(maKH);
-		if(maKH.length <= 0){
+		var maKH = $("#maKH").val().trim().length;
+		if(maKH<0){
 			alert("Mời bạn lưu thông tin khách hàng");
-		}
-		else if(cophong=='0'){
-			alert("Không có thông tin phòng để thuê");
 		}
 		else{
 			$.ajax({
 		        type: "POST",
-		        url: "KD_XacNhanNhanPhong?maKH="+maKH,
+		        url: "KD_XacNhanNhanPhong?maKH="+maKH+"&",
 		        dataType: "json",
 		        success: function (result) { 
-		            if(result.check == "fail"){
-		            	alert("Xác nhận nhận phòng không thành công!");
-		            }
-		            if(result.check == "ok"){
-		            	alert("Xác nhận nhận phòng thành công!");  
-		            	window.location.assign("nhan-vien.jsp");
-		            }
+		            
 		        },
 		        error: function (jqXHR, exception) {
 		            if (jqXHR.status == 500)
