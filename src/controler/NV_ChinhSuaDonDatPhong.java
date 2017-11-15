@@ -1,24 +1,34 @@
 package controler;
 
 import java.io.IOException;
+<<<<<<< HEAD
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+=======
+>>>>>>> 7f4f29fffcc64868817a0828d173bc0225a6cc45
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
 import connectionDB.NVDatPhongDB;
 
+=======
+/**
+ * Servlet implementation class NV_ChinhSuaDonDatPhong
+ */
+>>>>>>> 7f4f29fffcc64868817a0828d173bc0225a6cc45
 @WebServlet("/NV_ChinhSuaDonDatPhong")
 public class NV_ChinhSuaDonDatPhong extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+<<<<<<< HEAD
     public NV_ChinhSuaDonDatPhong() {
         super();
     }
@@ -76,6 +86,37 @@ public class NV_ChinhSuaDonDatPhong extends HttpServlet {
 			e.printStackTrace();
 		}		
 	
+=======
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public NV_ChinhSuaDonDatPhong() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
+	 */
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+>>>>>>> 7f4f29fffcc64868817a0828d173bc0225a6cc45
 	}
 
 }

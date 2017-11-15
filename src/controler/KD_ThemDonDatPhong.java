@@ -38,6 +38,18 @@ public class KD_ThemDonDatPhong extends HttpServlet {
 		String diachi = request.getParameter("diachi");
 		String quoctich = request.getParameter("quoctich");
 		String SDT = request.getParameter("SDT");
+		// System.out.println(phongdon);
+		// System.out.println(phongdoi);
+		// System.out.println(phongtt);
+		// System.out.println(ngaynhanphong);
+		// System.out.println(ngaytraphong);
+		// System.out.println(tiencoc);
+		// System.out.println(hoten);
+		// System.out.println(CMND);
+		// System.out.println(diachi);
+		// System.out.println(quoctich);
+		// System.out.println(SDT);
+		// System.out.println(rows);
 
 		response.setContentType("application/json;charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
@@ -58,9 +70,11 @@ public class KD_ThemDonDatPhong extends HttpServlet {
 				float tiencoc = KDDatPhongDB.TienCocCuaMotPhong(maphong, ngaynhanphong, ngaytraphong);
 				int b1 = KDDatPhongDB.ChiTietDatPhong(maKD, maphong, ngaynhanphong, ngaytraphong, tiencoc);
 				if (b1 <= 0) {
+					System.out.println("Không thêm được chi tiết đặt phòng!");
 					break;
 				} else {
 					flag = true;
+					System.out.println("Thêm thành công!");
 				}
 			}
 			for (j = 0; j < phongdoi; j++) {
@@ -68,9 +82,11 @@ public class KD_ThemDonDatPhong extends HttpServlet {
 				float tiencoc = KDDatPhongDB.TienCocCuaMotPhong(maphong, ngaynhanphong, ngaytraphong);
 				int b2 = KDDatPhongDB.ChiTietDatPhong(maKD, maphong, ngaynhanphong, ngaytraphong, tiencoc);
 				if (b2 <= 0) {
+					System.out.println("Không thêm được chi tiết đặt phòng!");
 					break;
 				} else {
 					flag = true;
+					System.out.println("Thêm thành công!");
 				}
 			}
 			for (j = 0; j < phongtt; j++) {
@@ -78,13 +94,16 @@ public class KD_ThemDonDatPhong extends HttpServlet {
 				float tiencoc = KDDatPhongDB.TienCocCuaMotPhong(maphong, ngaynhanphong, ngaytraphong);
 				int b3 = KDDatPhongDB.ChiTietDatPhong(maKD, maphong, ngaynhanphong, ngaytraphong, tiencoc);
 				if (b3 <= 0) {
+					System.out.println("Không thêm được chi tiết đặt phòng!");
 					break;
 				} else {
 					flag = true;
+					System.out.println("Thêm thành công!");
 				}
 			}
 
 			if (flag) {
+				System.out.println("OKK!");
 				out.write("{\"check\":\"ok\"}");
 				out.flush();
 			} else {
@@ -92,6 +111,7 @@ public class KD_ThemDonDatPhong extends HttpServlet {
 				out.flush();
 			}
 		} else {
+			System.out.println("Không thể thêm KD mới!");
 			out.write("{\"check\":\"fail\"}");
 			out.flush();
 		}

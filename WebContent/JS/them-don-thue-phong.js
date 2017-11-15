@@ -280,14 +280,19 @@
                                     	//Xóa phòng thuê này khỏi bảng
                                     	$(this).closest('tr').remove();
                                     }
-                             })
+                                })
+                        	)
                         )
+<<<<<<< HEAD
                      )
             );
         	
         	//Tăng tiền thuê khi chọn thuê thêm phòng
         	var tongTienThue = $("#tongTienThue").text();         	
         	$("#tongTienThue").text(parseFloat(tongTienThue) + parseFloat(phiThue));
+=======
+                	);
+>>>>>>> 7f4f29fffcc64868817a0828d173bc0225a6cc45
         }
     });
     
