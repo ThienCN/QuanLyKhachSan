@@ -91,7 +91,7 @@
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
 			<div class="div-square">
-				<a href="#"> <i class="fa fa-money"></i>
+				<a href="lap-hoa-don.jsp"> <i class="fa fa-money"></i>
 					<h4>Lập hóa đơn</h4>
 				</a>
 			</div>
@@ -115,18 +115,18 @@
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
 			<div class="div-square">
-				<a href="tra-cuu-dich-vu.jsp"> <i class="fa fa-shopping-bag"></i>
-					<h4>Tra cứu dịch vụ</h4>
+				<a href="thong-ke-dat-phong.jsp"> <i class="glyphicon glyphicon-list-alt"></i>
+					<h4>Thống kê đặt phòng</h4> 
 				</a>
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
 			<div class="div-square">
-				<a href="tra-cuu-phong.jsp"> <i class="glyphicon glyphicon-bed"></i>
-					<h4>Tra cứu phòng</h4>
+				<a href="thong-ke-don-thue-phong.jsp"> <i class="glyphicon glyphicon-list-alt"></i>
+					<h4>Thống kê thuê phòng</h4>
 				</a>
 			</div>
-		</div>
+		</div>		
 	</div>
 	<div class="row">
 		<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
@@ -145,15 +145,15 @@
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
 			<div class="div-square">
-				<a href="#"> <i class="glyphicon glyphicon-list-alt"></i>
-					<h4>Thống kê dịch vụ</h4>
+				<a href="#"> <i class="fa fa-shopping-bag"></i>
+					<h4>Tra cứu dịch vụ</h4>
 				</a>
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
 			<div class="div-square">
-				<a href="#"> <i class="glyphicon glyphicon-list-alt"></i>
-					<h4>Thống kê vật tư</h4>
+				<a href="#"> <i class="glyphicon glyphicon-bed"></i>
+					<h4>Tra cứu phòng</h4>
 				</a>
 			</div>
 		</div>

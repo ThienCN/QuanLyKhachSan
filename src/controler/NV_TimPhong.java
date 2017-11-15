@@ -28,8 +28,8 @@ public class NV_TimPhong extends HttpServlet {
 		
 		String ngayNhanPhong=request.getParameter("ngayNhanPhong");
 		String ngayTraPhong=request.getParameter("ngayTraPhong");
-		request.getSession().setAttribute("ngaynhanphong", ngayNhanPhong);
-		request.getSession().setAttribute("ngaytraphong", ngayTraPhong);
+//		request.getSession().setAttribute("ngaynhanphong", ngayNhanPhong);
+//		request.getSession().setAttribute("ngaytraphong", ngayTraPhong);
 	
 		List<DanhSachPhongTrong> dsPhongTrong = 
 				NVTimPhongDB.NVTimPhong(ngayNhanPhong, ngayTraPhong, 

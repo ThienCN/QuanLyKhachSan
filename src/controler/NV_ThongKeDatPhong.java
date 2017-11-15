@@ -14,68 +14,72 @@ import com.google.gson.Gson;
 
 import connectionDB.NVThongKeDB;
 import connectionDB.NVTraCuuDB;
-import model.ThongKeThuePhong;
+import model.ThongKeDatPhong;
+import model.ThongTinDatPhong;
+import model.ThongTinDatPhong_NV;
+import model.ThongTinKhachDat;
 import model.ThongTinKhachHang;
 import model.ThongTinThuePhong;
 
-@WebServlet("/NV_ThongKeThuePhong")
-public class NV_ThongKeThuePhong extends HttpServlet {
+@WebServlet("/NV_ThongKeDatPhong")
+public class NV_ThongKeDatPhong extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public NV_ThongKeThuePhong() {
+       
+    public NV_ThongKeDatPhong() {
         super();
     }
-    
-    /*Thống kê thuê phòng*/
+    /*Thống kê đặt phòng*/
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ngayBatDau=(String)request.getParameter("ngayBatDau");
-		String ngayKetThuc=(String)request.getParameter("ngayKetThuc");
+		String ngayKetThuc=(String)request.getParameter("ngayKetThuc"); 
+		
 		
 		String user=(String)request.getSession().getAttribute("user");
 		String pass=(String)request.getSession().getAttribute("pass");
 		//
-		List<ThongKeThuePhong> dsThongKeThuePhong=NVThongKeDB.ThongKeGiaoDichThuePhong(ngayBatDau, ngayKetThuc, user, pass);
+		List<ThongKeDatPhong> dsThongKeDatPhong = NVThongKeDB.ThongKeGiaoDichDatPhong(ngayBatDau, ngayKetThuc, user, pass);
 		
 		response.setContentType("application/json;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         
         PrintWriter out=response.getWriter();
-		if(!dsThongKeThuePhong.isEmpty())
+		if(!dsThongKeDatPhong.isEmpty())
 		{
-		    //Import gson-2.2.2.jar
 		    Gson gson = new Gson();
-		    String objectToReturn = gson.toJson(dsThongKeThuePhong); //Convert List -> Json
-		    out.write(objectToReturn); //Đưa Json trả về Ajax
+		    String objectToReturn = gson.toJson(dsThongKeDatPhong); 
+		    out.write(objectToReturn);
 		    out.flush();
 		} 
 		else
 		{
 			out.write("{\"check\":\"fail\"}");
 		    out.flush();
-		}		
+		}	
 	}
-	
-	/*Thông tin cá nhân và chi tiết thuê phòng của khách hàng*/
+
+	/*Thông tin cá nhân và chi tiết đặt phòng của khách đặt*/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String maKH=(String)request.getParameter("maKH");
+		String maKhachDat=(String)request.getParameter("maKhachDat");
 		
 		response.setContentType("application/json;charset=UTF-8");
 	    request.setCharacterEncoding("utf-8");
         
 	    PrintWriter out=response.getWriter();
 		
-		List<ThongTinKhachHang> thongtinKH=
-				NVTraCuuDB.TraCuuThongTinKhachHang(maKH, 
-				(String)request.getSession().getAttribute("user"), 
-				(String)request.getSession().getAttribute("pass"));
-		List<ThongTinThuePhong> thongtinThuePhong=
-				NVTraCuuDB.TraCuuThongTinThuePhongHienTaiCuaKhachHang(maKH, 
+		List<ThongTinKhachDat> thongtinKhachDat=
+				NVTraCuuDB.TraCuuThongTinKhachDat(maKhachDat, 
 				(String)request.getSession().getAttribute("user"), 
 				(String)request.getSession().getAttribute("pass"));
 		
-		if(!thongtinKH.isEmpty() && !thongtinThuePhong.isEmpty())
+		List<ThongTinDatPhong_NV> thongtinDatPhong=
+				NVTraCuuDB.TraCuuThongTinDatPhongHienTaiCuaKhachDat(maKhachDat, 
+				(String)request.getSession().getAttribute("user"), 
+				(String)request.getSession().getAttribute("pass")); 
+		
+		if(!thongtinKhachDat.isEmpty() && !thongtinDatPhong.isEmpty())
 		{
-			getServletContext().setAttribute("thongKeThongTinKH", thongtinKH); 
-			getServletContext().setAttribute("thongKeThongTinThuePhong", thongtinThuePhong);
+			getServletContext().setAttribute("thongKeThongTinKhachDat", thongtinKhachDat); 
+			getServletContext().setAttribute("thongKeThongTinDatPhong", thongtinDatPhong);
 			out.write("{\"check\":\"ok\"}"); 
 		    out.flush();
 		}
@@ -84,6 +88,7 @@ public class NV_ThongKeThuePhong extends HttpServlet {
 			out.write("{\"check\":\"fail\"}");
 		    out.flush();
 		}
+	
 	}
 
 }

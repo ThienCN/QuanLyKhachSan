@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLType;
 import java.util.List;
 
 import model.ThongTinDatPhong_NV;
@@ -329,7 +330,7 @@ public class NVDatPhongDB {
 		return 0;
 	}
 
-	public static int HuyDonDatPhong(String maKD, String maPhong, String ngayNhanPhong, String user, String pass) {
+	public static int HuyDonDatPhong(String maKD, String maPhong, String ngayNhanPhong, String nguoiHuy, String user, String pass) {
 
 		Connection conn = null;
 		CallableStatement cstmt = null;
@@ -337,17 +338,23 @@ public class NVDatPhongDB {
 		try {
 			conn = ConnectDB.ConnectDB_Role(user, pass);
 			if (conn == null) {
-				System.out.println("connect null");
 				return 0;
 			}
-			String sql = "{call spHuyDonDatPhong(?,?,?)}";
+			String sql = "{call spHuyDonDatPhong(?,?,?,?,?)}";
 			cstmt = conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
 			cstmt.setString(1, maKD);
 			cstmt.setString(2, maPhong);
 			cstmt.setString(3, ngayNhanPhong);
+			cstmt.setString(4, nguoiHuy);
+			cstmt.registerOutParameter(5, java.sql.Types.BIT); 
 
 			cstmt.executeUpdate();
+			
+			if(cstmt.getBoolean(5))
+				return 1;
+			else
+				return 0;
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();
