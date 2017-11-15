@@ -11,7 +11,7 @@ $(document).ready(function () {
     	   alert("Mời bạn nhập thông tin tìm kiếm!!!");
 	   }
        else{
-    	   var maTimKiemKD = $("#maTimKiem").val().trim();
+    	   var maTimKiemKD = $("#maCode").val().trim();
     	   $.ajax({
                type: "GET",
                url: "NV_TraCuuKhachDat",
@@ -28,7 +28,7 @@ $(document).ready(function () {
                    //Lấy size của list này
                    var listSize = Object.keys(result).length;
                    if (listSize > 0) {
-                	   $("#maCode").val(result[0].maKD);
+                	   $("#maKD").val(result[0].maKD);
                 	   $("#hoTenKD").val(result[0].hoTenKD);
                 	   $("#CMND").val(result[0].CMND);
                 	   $("#DiaChi").val(result[0].DiaChi)
@@ -50,10 +50,26 @@ $(document).ready(function () {
 	                           }
 	                           //Lấy size của list này
 	                           var listSize = Object.keys(result).length;
-	                           var ngayTraPhongCu = null;
+	                           var tinhTrang, nguoiHuy;
 	                           if (listSize > 0) {
 	                           	$("#table-thong-tin-dat-phong > tbody").children().remove();
 	                           	for(i=0; i<listSize; i++){
+	                           		nguoiHuy = "";
+	                           		
+	                           		if(result[i].tinhTrang == 1)
+	                           			tinhTrang = "Đã đặt thành công";
+	                           		else if(result[i].tinhTrang == 0 && result[i].nguoiHuy == null){
+	                           			tinhTrang = "Đã bị hủy";
+	                           			nguoiHuy = "Khách hủy";
+	                           		}
+	                           		else if(result[i].tinhTrang == 0 && result[i].nguoiHuy != null){
+	                           			tinhTrang = "Đã bị hủy";
+	                           			nguoiHuy = result[i].nguoiHuy;
+	                           		}
+	                           		else if(result[i].tinhTrang == 2)
+	                           			tinhTrang = "Đã nhận phòng";
+	                           			
+	                           		
 	                               	$("#table-thong-tin-dat-phong > tbody").append(
 	                                       $('<tr>').append(
 	                                           $('<td>').text(result[i].loaiPhong)
@@ -64,42 +80,67 @@ $(document).ready(function () {
 	                                           ).append(
 	                                           $('<td>').text(result[i].ngayTraPhong)
 	                                           ).append(
+	                                           $('<td>').text(result[i].tienPhong)
+	                                           ).append(
+	                                           $('<td>').text(parseFloat(result[i].tienPhong)*0.1)
+	                                           ).append(
+	                                           $('<td>').text(tinhTrang)   
+	                                           ).append(
+	                                           $('<td>').text(nguoiHuy)   
+	                                           ).append(
 		                                       $('<td>').append(
 		                                    		   $('<a>')
 		                                    		   		.text("Hủy")
 		                                    		   		.css('cursor', 'pointer')
 	                                    		   			.click(function(e){
 	                                    		   				e.preventDefault();
-	                                    		   				if(confirm("Bạn có chắc chắn muốn hủy thuê phòng này không?"))
+	                                    		   				if($(this).closest('tr').find('td:nth-child(7)').text() == "Đã bị hủy" 
+	                                    		   						|| $(this).closest('tr').find('td:nth-child(7)').text() == "Đã nhận phòng"){
+	                                    		   					alert("Phòng đã bị hủy hoặc đã nhận phòng rồi!");
+	                                    		   					return;
+	                                    		   				}
+	                                    		   				
+	                                    		   				if(confirm("Bạn có chắc chắn muốn hủy đặt phòng này không?"))
                                     		   					{
-		                                    		   				//Ngày hủy phải bằng ngày nhận phòng
-		                                    		   				var maKH = $("#maKH").val();
-	                                    		   	            	//console.log(maKH);
-	                                    		   	            	var maPhong = $(this).closest('tr').find('td:nth-child(2)').text();
-	                                    		   	            	//console.log(maPhong);
-	                                    		   	            	var ngayNhanPhong = $(this).closest('tr').find('td:nth-child(3)').text();
-	                                    		   	            	var temp=this;
-	                                    		   	            	//console.log(ngayNhanPhong);
-	                                    		   	            	$.ajax({
-	                                    		   	            		type:"DELETE",
-	                                    		   	            		url: "NV_ChinhSuaDonThuePhong?maKH="+ maKH
-	                                    		   	            									+"&maPhong=" + maPhong
-	                                    		   	            									+"&ngayNhanPhong=" + ngayNhanPhong,
-	        		   	            									dataType: "json",
-	        		   	            			                        success: function (result) {
-	        		   	            			                        	if (result.check == "fail") {
-	        		   	            				                           		alert("Ngày hủy không hợp lệ.\nNgày hủy phải bằng ngày nhận phòng!!!");
-	        		   	            				                           		return;
-	        		   	            				                           }
-	        		   	            			                        	else{
-	        		   	            			                        		$(temp).closest('tr').find('a').text("Đã hủy thuê phòng");
-	        		   	            			                        		$(temp).closest('tr').find('a').css("color","red");	        		   	            			                        	}
-	        		   	            			                        },
-	        		   	            			                        error: function (jqXHR, exception) {
-	        		   	            			                           if (jqXHR.status == 500)
-	        		   	            			                        	   alert("Tìm kiếm thông tin thuê phòng của khách hàng không thành công!");
-	        		   	            			                        }
-	                                    		   	            	});
+	                                    		   					var nguoiHuy = prompt("Nếu là khách sạn hủy thì nhân viên hãy điền mã NV của mình vào đây!" +
+	                                    		   							"\rCòn nếu là khách hủy thì không cần điền!", "");	
+	                                    		   					if(nguoiHuy == "")
+	                                    		   						$(this).closest('tr').find('td:nth-child(8)').text("Khách hủy");
+	                                    		   					else
+	                                    		   						$(this).closest('tr').find('td:nth-child(8)').text(nguoiHuy);
+	                                    		   					
+	                                    		   					//Tình trạng phải là đang đặt, ngày hủy phải nhỏ hơn hoặc bằng ngày hiện tại
+	                                    		   					var tinhTrang = $(this).closest('tr').find('td:nth-child(7)').text();
+	                                    		   					if(tinhTrang != "Đã đặt thành công"){
+	                                    		   						confirm("Hủy đặt phòng không hợp lệ!");
+	                                    		   						return;
+	                                    		   					}
+	                                    		   					if(tinhTrang == "Đã đặt thành công"){
+	                                    		   						var temp=this;
+	                                    		   						$.ajax({
+		                                    		   	            		type:"DELETE",
+		                                    		   	            		url: "NV_ChinhSuaDonDatPhong?maKhachDat="+ $("#maKD").val()
+		                                    		   	            									+"&maPhong=" + $(this).closest('tr').find('td:nth-child(2)').text()
+		                                    		   	            									+"&ngayNhanPhong=" + $(this).closest('tr').find('td:nth-child(3)').text()
+		                                    		   	            									+"&nguoiHuy=" + $(this).closest('tr').find('td:nth-child(8)').text(),
+		        		   	            									dataType: "json",
+		        		   	            			                        success: function (result) {
+		        		   	            			                        	if (result.check == "fail") {
+		        		   	            				                           		alert("Ngày hủy không hợp lệ.\nNgày hủy phải nhỏ hơn hoặc bằng ngày nhận phòng!!!");
+		        		   	            				                           		return;
+		        		   	            				                           }
+		        		   	            			                        	else{
+		        		   	            			                        		$(temp).closest('tr').find('a').text("Hủy thành công");
+		        		   	            			                        		$(temp).closest('tr').find('a').css("color","blue");	
+		        		   	            			                        		$(temp).closest('tr').find('td:nth-child(7)').text("Đã bị hủy");  
+		        		   	            			                        		$(temp).closest('tr').find('td:nth-child(7)').css("color","red");	      		   	            			                        	}
+		        		   	            			                        },
+		        		   	            			                        error: function (jqXHR, exception) {
+		        		   	            			                           if (jqXHR.status == 500)
+		        		   	            			                        	   alert("Tìm kiếm thông tin thuê phòng của khách hàng không thành công!");
+		        		   	            			                        }
+		                                    		   	            	});
+	                                    		   					}                                  		   					
                                     		   					}
 	                                    		   				
 	                                    		   			})
@@ -107,7 +148,7 @@ $(document).ready(function () {
 	                                           )
 	                                  );
 	                           	}
-	                           	$("#thong-tin-thue-phong").css("display","block");
+	                           	$("#thong-tin-dat-phong").css("display","block");
 	                           }
 	                       },
 	                       error: function (jqXHR, exception) {

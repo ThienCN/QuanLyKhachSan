@@ -51,7 +51,6 @@ $(document).ready(function () {
 	                           }
 	                           //Lấy size của list này
 	                           var listSize = Object.keys(result).length;
-	                           var ngayTraPhongCu = null;
 	                           if (listSize > 0) {
 	                           	$("#table-thong-tin-thue-phong > tbody").children().remove();
 	                           	for(i=0; i<listSize; i++){

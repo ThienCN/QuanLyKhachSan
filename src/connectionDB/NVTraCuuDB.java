@@ -187,14 +187,13 @@ public class NVTraCuuDB {
 	public static List<ThongTinDatPhong_NV> TraCuuThongTinDatPhongHienTaiCuaKhachDat(String maKD, String user, String pass) {
 		Connection conn=null;
 		CallableStatement cstmt=null;
-		String maKhachDat,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong;
+		String maKhachDat,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong, nguoiHuy;
 		int tinhTrang;
 		float tienPhong;
 		
 		try {
 			conn=ConnectDB.ConnectDB_Role(user, pass);
 			if (conn == null) {
-				System.out.println("connect null");
 	            return null;
 	        }
 			
@@ -220,8 +219,9 @@ public class NVTraCuuDB {
 				//System.out.println(tinhTrang);
 				tienPhong=kq.getFloat("tienPhong");
 				//System.out.println(tienPhong);
+				nguoiHuy=kq.getString("nguoiHuy");
 				
-				thongTinDatPhong_NV.add(new ThongTinDatPhong_NV(maKhachDat,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong, tinhTrang, tienPhong, null));
+				thongTinDatPhong_NV.add(new ThongTinDatPhong_NV(maKhachDat,loaiPhong, maPhong, ngayNhanPhong, ngayTraPhong, tinhTrang, tienPhong, nguoiHuy));
 			}		
 			kq.close();	
 			return thongTinDatPhong_NV; 

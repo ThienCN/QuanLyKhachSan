@@ -62,7 +62,7 @@
                         <div class="form-group">
                             <label class="control-label col-xs-12 col-sm-4 col-md-2">Mã code:</label>
                             <div class="col-xs-12 col-sm-8 col-md-4">
-                                <input type="text" id="maCode" class="form-control" readonly>
+                                <input type="text" id="maKD" class="form-control" readonly>
                             </div>
                             <label class="control-label col-xs-12 col-sm-4 col-md-2">Họ tên:</label>
                             <div class="col-xs-12 col-sm-8 col-md-4">
@@ -110,6 +110,7 @@
                                 <th>Tiền phòng</th>
                                 <th>Tiền đã đặt cọc</th>
                                 <th>Tình trạng</th>
+                                <th>Người hủy</th>
                                 <th></th>
                             </tr>
                         </thead>

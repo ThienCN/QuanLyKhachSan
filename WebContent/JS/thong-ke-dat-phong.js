@@ -1,5 +1,4 @@
-$(document).ready(function (e){
-	
+$(document).ready(function (e){	
 	
 	$("#btn-thong-ke").click(function (e){
 		$("#ket-qua-thong-ke").css("display","none"); 
@@ -18,7 +17,7 @@ $(document).ready(function (e){
         	ngayKetThuc=$("#ngayKetThuc").val();
         	$.ajax({
         		type:"GET",
-        		url:"NV_ThongKeThuePhong",
+        		url:"NV_ThongKeDatPhong",
         		data:{
         			ngayBatDau:ngayBatDau,
         			ngayKetThuc:ngayKetThuc
@@ -26,21 +25,21 @@ $(document).ready(function (e){
         		dataType:"json",
         		success: function(result){
         			if (result.check == "fail") {
-        				$("#khong-co-ket-qua").text("Không có giao dịch thuê phòng trong thời gian này!");
+        				$("#khong-co-ket-qua").text("Không có giao dịch đặt phòng trong thời gian này!");
         				$("#khong-co-ket-qua").css("display","block");
                         return;
                     }
         			else{
         				var listSize=Object.keys(result).length;
         				if(listSize != 0){
-        					$("#table-thong-ke-thue-phong > tbody").children().remove();
+        					$("#table-thong-ke-dat-phong > tbody").children().remove();
         					for(i=0; i<listSize; i++)
     						{
-        						$("#table-thong-ke-thue-phong > tbody").append(
+        						$("#table-thong-ke-dat-phong > tbody").append(
             							$("<tr>").append(
-            								$('<td>').text(result[i].maKH)
+            								$('<td>').text(result[i].maKhachDat)
             								).append(
-            								$('<td>').text(result[i].hoTenKH)		
+            								$('<td>').text(result[i].hoTenKhachDat)		
             								).append(
             								$('<td>').text(result[i].soPhongDon)	
             								).append(
@@ -52,14 +51,14 @@ $(document).ready(function (e){
             									$('<a>').text("Chi tiết")
             											.click(function(e){
             												e.preventDefault();
-            												var maKH = $(this).closest('tr').find('td:nth-child(1)').text();
+            												var maKhachDat = $(this).closest('tr').find('td:nth-child(1)').text();
             												$.ajax({
             													type:"POST",
-            													url:"NV_ThongKeThuePhong?maKH="+maKH,
+            													url:"NV_ThongKeDatPhong?maKhachDat="+maKhachDat,
             													dataType:"json",
             													success:function(result){
             														if (result.check == "ok") {
-            									        				window.location.assign("chi-tiet-thong-ke-thue-phong.jsp");
+            									        				window.location.assign("chi-tiet-thong-ke-dat-phong.jsp");
             									                    }
             														else if (result.check == "fail") {
             															alert("Server hiện đang bận!\nMời bạn xem khi khác!"); 

@@ -271,16 +271,21 @@
                                             	if (jqXHR.status == 500)
                                             		alert("Xóa phòng thuê không thành công!\n Ngày xóa không hợp lệ!");  
                                             }
-                                        }); 
+                                        });                                        
                                         
-                                        $(this).closest('tr').remove();
+                                        //Giảm tiền thuê khi hủy 1 phòng thuê
+                                    	var tongTienThue = $("#tongTienThue").text();
+                                    	var phiThue = $(this).closest('tr').find('td:nth-child(5)').text();
+                                    	$("#tongTienThue").text(parseFloat(tongTienThue) - parseFloat(phiThue));
+                                    	//Xóa phòng thuê này khỏi bảng
+                                    	$(this).closest('tr').remove();
                                     }
                              })
                         )
                      )
             );
         	
-        	//
+        	//Tăng tiền thuê khi chọn thuê thêm phòng
         	var tongTienThue = $("#tongTienThue").text();         	
         	$("#tongTienThue").text(parseFloat(tongTienThue) + parseFloat(phiThue));
         }

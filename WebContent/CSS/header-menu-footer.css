@@ -54,7 +54,7 @@ header{
     color: white !important;
     text-decoration:none;
 }
-.navbar-left a:hover{
+.navbar-left a{
     font-weight:bold;
 }
 .navbar-brand { /*icon home đầu thanh menu*/    

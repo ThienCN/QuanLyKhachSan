@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="./CSS/thong-ke-don-thue-phong.css" />
     <!-- MY JS -->
     <script src="./JS/include-html.js"></script>
-    <script src="./JS/thong-ke-don-thue-phong.js"></script>
+    <script src="./JS/thong-ke-dat-phong.js"></script>
 </head>
 <body>
     <!-- HEADER -->
@@ -35,7 +35,7 @@
     <!-- CONTENT -->
     <section class="phan-noi-dung">
         <h4>THỐNG KÊ ĐƠN ĐẶT PHÒNG</h4>
-        <!-- Từ ngày a đến ngày b có bao nhiêu đơn thuê phòng -->
+        <!-- Từ ngày a đến ngày b có bao nhiêu đơn đặt phòng -->
         <p style="font-weight: bold; text-decoration: underline">Thống kê các đơn đặt phòng: </p>
         <div class="row ">
         	<div class="col-xs-12 col-md-6">

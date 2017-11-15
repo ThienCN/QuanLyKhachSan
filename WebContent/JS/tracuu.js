@@ -283,12 +283,7 @@
     	});
     });
     
-<<<<<<< HEAD
     /*CHO KHÁCH HÀNG ĐẶT THÊM PHÒNG TRONG TRA CỨU KHÁCH ĐẶT*/
-=======
-    
-    
->>>>>>> 122dd028750722b2ea045a50fdd7e77d6d0865af
     $("#dat-them-phong").click(function (e) {
     	var maTimKiemKD = $("#maTimKiemKD").val().trim();
     	$.ajax({

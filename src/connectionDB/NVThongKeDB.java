@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.ThongKeDatPhong;
 import model.ThongKeThuePhong;
 
 public class NVThongKeDB {
@@ -21,7 +22,6 @@ public class NVThongKeDB {
 		try {
 			conn=ConnectDB.ConnectDB_Role(user, pass);
 			if (conn == null) {
-				System.out.println("connect null");
 	            return null;
 	        }
 			
@@ -86,6 +86,77 @@ public class NVThongKeDB {
 		return null;
 	}
 
-	
+	public static List<ThongKeDatPhong> ThongKeGiaoDichDatPhong(String ngayBatDau, String ngayKetThuc, 
+			String user, String pass) {
+		
+		Connection conn=null;
+		CallableStatement cstmt=null;
+		String maKhachDat, hoTenKhachDat;
+		int soPhongDon = 0, soPhongDoi = 0, soPhongTapThe = 0;
+		
+		try {
+			conn=ConnectDB.ConnectDB_Role(user, pass);
+			if (conn == null) {
+				return null;
+			}
+		
+			String sql= "{call spThongKeDSKDatDangCoGiaoDichDatPhong(?,?)}"; 
+			cstmt=conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			
+			cstmt.setString(1, ngayBatDau);
+			cstmt.setString(2, ngayKetThuc);
+			
+			ResultSet kq=cstmt.executeQuery();
+			
+			List<ThongKeDatPhong> thongKeDatPhong=new ArrayList<ThongKeDatPhong>(); 
+			
+			while(kq.next()) {
+				maKhachDat=kq.getString("maKhachDat");
+				hoTenKhachDat=kq.getString("HoTen");
+				
+				sql = "{call spThongKeSoLoaiPhongDaDatCuaMotKDatTrongKhoangNgay(?,?,?)}";
+				cstmt=conn.prepareCall(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				cstmt.setString(1, maKhachDat);
+				cstmt.setString(2, ngayBatDau);
+				cstmt.setString(3, ngayKetThuc);
+				
+				ResultSet ketqua=cstmt.executeQuery();
+				
+				while(ketqua.next()) {
+					if(ketqua.getString("loaiPhong").equals("Phòng đơn"))
+						soPhongDon=ketqua.getInt("soPhong"); 
+					else if(ketqua.getString("loaiPhong").equals("Phòng đôi"))
+						soPhongDoi=ketqua.getInt("soPhong"); 
+					else if(ketqua.getString("loaiPhong").equals("Phòng tập thể"))
+						soPhongTapThe=ketqua.getInt("soPhong");
+				}
+				
+				if(soPhongDoi!=0 || soPhongDon!=0 || soPhongTapThe != 0)
+					thongKeDatPhong.add(new ThongKeDatPhong(maKhachDat, hoTenKhachDat, soPhongDon, soPhongDoi, soPhongTapThe));
+				
+				soPhongDon = 0;
+				soPhongDoi = 0;
+				soPhongTapThe = 0;
+			}		
+			
+			kq.close();	
+			return thongKeDatPhong;
+			
+			}catch (SQLException ex) {
+				ex.printStackTrace();
+			}finally {
+				try {
+					if (conn != null) {
+						conn.close();
+					}
+					if (cstmt != null) {
+						cstmt.close();
+					}
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+			return null;
+		}
 	
 }
